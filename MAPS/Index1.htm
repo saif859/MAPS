@@ -1,0 +1,1449 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <style type="text/css">
+        .gm-style .gm-style-mtc label, .gm-style .gm-style-mtc div
+        {
+            font-weight: 400;
+        }
+    </style>
+    <style type="text/css">
+        .gm-style .gm-style-cc span, .gm-style .gm-style-cc a, .gm-style .gm-style-mtc div
+        {
+            font-size: 10px;
+        }
+    </style>
+    <style type="text/css">
+        @media print
+        {
+            .gm-style .gmnoprint, .gmnoprint
+            {
+                display: none;
+            }
+        }
+        @media screen
+        {
+            .gm-style .gmnoscreen, .gmnoscreen
+            {
+                display: none;
+            }
+        }
+    </style>
+    <style type="text/css">
+        .gm-style div, .gm-style span, .gm-style label, .gm-style a
+        {
+            font-family: Roboto,Arial,sans-serif;
+            font-size: 11px;
+            font-weight: 400;
+        }
+        .gm-style div, .gm-style span, .gm-style label
+        {
+            text-decoration: none;
+        }
+        .gm-style img
+        {
+            border: 0;
+            padding: 0;
+            margin: 0;
+        }
+    </style>
+    <title>Calculate distance and bearing between two Latitude/Longitude points using Haversine
+        formula in JavaScript</title>
+    <link rel="stylesheet" href="http://www.movable-type.co.uk/css/mtl5.css">
+    <link rel="stylesheet" href="http://www.movable-type.co.uk/css/prettify.css">
+    <style>
+        body
+        {
+            max-width: 64em;
+        }
+        input
+        {
+            text-align: right;
+            width: 6em;
+        }
+        input[type="radio"]
+        {
+            width: auto;
+            vertical-align: baseline;
+        }
+        a
+        {
+            cursor: pointer;
+        }
+        figcaption
+        {
+            font-size: 0.8em;
+            font-style: italic;
+            text-align: center;
+        }
+        form ul.list
+        {
+            list-style: inherit;
+        }
+        /* an actual list to appear within a form! */fieldset
+        {
+            padding: 0 2em;
+        }
+        input
+        {
+            background-color: #f0f0f0;
+        }
+        output
+        {
+            color: #000099;
+            font-weight: bold;
+        }
+        .inputs
+        {
+            float: left;
+            margin: 1em 2em 0 0;
+        }
+        .outputs
+        {
+            margin: 1em 2em 0 0;
+        }
+        .map
+        {
+            display: none;
+            height: 480px;
+            width: 480px;
+        }
+        .radicand
+        {
+            border-top: solid 1px #cccccc;
+        }
+        pre.prettyprint
+        {
+            border: none;
+        }
+        .margin-l-0
+        {
+            margin-left: 0;
+        }
+        .label
+        {
+            color: #666666;
+            font-style: italic;
+        }
+    </style>
+    <!--[if lte IE 7]>
+<style> /* IE! sigh! */
+  ul    { position: relative; top: 0.5em; }
+  ul li { vertical-align: top; position: relative; top: -0.5em; }
+  ul li { max-width: none; }
+</style>
+<![endif]-->
+    <!--[if lt IE 9]> <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script> <![endif]-->
+    <script src="Scripts/latlon.js">        /* Latitude/Longitude formulae JavaScript implementation */</script>
+    <script src="Scripts/geo.js">        /* Geodesy representation conversions */</script>
+    <script src="Scripts/main.js" type="text/javascript"></script>
+    <script src="Scripts/jquery.min.js"></script>
+    <script src="Scripts/jquery.cookie.js" type="text/javascript"></script>
+    <script>
+        var maps = { // note we have to track overlay items ourselves
+            orthoDist: { map: null, geodesic: true, overlay: { marker1: null, marker2: null, path: null} },
+            orthoDest: { map: null, geodesic: true, overlay: { marker1: null, marker2: null, path: null} },
+        };
+        var degFmt = $.cookie('latlon-degree-format') || 'dms';
+
+        function drawPath(lat1, lon1, lat2, lon2, m) {
+            google.maps.event.trigger(m.map, 'resize');  // Gaaaaaah!
+
+            // clear current overlays
+            if (m.overlay.marker1) { m.overlay.marker1.setMap(null); m.overlay.marker1 = null; }
+            if (m.overlay.marker2) { m.overlay.marker2.setMap(null); m.overlay.marker1 = null; }
+            if (m.overlay.path) { m.overlay.path.setMap(null); m.overlay.path = null; }
+
+            // if supplied lat/long are all valid numbers, draw the path
+            if (!isNaN(lat1 + lon1 + lat2 + lon2)) {
+                var p1 = new google.maps.LatLng(lat1, lon1);
+                var p2 = new google.maps.LatLng(lat2, lon2);
+                var sw = new google.maps.LatLng(Math.min(lat1, lat2), Math.min(lon1, lon2));
+                var ne = new google.maps.LatLng(Math.max(lat1, lat2), Math.max(lon1, lon2));
+                var bnds = new google.maps.LatLngBounds(sw, ne);
+                m.map.fitBounds(bnds);
+                m.overlay.marker1 = new google.maps.Marker({ map: m.map, position: p1, title: 'Point 1' });
+                m.overlay.marker2 = new google.maps.Marker({ map: m.map, position: p2, title: 'Point 2' });
+                m.overlay.path = new google.maps.Polyline({ map: m.map, path: [p1, p2], strokeColor: '#990000', geodesic: m.geodesic });
+            }
+        }
+
+        $(document).ready(function () {
+            // show source code
+            $.get('latlon.js', function (data) {
+                var src = data.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+                $('#latlon-src').html(src);
+            });
+            $.get('geo.js', function (data) {
+                var src = data.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+                $('#geo-src').html(src);
+            });
+
+            // initialise maps
+            var mapOptions = {
+                zoom: 0,
+                center: new google.maps.LatLng(0, 0),
+                mapTypeId: google.maps.MapTypeId.HYBRID,
+                mapTypeControlOptions: {
+                    style: google.maps.MapTypeControlStyle.DROPDOWN_MENU
+                },
+                navigationControlOptions: {
+                    style: google.maps.NavigationControlStyle.SMALL
+                },
+                scaleControl: true
+            };
+
+            // display preference
+            $('#degFormat' + degFmt).attr('checked', true);
+
+            // ---- listeners for entered values & map displays
+
+            // orthodrome distance / bearings / midpoint between two points
+            $('#ortho-dist input').change(function () {
+                orthoDistCalc();
+                if ($('#map-ortho-dist-canvas').is(':visible')) orthoDistMap();
+            });
+            // toggle display of map
+            $('#ortho-dist .toggle-map a').click(function () {
+                if (!maps.orthoDist.map) {
+                    var mapCanvas = document.getElementById("map-ortho-dist-canvas");
+                    maps.orthoDist.map = new google.maps.Map(mapCanvas, mapOptions);
+                }
+                $('#ortho-dist .toggle-map').toggle();
+                $('#ortho-dist .map').toggle();
+                orthoDistMap();
+            });
+
+            // orthodrome destination point from start point / bearing / distance
+            $('#ortho-dest input').change(function () {
+                orthoDestCalc()
+                if ($('#map-ortho-dest-canvas').is(':visible')) orthoDestMap();
+            });
+            // toggle display of map
+            $('#ortho-dest .toggle-map a').click(function () {
+                if (!maps.orthoDest.map) {
+                    var mapCanvas = document.getElementById("map-ortho-dest-canvas");
+                    maps.orthoDest.map = new google.maps.Map(mapCanvas, mapOptions);
+                }
+                $('#ortho-dest .toggle-map').toggle();
+                $('#ortho-dest .map').toggle();
+                orthoDestMap();
+            });
+
+            // deg-min-sec / decimal degrees conversion
+            $('#latDMS').change(function () { $('#latDec').val(Geo.parseDMS($('#latDMS').val()).toFixed(7)); });
+            $('#lonDMS').change(function () { $('#lonDec').val(Geo.parseDMS($('#lonDMS').val()).toFixed(7)); });
+            $('#latDec').change(function () { $('#latDMS').val(Geo.toLat($('#latDec').val(), 'dms', 1)); });
+            $('#lonDec').change(function () { $('#lonDMS').val(Geo.toLon($('#lonDec').val(), 'dms', 1)); });
+
+            // set display of bearings to user's preference
+            $('input[name="degFormat"]').change(function () {
+                $.cookie('latlon-degree-format', degFmt = $(this).val())
+                orthoDistCalc();
+                orthoDestCalc();
+            });
+
+            // initial values calculations
+            orthoDistCalc();
+            orthoDestCalc();
+
+        });
+
+        // functions to perform calculatios illustration operation of code
+
+        // note that in place of the standard use of id to identify input fields,
+        // fields are here identified by form id + field class name
+
+        function orthoDistCalc() {
+            var lat1 = Geo.parseDMS($('#ortho-dist .lat1').val());
+            var lon1 = Geo.parseDMS($('#ortho-dist .lon1').val());
+            var lat2 = Geo.parseDMS($('#ortho-dist .lat2').val());
+            var lon2 = Geo.parseDMS($('#ortho-dist .lon2').val());
+            var p1 = new LatLon(lat1, lon1);
+            var p2 = new LatLon(lat2, lon2);
+            $('#ortho-dist .result-dist').html(p1.distanceTo(p2));
+            $('#ortho-dist .result-brng1').html(Geo.toBrng(p1.bearingTo(p2), degFmt));
+            $('#ortho-dist .result-brng2').html(Geo.toBrng(p1.finalBearingTo(p2), degFmt));
+            $('#ortho-dist .result-midpt').html(p1.midpointTo(p2).toString(degFmt));
+        }
+
+        function orthoDistMap() {
+            var lat1 = Geo.parseDMS($('#ortho-dist .lat1').val());
+            var lon1 = Geo.parseDMS($('#ortho-dist .lon1').val());
+            var lat2 = Geo.parseDMS($('#ortho-dist .lat2').val());
+            var lon2 = Geo.parseDMS($('#ortho-dist .lon2').val());
+            drawPath(lat1, lon1, lat2, lon2, maps.orthoDist);
+        }
+
+        function orthoDestCalc() {
+            var latStart = Geo.parseDMS($('#ortho-dest .lat1').val());
+            var lonStart = Geo.parseDMS($('#ortho-dest .lon1').val())
+            var brng = Geo.parseDMS($('#ortho-dest .brng').val());
+            var dist = $('#ortho-dest .dist').val();
+            var p1 = new LatLon(latStart, lonStart);
+            var p2 = p1.destinationPoint(brng, dist);
+            var brngFinal = p1.finalBearingTo(p2);
+            $('#ortho-dest .result-point').html(p2.toString(degFmt));
+            $('#ortho-dest .result-brng').html(Geo.toBrng(brngFinal, degFmt));
+        }
+
+        function orthoDestMap() {
+            var lat1 = Geo.parseDMS($('#ortho-dest .lat1').val());
+            var lon1 = Geo.parseDMS($('#ortho-dest .lon1').val());
+            var brng = Geo.parseDMS($('#ortho-dest .brng').val());
+            var dist = $('#ortho-dest .dist').val();
+            var p1 = new LatLon(lat1, lon1);
+            var p2 = p1.destinationPoint(brng, dist);
+            lat2 = p2.lat()
+            lon2 = p2.lon()
+            drawPath(lat1, lon1, lat2, lon2, maps.orthoDest);
+        }
+  
+</script>
+    <script type="text/javascript" charset="UTF-8" src="Scripts/{common,util,stats}.js"></script>
+    <script type="text/javascript" charset="UTF-8" src="Scripts/{map,marker,geometry,poly}.js"></script>
+    <script type="text/javascript" charset="UTF-8" src="Scripts/{onion}.js"></script>
+    <script type="text/javascript" charset="UTF-8" src="Scripts/{controls}.js"></script>
+    <script type="text/javascript" charset="UTF-8" src="Scripts/{streetview}.js"></script>
+    <script src="Scripts/map.js" type="text/javascript"></script>
+</head>
+<body>
+    <div class="header">
+        <h2>
+            Calculate distance, bearing and more between Latitude/Longitude points</h2>
+    </div>
+    <form name="ortho-dist" id="ortho-dist">
+    <fieldset>
+        <legend>Great-circle distance between two points</legend>
+        <p>
+            Enter the co-ordinates into the text boxes to try out the calculations. A variety
+            of formats are accepted, principally:</p>
+        <ul class="list">
+            <li>deg-min-sec suffixed with N/S/E/W (e.g. 40°44′55″N, 73 59 11W), or </li>
+            <li>signed decimal degrees without compass direction, where negative indicates west/south
+                (e.g. 40.7486, -73.9864):</li>
+        </ul>
+        <table class="inputs">
+            <tbody>
+                <tr>
+                    <td>
+                        Point 1:
+                    </td>
+                    <td>
+                        <input type="text" name="lat1" class="lat1" value="50 03 59N" placeholder="Lat 1 (ºN/S)"
+                            title="Lat 1 (ºN/S)" required="">
+                        ,
+                        <input type="text" name="lon1" class="lon1" value="005 42 53W" placeholder="Lon 1 (ºE/W)"
+                            title="Lon 1 (ºE/W)" required="">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Point 2:
+                    </td>
+                    <td>
+                        <input type="text" name="lat2" class="lat2" value="58 38 38N" placeholder="Lat 2 (ºN/S)"
+                            title="Lat 2 (ºN/S)" required="">
+                        ,
+                        <input type="text" name="lon2" class="lon2" value="003 04 12W" placeholder="Lon 2 (ºE/W)"
+                            title="Lon 2 (ºE/W)" required="">
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="outputs">
+            <tbody>
+                <tr>
+                    <td>
+                        Distance:
+                    </td>
+                    <td>
+                        <output class="result-dist" title="Distance (in km)">968.9</output>
+                        km <span title="rounding to 4 significant figures reflects the c. 0.3% accuracy of the spherical model"
+                            class="small grey">(to 4 SF<sup>*</sup>)</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Initial bearing:
+                    </td>
+                    <td>
+                        <output class="result-brng1" title="Initial bearing (azimuth) between points">009°07′11″</output>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Final bearing:
+                    </td>
+                    <td>
+                        <output class="result-brng2" title="Final bearing (azimuth) between points">011°16′31″</output>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Midpoint:
+                    </td>
+                    <td>
+                        <output class="result-midpt" title="Midpoint between points">54°21′44″N, 004°31′50″W</output>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <p class="toggle-map" style="display: block;">
+            And you can <a>see it on a map</a> (aren’t those Google guys wonderful!)</p>
+        <p class="toggle-map hidden" style="display: none;">
+            <a>... hide map</a></p>
+        <div id="map-ortho-dist-canvas" class="map" style="display: none; position: relative;
+            background-color: rgb(229, 227, 223); overflow: hidden; -webkit-transform: translateZ(0);">
+            <div class="gm-style" style="position: absolute; left: 0px; top: 0px; overflow: hidden;
+                width: 100%; height: 100%; z-index: 0;">
+                <div style="position: absolute; left: 0px; top: 0px; overflow: hidden; width: 100%;
+                    height: 100%; z-index: 0;">
+                    <div style="position: absolute; left: 0px; top: 0px; z-index: 1; width: 100%; cursor: url(http://maps.gstatic.com/mapfiles/openhand_8_8.cur) 8 8, default;
+                        -webkit-transform-origin: 0px 0px; -webkit-transform: matrix(1, 0, 0, 1, 0, 0);">
+                        <div style="-webkit-transform: translateZ(0); position: absolute; left: 0px; top: 0px;
+                            width: 100%; z-index: 200;">
+                            <div style="-webkit-transform: translateZ(0); position: absolute; left: 0px; top: 0px;
+                                z-index: 101; width: 100%;">
+                                <div style="position: absolute; left: 0px; top: 0px; z-index: 30;">
+                                    <div style="position: absolute; left: 0px; top: 0px; z-index: 1;">
+                                        <div style="width: 256px; height: 256px; overflow: hidden; -webkit-transform: translateZ(0);
+                                            position: absolute; left: -125px; top: -81px;">
+                                            <canvas width="256" height="256" draggable="false" style="-webkit-user-select: none;
+                                                position: absolute; left: 0px; top: 0px;"></canvas>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div style="-webkit-transform: translateZ(0); position: absolute; left: 0px; top: 0px;
+                            width: 100%; z-index: 201;">
+                            <div style="-webkit-transform: translateZ(0); position: absolute; left: 0px; top: 0px;
+                                z-index: 102; width: 100%;">
+                            </div>
+                            <div style="-webkit-transform: translateZ(0); position: absolute; left: 0px; top: 0px;
+                                z-index: 103; width: 100%;">
+                                <div style="position: absolute; left: 0px; top: 0px; z-index: -1;">
+                                    <div style="position: absolute; left: 0px; top: 0px; z-index: 1;">
+                                        <div style="width: 256px; height: 256px; overflow: hidden; -webkit-transform: translateZ(0);
+                                            position: absolute; left: -125px; top: -81px;">
+                                            <canvas draggable="false" height="256" width="256" style="-webkit-user-select: none;
+                                                position: absolute; left: 0px; top: 0px; height: 256px; width: 256px;"></canvas>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div style="-webkit-transform: translateZ(0); position: absolute; left: 0px; top: 0px;
+                            width: 100%; z-index: 202;">
+                            <div style="-webkit-transform: translateZ(0); position: absolute; left: 0px; top: 0px;
+                                z-index: 104; width: 100%;">
+                            </div>
+                            <div style="-webkit-transform: translateZ(0); position: absolute; left: 0px; top: 0px;
+                                z-index: 105; width: 100%;">
+                            </div>
+                            <div style="-webkit-transform: translateZ(0); position: absolute; left: 0px; top: 0px;
+                                z-index: 106; width: 100%;">
+                                <div style="z-index: -202; cursor: pointer; -webkit-transform: translateZ(0); display: none;">
+                                    <div style="width: 30px; height: 27px; overflow: hidden; position: absolute;">
+                                        <img src="./Calculate distance and bearing between two Latitude Longitude points using Haversine formula in JavaScript_files/undo_poly.png"
+                                            draggable="false" style="position: absolute; left: 0px; top: 0px; -webkit-user-select: none;
+                                            border: 0px; padding: 0px; margin: 0px; width: 90px; height: 27px;">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div style="-webkit-transform: translateZ(0); position: absolute; left: 0px; top: 0px;
+                            z-index: 100; width: 100%;">
+                            <div style="position: absolute; left: 0px; top: 0px; z-index: 0;">
+                                <div style="position: absolute; left: 0px; top: 0px; z-index: 1;">
+                                    <div style="width: 256px; height: 256px; -webkit-transform: translateZ(0); position: absolute;
+                                        left: -125px; top: -81px;">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div style="position: absolute; z-index: 0; left: 0px; top: 0px;">
+                            <div style="overflow: hidden; width: 480px; height: 480px;">
+                            </div>
+                        </div>
+                        <div style="position: absolute; left: 0px; top: 0px; z-index: 0;">
+                            <div style="position: absolute; left: 0px; top: 0px; z-index: 1;">
+                                <div style="width: 256px; height: 256px; -webkit-transform: translateZ(0); position: absolute;
+                                    left: -125px; top: -81px;">
+                                    <img src="./Calculate distance and bearing between two Latitude Longitude points using Haversine formula in JavaScript_files/kh"
+                                        draggable="false" style="width: 256px; height: 256px; -webkit-user-select: none;
+                                        border: 0px; padding: 0px; margin: 0px; position: absolute; left: 0px; top: 0px;">
+                                    <img src="./Calculate distance and bearing between two Latitude Longitude points using Haversine formula in JavaScript_files/vt"
+                                        draggable="false" style="width: 256px; height: 256px; -webkit-user-select: none;
+                                        border: 0px; padding: 0px; margin: 0px; position: absolute; left: 0px; top: 0px;">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div style="margin-left: 5px; margin-right: 5px; z-index: 1000000; position: absolute;
+                    left: 0px; bottom: 0px;">
+                    <a target="_blank" href="http://maps.google.com/maps?ll=54.58011,-4.392361&z=0&t=h&hl=en-US&gl=US&mapclient=apiv3"
+                        title="Click to see this area on Google Maps" style="position: static; overflow: visible;
+                        float: none; display: inline;">
+                        <div style="width: 62px; height: 26px; cursor: pointer;">
+                            <img src="./Calculate distance and bearing between two Latitude Longitude points using Haversine formula in JavaScript_files/google_white2.png"
+                                draggable="false" style="position: absolute; left: 0px; top: 0px; width: 62px;
+                                height: 26px; -webkit-user-select: none; border: 0px; padding: 0px; margin: 0px;">
+                        </div>
+                    </a>
+                </div>
+                <div class="gmnoprint" style="z-index: 1000001; position: absolute; right: 0px; bottom: 0px;
+                    width: 12px;">
+                    <div draggable="false" class="gm-style-cc" style="-webkit-user-select: none;">
+                        <div style="opacity: 0.7; width: 100%; height: 100%; position: absolute;">
+                            <div style="width: 1px;">
+                            </div>
+                            <div style="background-color: rgb(245, 245, 245); width: auto; height: 100%; margin-left: 1px;">
+                            </div>
+                        </div>
+                        <div style="position: relative; padding-right: 6px; padding-left: 6px; font-family: Roboto, Arial, sans-serif;
+                            font-size: 10px; color: rgb(68, 68, 68); white-space: nowrap; direction: ltr;
+                            text-align: right;">
+                            <a style="color: rgb(68, 68, 68); text-decoration: none; cursor: pointer;">Map Data</a><span
+                                style="display: none;">Map data ©2014 Google Imagery ©2014 TerraMetrics</span></div>
+                    </div>
+                </div>
+                <div style="background-color: white; padding: 15px 21px; border: 1px solid rgb(171, 171, 171);
+                    font-family: Roboto, Arial, sans-serif; color: rgb(34, 34, 34); -webkit-box-shadow: rgba(0, 0, 0, 0.2) 0px 4px 16px;
+                    box-shadow: rgba(0, 0, 0, 0.2) 0px 4px 16px; z-index: 10000002; display: none;
+                    width: 0px; height: 0px; position: absolute; left: 5px; top: 5px;">
+                    <div style="padding: 0px 0px 10px; font-size: 16px;">
+                        Map Data</div>
+                    <div style="font-size: 13px;">
+                        Map data ©2014 Google Imagery ©2014 TerraMetrics</div>
+                    <div style="width: 13px; height: 13px; overflow: hidden; position: absolute; opacity: 0.7;
+                        right: 12px; top: 12px; z-index: 10000; cursor: pointer;">
+                        <img src="./Calculate distance and bearing between two Latitude Longitude points using Haversine formula in JavaScript_files/mapcnt3.png"
+                            draggable="false" style="position: absolute; left: -2px; top: -336px; width: 59px;
+                            height: 492px; -webkit-user-select: none; border: 0px; padding: 0px; margin: 0px;">
+                    </div>
+                </div>
+                <div class="gmnoscreen" style="position: absolute; right: 0px; bottom: 0px;">
+                    <div style="font-family: Roboto, Arial, sans-serif; font-size: 11px; color: rgb(68, 68, 68);
+                        direction: ltr; text-align: right; background-color: rgb(245, 245, 245);">
+                        Map data ©2014 Google Imagery ©2014 TerraMetrics</div>
+                </div>
+                <div class="gmnoprint gm-style-cc" draggable="false" style="z-index: 1000001; position: absolute;
+                    -webkit-user-select: none; right: 0px; bottom: 0px;">
+                    <div style="opacity: 0.7; width: 100%; height: 100%; position: absolute;">
+                        <div style="width: 1px;">
+                        </div>
+                        <div style="background-color: rgb(245, 245, 245); width: auto; height: 100%; margin-left: 1px;">
+                        </div>
+                    </div>
+                    <div style="position: relative; padding-right: 6px; padding-left: 6px; font-family: Roboto, Arial, sans-serif;
+                        font-size: 10px; color: rgb(68, 68, 68); white-space: nowrap; direction: ltr;
+                        text-align: right;">
+                        <a href="http://www.google.com/intl/en-US_US/help/terms_maps.html" target="_blank"
+                            style="text-decoration: none; cursor: pointer; color: rgb(68, 68, 68);">Terms of
+                            Use</a></div>
+                </div>
+                <div draggable="false" class="gm-style-cc" style="-webkit-user-select: none; position: absolute;
+                    right: 0px; bottom: 0px;">
+                    <div style="opacity: 0.7; width: 100%; height: 100%; position: absolute;">
+                        <div style="width: 1px;">
+                        </div>
+                        <div style="background-color: rgb(245, 245, 245); width: auto; height: 100%; margin-left: 1px;">
+                        </div>
+                    </div>
+                    <div style="position: relative; padding-right: 6px; padding-left: 6px; font-family: Roboto, Arial, sans-serif;
+                        font-size: 10px; color: rgb(68, 68, 68); white-space: nowrap; direction: ltr;
+                        text-align: right; display: none;">
+                        <a target="_new" title="Report errors in the road map or imagery to Google" href="http://maps.google.com/maps?ll=54.58011,-4.392361&z=0&t=h&hl=en-US&gl=US&mapclient=apiv3&skstate=action:mps_dialog$apiref:1&output=classic"
+                            style="font-family: Roboto, Arial, sans-serif; font-size: 10px; color: rgb(68, 68, 68);
+                            text-decoration: none; position: relative;">Report a map error</a></div>
+                </div>
+                <div class="gmnoprint gm-style-mtc" style="margin: 5px; z-index: 0; position: absolute;
+                    cursor: pointer; text-align: left; width: 85px; right: 0px; top: 0px;">
+                    <div draggable="false" title="Change map style" style="direction: ltr; overflow: hidden;
+                        text-align: left; position: relative; color: rgb(0, 0, 0); font-family: Roboto, Arial, sans-serif;
+                        -webkit-user-select: none; font-size: 11px; background-color: rgb(255, 255, 255);
+                        padding: 1px 6px; border-bottom-left-radius: 2px; border-top-left-radius: 2px;
+                        border-bottom-right-radius: 2px; border-top-right-radius: 2px; -webkit-background-clip: padding-box;
+                        background-clip: padding-box; border: 1px solid rgba(0, 0, 0, 0.14902); -webkit-box-shadow: rgba(0, 0, 0, 0.298039) 0px 1px 4px -1px;
+                        box-shadow: rgba(0, 0, 0, 0.298039) 0px 1px 4px -1px; font-weight: 500;">
+                        Satellite
+                        <img src="./Calculate distance and bearing between two Latitude Longitude points using Haversine formula in JavaScript_files/arrow-down.png"
+                            draggable="false" style="-webkit-user-select: none; border: 0px; padding: 0px;
+                            margin: -2px 0px 0px; position: absolute; right: 6px; top: 50%; width: 7px; height: 4px;">
+                    </div>
+                    <div style="background-color: white; z-index: -1; padding-top: 2px; -webkit-background-clip: padding-box;
+                        background-clip: padding-box; border-width: 0px 1px 1px; border-right-style: solid;
+                        border-bottom-style: solid; border-left-style: solid; border-right-color: rgba(0, 0, 0, 0.14902);
+                        border-bottom-color: rgba(0, 0, 0, 0.14902); border-left-color: rgba(0, 0, 0, 0.14902);
+                        -webkit-box-shadow: rgba(0, 0, 0, 0.298039) 0px 1px 4px -1px; box-shadow: rgba(0, 0, 0, 0.298039) 0px 1px 4px -1px;
+                        position: relative; text-align: left; display: none;">
+                        <div draggable="false" title="Show street map" style="color: black; font-family: Roboto, Arial, sans-serif;
+                            -webkit-user-select: none; font-size: 11px; background-color: rgb(255, 255, 255);
+                            padding: 3px 5px;">
+                            Map</div>
+                        <div draggable="false" title="Show satellite imagery" style="color: black; font-family: Roboto, Arial, sans-serif;
+                            -webkit-user-select: none; font-size: 11px; background-color: rgb(255, 255, 255);
+                            padding: 3px 5px; font-weight: 500;">
+                            Satellite</div>
+                        <div style="margin: 1px 0px; border-top-width: 1px; border-top-style: solid; border-top-color: rgb(235, 235, 235);">
+                        </div>
+                        <div draggable="false" title="Show street map with terrain" style="color: rgb(0, 0, 0);
+                            font-family: Roboto, Arial, sans-serif; -webkit-user-select: none; font-size: 11px;
+                            background-color: rgb(255, 255, 255); padding: 3px 8px 3px 5px; direction: ltr;
+                            text-align: left; white-space: nowrap; display: none;">
+                            <span role="checkbox" style="box-sizing: border-box; position: relative; line-height: 0;
+                                font-size: 0px; margin: 0px 5px 0px 0px; display: inline-block; background-color: rgb(255, 255, 255);
+                                border: 1px solid rgb(198, 198, 198); border-top-left-radius: 1px; border-top-right-radius: 1px;
+                                border-bottom-right-radius: 1px; border-bottom-left-radius: 1px; width: 13px;
+                                height: 13px; vertical-align: middle;">
+                                <div style="position: absolute; left: 1px; top: -2px; width: 13px; height: 11px;
+                                    overflow: hidden; display: none;">
+                                    <img src="./Calculate distance and bearing between two Latitude Longitude points using Haversine formula in JavaScript_files/imgs8.png"
+                                        draggable="false" style="position: absolute; left: -52px; top: -44px; -webkit-user-select: none;
+                                        border: 0px; padding: 0px; margin: 0px; width: 68px; height: 67px;">
+                                </div>
+                            </span>
+                            <label style="vertical-align: middle; cursor: pointer;">
+                                Terrain</label></div>
+                        <div style="margin: 1px 0px; border-top-width: 1px; border-top-style: solid; border-top-color: rgb(235, 235, 235);
+                            display: none;">
+                        </div>
+                        <div draggable="false" title="Zoom in to show 45 degree view" style="color: rgb(184, 184, 184);
+                            font-family: Roboto, Arial, sans-serif; -webkit-user-select: none; font-size: 11px;
+                            background-color: rgb(255, 255, 255); padding: 3px 8px 3px 5px; direction: ltr;
+                            text-align: left; white-space: nowrap; display: none;">
+                            <span role="checkbox" style="box-sizing: border-box; position: relative; line-height: 0;
+                                font-size: 0px; margin: 0px 5px 0px 0px; display: inline-block; background-color: rgb(255, 255, 255);
+                                border: 1px solid rgb(241, 241, 241); border-top-left-radius: 1px; border-top-right-radius: 1px;
+                                border-bottom-right-radius: 1px; border-bottom-left-radius: 1px; width: 13px;
+                                height: 13px; vertical-align: middle;">
+                                <div style="position: absolute; left: 1px; top: -2px; width: 13px; height: 11px;
+                                    overflow: hidden; display: none;">
+                                    <img src="./Calculate distance and bearing between two Latitude Longitude points using Haversine formula in JavaScript_files/imgs8.png"
+                                        draggable="false" style="position: absolute; left: -52px; top: -44px; -webkit-user-select: none;
+                                        border: 0px; padding: 0px; margin: 0px; width: 68px; height: 67px;">
+                                </div>
+                            </span>
+                            <label style="vertical-align: middle; cursor: pointer;">
+                                45°</label></div>
+                        <div draggable="false" title="Show imagery with street names" style="color: rgb(0, 0, 0);
+                            font-family: Roboto, Arial, sans-serif; -webkit-user-select: none; font-size: 11px;
+                            background-color: rgb(255, 255, 255); padding: 3px 8px 3px 5px; direction: ltr;
+                            text-align: left; white-space: nowrap;">
+                            <span role="checkbox" style="box-sizing: border-box; position: relative; line-height: 0;
+                                font-size: 0px; margin: 0px 5px 0px 0px; display: inline-block; background-color: rgb(255, 255, 255);
+                                border: 1px solid rgb(198, 198, 198); border-top-left-radius: 1px; border-top-right-radius: 1px;
+                                border-bottom-right-radius: 1px; border-bottom-left-radius: 1px; width: 13px;
+                                height: 13px; vertical-align: middle;">
+                                <div style="position: absolute; left: 1px; top: -2px; width: 13px; height: 11px;
+                                    overflow: hidden;">
+                                    <img src="./Calculate distance and bearing between two Latitude Longitude points using Haversine formula in JavaScript_files/imgs8.png"
+                                        draggable="false" style="position: absolute; left: -52px; top: -44px; -webkit-user-select: none;
+                                        border: 0px; padding: 0px; margin: 0px; width: 68px; height: 67px;">
+                                </div>
+                            </span>
+                            <label style="vertical-align: middle; cursor: pointer;">
+                                Labels</label></div>
+                    </div>
+                </div>
+                <div draggable="false" class="gm-style-cc" style="-webkit-user-select: none; position: absolute;
+                    right: 0px; bottom: 0px;">
+                    <div style="opacity: 0.7; width: 100%; height: 100%; position: absolute;">
+                        <div style="width: 1px;">
+                        </div>
+                        <div style="background-color: rgb(245, 245, 245); width: auto; height: 100%; margin-left: 1px;">
+                        </div>
+                    </div>
+                    <div style="position: relative; padding-right: 6px; padding-left: 6px; font-family: Roboto, Arial, sans-serif;
+                        font-size: 10px; color: rgb(68, 68, 68); white-space: nowrap; direction: ltr;
+                        text-align: right;">
+                        <span>5000 km&nbsp;</span><div style="position: relative; display: inline-block;
+                            height: 8px; bottom: -1px; width: 55px;">
+                            <div style="width: 100%; height: 4px; position: absolute; background-color: rgb(255, 255, 255);
+                                bottom: 0px; left: 0px;">
+                            </div>
+                            <div style="position: absolute; left: 0px; top: 0px; width: 4px; height: 8px; background-color: rgb(255, 255, 255);">
+                            </div>
+                            <div style="width: 4px; height: 8px; position: absolute; background-color: rgb(255, 255, 255);
+                                bottom: 0px; right: 0px;">
+                            </div>
+                            <div style="position: absolute; background-color: rgb(102, 102, 102); height: 2px;
+                                bottom: 1px; right: 1px; left: 1px;">
+                            </div>
+                            <div style="position: absolute; left: 1px; top: 1px; width: 2px; height: 6px; background-color: rgb(102, 102, 102);">
+                            </div>
+                            <div style="width: 2px; height: 6px; position: absolute; background-color: rgb(102, 102, 102);
+                                bottom: 1px; right: 1px;">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="gmnoprint" draggable="false" controlwidth="32" controlheight="84" style="margin: 5px;
+                    -webkit-user-select: none; position: absolute; left: 0px; top: 0px;">
+                    <div controlwidth="32" controlheight="40" style="cursor: url(http://maps.gstatic.com/mapfiles/openhand_8_8.cur) 8 8, default;
+                        position: absolute; left: 0px; top: 0px;">
+                        <div style="width: 32px; height: 40px; overflow: hidden; position: absolute; left: 0px;
+                            top: 0px;">
+                            <img src="./Calculate distance and bearing between two Latitude Longitude points using Haversine formula in JavaScript_files/cb_scout2.png"
+                                draggable="false" style="position: absolute; left: -9px; top: -102px; width: 1028px;
+                                height: 214px; -webkit-user-select: none; border: 0px; padding: 0px; margin: 0px;">
+                        </div>
+                        <div style="width: 32px; height: 40px; overflow: hidden; position: absolute; left: 0px;
+                            top: 0px; visibility: hidden;">
+                            <img src="./Calculate distance and bearing between two Latitude Longitude points using Haversine formula in JavaScript_files/cb_scout2.png"
+                                draggable="false" style="position: absolute; left: -107px; top: -102px; width: 1028px;
+                                height: 214px; -webkit-user-select: none; border: 0px; padding: 0px; margin: 0px;">
+                        </div>
+                        <div style="width: 32px; height: 40px; overflow: hidden; position: absolute; left: 0px;
+                            top: 0px; visibility: hidden;">
+                            <img src="./Calculate distance and bearing between two Latitude Longitude points using Haversine formula in JavaScript_files/cb_scout2.png"
+                                draggable="false" style="position: absolute; left: -58px; top: -102px; width: 1028px;
+                                height: 214px; -webkit-user-select: none; border: 0px; padding: 0px; margin: 0px;">
+                        </div>
+                        <div style="width: 32px; height: 40px; overflow: hidden; position: absolute; left: 0px;
+                            top: 0px; visibility: hidden;">
+                            <img src="./Calculate distance and bearing between two Latitude Longitude points using Haversine formula in JavaScript_files/cb_scout2.png"
+                                draggable="false" style="position: absolute; left: -205px; top: -102px; width: 1028px;
+                                height: 214px; -webkit-user-select: none; border: 0px; padding: 0px; margin: 0px;">
+                        </div>
+                    </div>
+                    <div class="gmnoprint" controlwidth="0" controlheight="0" style="opacity: 0.6; display: none;
+                        position: absolute;">
+                        <div title="Rotate map 90 degrees" style="width: 22px; height: 22px; overflow: hidden;
+                            position: absolute; cursor: pointer;">
+                            <img src="./Calculate distance and bearing between two Latitude Longitude points using Haversine formula in JavaScript_files/mapcnt3.png"
+                                draggable="false" style="position: absolute; left: -38px; top: -360px; width: 59px;
+                                height: 492px; -webkit-user-select: none; border: 0px; padding: 0px; margin: 0px;">
+                        </div>
+                    </div>
+                    <div class="gmnoprint" controlwidth="20" controlheight="39" style="position: absolute;
+                        left: 6px; top: 45px;">
+                        <div style="width: 20px; height: 39px; overflow: hidden; position: absolute;">
+                            <img src="./Calculate distance and bearing between two Latitude Longitude points using Haversine formula in JavaScript_files/mapcnt3.png"
+                                draggable="false" style="position: absolute; left: -39px; top: -401px; width: 59px;
+                                height: 492px; -webkit-user-select: none; border: 0px; padding: 0px; margin: 0px;">
+                        </div>
+                        <div title="Zoom in" style="position: absolute; left: 0px; top: 2px; width: 20px;
+                            height: 17px; cursor: pointer;">
+                        </div>
+                        <div title="Zoom out" style="position: absolute; left: 0px; top: 19px; width: 20px;
+                            height: 17px; cursor: pointer;">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </fieldset>
+    </form>
+    <h3 id="destPoint">
+        <b>Destination point given distance and bearing from start point</b></h3>
+    <p>
+        Given a start point, initial bearing, and distance, this will calculate the destination
+        point and final bearing travelling along a (shortest distance) great circle arc.</p>
+    <form name="ortho-dest" id="ortho-dest">
+    <fieldset>
+        <legend>Destination point along great-circle given distance and bearing from start point</legend>
+        <table class="inputs">
+            <tbody>
+                <tr>
+                    <td>
+                        Start point:
+                    </td>
+                    <td>
+                        <input name="lat1" class="lat1" type="text" value="53°19′14″N">,
+                        <input name="lon1" class="lon1" type="text" value="001°43′47″W">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Bearing:
+                    </td>
+                    <td>
+                        <input type="text" name="brng" class="brng" value="096°01′18″">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Distance:
+                    </td>
+                    <td>
+                        <input name="dist" class="dist w4" type="number" step="any" value="124.8">
+                        km
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="outputs">
+            <tbody>
+                <tr>
+                    <td>
+                        Destination point:
+                    </td>
+                    <td>
+                        <output class="result-point" title="Destination point">53°11′18″N, 000°08′00″E</output>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Final bearing:
+                    </td>
+                    <td>
+                        <output class="result-brng" title="Final bearing (azimuth) arriving at point 2">097°30′52″</output>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p class="toggle-map" style="display: block;">
+                            <a>view map</a></p>
+                        <p class="toggle-map hidden" style="display: none;">
+                            <a>hide map</a></p>
+                    </td>
+                    <td>
+                        &nbsp;
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div id="map-ortho-dest-canvas" class="map" style="position: relative; background-color: rgb(229, 227, 223);
+            overflow: hidden; -webkit-transform: translateZ(0); display: none;">
+            <div class="gm-style" style="position: absolute; left: 0px; top: 0px; overflow: hidden;
+                width: 100%; height: 100%; z-index: 0;">
+                <div style="position: absolute; left: 0px; top: 0px; overflow: hidden; width: 100%;
+                    height: 100%; z-index: 0;">
+                    <div style="position: absolute; left: 0px; top: 0px; z-index: 1; width: 100%; cursor: url(http://maps.gstatic.com/mapfiles/openhand_8_8.cur) 8 8, default;
+                        -webkit-transform-origin: 0px 0px; -webkit-transform: matrix(1, 0, 0, 1, 0, 0);">
+                        <div style="-webkit-transform: translateZ(0); position: absolute; left: 0px; top: 0px;
+                            width: 100%; z-index: 200;">
+                            <div style="-webkit-transform: translateZ(0); position: absolute; left: 0px; top: 0px;
+                                z-index: 101; width: 100%;">
+                                <div style="position: absolute; left: 0px; top: 0px; z-index: 30;">
+                                    <div style="position: absolute; left: 0px; top: 0px; z-index: 1;">
+                                        <div style="width: 256px; height: 256px; overflow: hidden; -webkit-transform: translateZ(0);
+                                            position: absolute; left: -127px; top: -83px;">
+                                            <canvas width="256" height="256" draggable="false" style="-webkit-user-select: none;
+                                                position: absolute; left: 0px; top: 0px;"></canvas>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div style="-webkit-transform: translateZ(0); position: absolute; left: 0px; top: 0px;
+                            width: 100%; z-index: 201;">
+                            <div style="-webkit-transform: translateZ(0); position: absolute; left: 0px; top: 0px;
+                                z-index: 102; width: 100%;">
+                            </div>
+                            <div style="-webkit-transform: translateZ(0); position: absolute; left: 0px; top: 0px;
+                                z-index: 103; width: 100%;">
+                                <div style="position: absolute; left: 0px; top: 0px; z-index: -1;">
+                                    <div style="position: absolute; left: 0px; top: 0px; z-index: 1;">
+                                        <div style="width: 256px; height: 256px; overflow: hidden; -webkit-transform: translateZ(0);
+                                            position: absolute; left: -127px; top: -83px;">
+                                            <canvas draggable="false" height="256" width="256" style="-webkit-user-select: none;
+                                                position: absolute; left: 0px; top: 0px; height: 256px; width: 256px;"></canvas>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div style="-webkit-transform: translateZ(0); position: absolute; left: 0px; top: 0px;
+                            width: 100%; z-index: 202;">
+                            <div style="-webkit-transform: translateZ(0); position: absolute; left: 0px; top: 0px;
+                                z-index: 104; width: 100%;">
+                            </div>
+                            <div style="-webkit-transform: translateZ(0); position: absolute; left: 0px; top: 0px;
+                                z-index: 105; width: 100%;">
+                            </div>
+                            <div style="-webkit-transform: translateZ(0); position: absolute; left: 0px; top: 0px;
+                                z-index: 106; width: 100%;">
+                                <div style="z-index: -202; cursor: pointer; -webkit-transform: translateZ(0); display: none;">
+                                    <div style="width: 30px; height: 27px; overflow: hidden; position: absolute;">
+                                        <img src="./Calculate distance and bearing between two Latitude Longitude points using Haversine formula in JavaScript_files/undo_poly.png"
+                                            draggable="false" style="position: absolute; left: 0px; top: 0px; -webkit-user-select: none;
+                                            border: 0px; padding: 0px; margin: 0px; width: 90px; height: 27px;">
+                                    </div>
+                                </div>
+                                <div style="display: none; position: absolute; left: 18px; top: -102px;">
+                                    <div style="width: 107px; height: 137px; overflow: hidden; position: absolute; left: 21px;
+                                        top: 26px;">
+                                        <img src="./Calculate distance and bearing between two Latitude Longitude points using Haversine formula in JavaScript_files/cb_scout2.png"
+                                            draggable="false" style="position: absolute; left: -784px; top: -102px; width: 1028px;
+                                            height: 214px; -webkit-user-select: none; border: 0px; padding: 0px; margin: 0px;">
+                                        <div style="position: absolute; left: 7px; top: 5px; width: 94px; height: 75px; background-color: rgb(211, 211, 211);
+                                            z-index: 1;">
+                                        </div>
+                                        <div style="width: 95px; bottom: 38px; z-index: 1; left: 7px; font-family: Roboto, Arial, sans-serif;
+                                            font-size: 9px; color: gray; background-color: white; position: absolute;">
+                                            Loading...
+                                        </div>
+                                        <img src="./Calculate distance and bearing between two Latitude Longitude points using Haversine formula in JavaScript_files/cbk"
+                                            draggable="false" style="position: absolute; left: 7px; top: 5px; width: 94px;
+                                            height: 75px; -webkit-user-select: none; border: 0px; padding: 0px; margin: 0px;
+                                            opacity: 0.25;">
+                                    </div>
+                                    <div style="width: 21px; height: 26px; overflow: hidden; position: absolute; left: 4px;
+                                        top: 67px;">
+                                        <img src="./Calculate distance and bearing between two Latitude Longitude points using Haversine formula in JavaScript_files/cb_scout2.png"
+                                            draggable="false" style="position: absolute; left: -343px; top: -102px; width: 1028px;
+                                            height: 214px; -webkit-user-select: none; border: 0px; padding: 0px; margin: 0px;">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div style="-webkit-transform: translateZ(0); position: absolute; left: 0px; top: 0px;
+                            z-index: 100; width: 100%;">
+                            <div style="position: absolute; left: 0px; top: 0px; z-index: 0;">
+                                <div style="position: absolute; left: 0px; top: 0px; z-index: 1;">
+                                    <div style="width: 256px; height: 256px; -webkit-transform: translateZ(0); position: absolute;
+                                        left: -127px; top: -83px;">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div style="position: absolute; z-index: 0; left: 0px; top: 0px;">
+                            <div style="overflow: hidden; width: 480px; height: 480px;">
+                            </div>
+                        </div>
+                        <div style="position: absolute; left: 0px; top: 0px; z-index: 0;">
+                            <div style="position: absolute; left: 0px; top: 0px; z-index: 1;">
+                                <div style="width: 256px; height: 256px; -webkit-transform: translateZ(0); position: absolute;
+                                    left: -127px; top: -83px;">
+                                    <img src="./Calculate distance and bearing between two Latitude Longitude points using Haversine formula in JavaScript_files/kh"
+                                        draggable="false" style="width: 256px; height: 256px; -webkit-user-select: none;
+                                        border: 0px; padding: 0px; margin: 0px; position: absolute; left: 0px; top: 0px;">
+                                    <img src="./Calculate distance and bearing between two Latitude Longitude points using Haversine formula in JavaScript_files/vt"
+                                        draggable="false" style="width: 256px; height: 256px; -webkit-user-select: none;
+                                        border: 0px; padding: 0px; margin: 0px; position: absolute; left: 0px; top: 0px;">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div style="margin-left: 5px; margin-right: 5px; z-index: 1000000; position: absolute;
+                    left: 0px; bottom: 0px;">
+                    <a target="_blank" href="http://maps.google.com/maps?ll=53.254464,-0.798223&z=0&t=h&hl=en-US&gl=US&mapclient=apiv3"
+                        title="Click to see this area on Google Maps" style="position: static; overflow: visible;
+                        float: none; display: inline;">
+                        <div style="width: 62px; height: 26px; cursor: pointer;">
+                            <img src="./Calculate distance and bearing between two Latitude Longitude points using Haversine formula in JavaScript_files/google_white2.png"
+                                draggable="false" style="position: absolute; left: 0px; top: 0px; width: 62px;
+                                height: 26px; -webkit-user-select: none; border: 0px; padding: 0px; margin: 0px;">
+                        </div>
+                    </a>
+                </div>
+                <div class="gmnoprint" style="z-index: 1000001; position: absolute; right: 0px; bottom: 0px;
+                    width: 12px;">
+                    <div draggable="false" class="gm-style-cc" style="-webkit-user-select: none;">
+                        <div style="opacity: 0.7; width: 100%; height: 100%; position: absolute;">
+                            <div style="width: 1px;">
+                            </div>
+                            <div style="background-color: rgb(245, 245, 245); width: auto; height: 100%; margin-left: 1px;">
+                            </div>
+                        </div>
+                        <div style="position: relative; padding-right: 6px; padding-left: 6px; font-family: Roboto, Arial, sans-serif;
+                            font-size: 10px; color: rgb(68, 68, 68); white-space: nowrap; direction: ltr;
+                            text-align: right;">
+                            <a style="color: rgb(68, 68, 68); text-decoration: none; cursor: pointer;">Map Data</a><span
+                                style="display: none;">Map data ©2014 Google Imagery ©2014 TerraMetrics</span></div>
+                    </div>
+                </div>
+                <div style="background-color: white; padding: 15px 21px; border: 1px solid rgb(171, 171, 171);
+                    font-family: Roboto, Arial, sans-serif; color: rgb(34, 34, 34); -webkit-box-shadow: rgba(0, 0, 0, 0.2) 0px 4px 16px;
+                    box-shadow: rgba(0, 0, 0, 0.2) 0px 4px 16px; z-index: 10000002; display: none;
+                    width: 0px; height: 0px; position: absolute; left: 5px; top: 5px;">
+                    <div style="padding: 0px 0px 10px; font-size: 16px;">
+                        Map Data</div>
+                    <div style="font-size: 13px;">
+                        Map data ©2014 Google Imagery ©2014 TerraMetrics</div>
+                    <div style="width: 13px; height: 13px; overflow: hidden; position: absolute; opacity: 0.7;
+                        right: 12px; top: 12px; z-index: 10000; cursor: pointer;">
+                        <img src="./Calculate distance and bearing between two Latitude Longitude points using Haversine formula in JavaScript_files/mapcnt3.png"
+                            draggable="false" style="position: absolute; left: -2px; top: -336px; width: 59px;
+                            height: 492px; -webkit-user-select: none; border: 0px; padding: 0px; margin: 0px;">
+                    </div>
+                </div>
+                <div class="gmnoscreen" style="position: absolute; right: 0px; bottom: 0px;">
+                    <div style="font-family: Roboto, Arial, sans-serif; font-size: 11px; color: rgb(68, 68, 68);
+                        direction: ltr; text-align: right; background-color: rgb(245, 245, 245);">
+                        Map data ©2014 Google Imagery ©2014 TerraMetrics</div>
+                </div>
+                <div class="gmnoprint gm-style-cc" draggable="false" style="z-index: 1000001; position: absolute;
+                    -webkit-user-select: none; right: 0px; bottom: 0px;">
+                    <div style="opacity: 0.7; width: 100%; height: 100%; position: absolute;">
+                        <div style="width: 1px;">
+                        </div>
+                        <div style="background-color: rgb(245, 245, 245); width: auto; height: 100%; margin-left: 1px;">
+                        </div>
+                    </div>
+                    <div style="position: relative; padding-right: 6px; padding-left: 6px; font-family: Roboto, Arial, sans-serif;
+                        font-size: 10px; color: rgb(68, 68, 68); white-space: nowrap; direction: ltr;
+                        text-align: right;">
+                        <a href="http://www.google.com/intl/en-US_US/help/terms_maps.html" target="_blank"
+                            style="text-decoration: none; cursor: pointer; color: rgb(68, 68, 68);">Terms of
+                            Use</a></div>
+                </div>
+                <div draggable="false" class="gm-style-cc" style="-webkit-user-select: none; position: absolute;
+                    right: 0px; bottom: 0px;">
+                    <div style="opacity: 0.7; width: 100%; height: 100%; position: absolute;">
+                        <div style="width: 1px;">
+                        </div>
+                        <div style="background-color: rgb(245, 245, 245); width: auto; height: 100%; margin-left: 1px;">
+                        </div>
+                    </div>
+                    <div style="position: relative; padding-right: 6px; padding-left: 6px; font-family: Roboto, Arial, sans-serif;
+                        font-size: 10px; color: rgb(68, 68, 68); white-space: nowrap; direction: ltr;
+                        text-align: right; display: none;">
+                        <a target="_new" title="Report errors in the road map or imagery to Google" href="http://maps.google.com/maps?ll=53.254464,-0.798223&z=0&t=h&hl=en-US&gl=US&mapclient=apiv3&skstate=action:mps_dialog$apiref:1&output=classic"
+                            style="font-family: Roboto, Arial, sans-serif; font-size: 10px; color: rgb(68, 68, 68);
+                            text-decoration: none; position: relative;">Report a map error</a></div>
+                </div>
+                <div class="gmnoprint gm-style-mtc" style="margin: 5px; z-index: 0; position: absolute;
+                    cursor: pointer; text-align: left; width: 85px; right: 0px; top: 0px;">
+                    <div draggable="false" title="Change map style" style="direction: ltr; overflow: hidden;
+                        text-align: left; position: relative; color: rgb(0, 0, 0); font-family: Roboto, Arial, sans-serif;
+                        -webkit-user-select: none; font-size: 11px; background-color: rgb(255, 255, 255);
+                        padding: 1px 6px; border-bottom-left-radius: 2px; border-top-left-radius: 2px;
+                        border-bottom-right-radius: 2px; border-top-right-radius: 2px; -webkit-background-clip: padding-box;
+                        background-clip: padding-box; border: 1px solid rgba(0, 0, 0, 0.14902); -webkit-box-shadow: rgba(0, 0, 0, 0.298039) 0px 1px 4px -1px;
+                        box-shadow: rgba(0, 0, 0, 0.298039) 0px 1px 4px -1px; font-weight: 500;">
+                        Satellite
+                        <img src="./Calculate distance and bearing between two Latitude Longitude points using Haversine formula in JavaScript_files/arrow-down.png"
+                            draggable="false" style="-webkit-user-select: none; border: 0px; padding: 0px;
+                            margin: -2px 0px 0px; position: absolute; right: 6px; top: 50%; width: 7px; height: 4px;">
+                    </div>
+                    <div style="background-color: white; z-index: -1; padding-top: 2px; -webkit-background-clip: padding-box;
+                        background-clip: padding-box; border-width: 0px 1px 1px; border-right-style: solid;
+                        border-bottom-style: solid; border-left-style: solid; border-right-color: rgba(0, 0, 0, 0.14902);
+                        border-bottom-color: rgba(0, 0, 0, 0.14902); border-left-color: rgba(0, 0, 0, 0.14902);
+                        -webkit-box-shadow: rgba(0, 0, 0, 0.298039) 0px 1px 4px -1px; box-shadow: rgba(0, 0, 0, 0.298039) 0px 1px 4px -1px;
+                        position: relative; text-align: left; display: none;">
+                        <div draggable="false" title="Show street map" style="color: black; font-family: Roboto, Arial, sans-serif;
+                            -webkit-user-select: none; font-size: 11px; background-color: rgb(255, 255, 255);
+                            padding: 3px 5px;">
+                            Map</div>
+                        <div draggable="false" title="Show satellite imagery" style="color: black; font-family: Roboto, Arial, sans-serif;
+                            -webkit-user-select: none; font-size: 11px; background-color: rgb(255, 255, 255);
+                            padding: 3px 5px; font-weight: 500;">
+                            Satellite</div>
+                        <div style="margin: 1px 0px; border-top-width: 1px; border-top-style: solid; border-top-color: rgb(235, 235, 235);">
+                        </div>
+                        <div draggable="false" title="Show street map with terrain" style="color: rgb(0, 0, 0);
+                            font-family: Roboto, Arial, sans-serif; -webkit-user-select: none; font-size: 11px;
+                            background-color: rgb(255, 255, 255); padding: 3px 8px 3px 5px; direction: ltr;
+                            text-align: left; white-space: nowrap; display: none;">
+                            <span role="checkbox" style="box-sizing: border-box; position: relative; line-height: 0;
+                                font-size: 0px; margin: 0px 5px 0px 0px; display: inline-block; background-color: rgb(255, 255, 255);
+                                border: 1px solid rgb(198, 198, 198); border-top-left-radius: 1px; border-top-right-radius: 1px;
+                                border-bottom-right-radius: 1px; border-bottom-left-radius: 1px; width: 13px;
+                                height: 13px; vertical-align: middle;">
+                                <div style="position: absolute; left: 1px; top: -2px; width: 13px; height: 11px;
+                                    overflow: hidden; display: none;">
+                                    <img src="./Calculate distance and bearing between two Latitude Longitude points using Haversine formula in JavaScript_files/imgs8.png"
+                                        draggable="false" style="position: absolute; left: -52px; top: -44px; -webkit-user-select: none;
+                                        border: 0px; padding: 0px; margin: 0px; width: 68px; height: 67px;">
+                                </div>
+                            </span>
+                            <label style="vertical-align: middle; cursor: pointer;">
+                                Terrain</label></div>
+                        <div style="margin: 1px 0px; border-top-width: 1px; border-top-style: solid; border-top-color: rgb(235, 235, 235);
+                            display: none;">
+                        </div>
+                        <div draggable="false" title="Zoom in to show 45 degree view" style="color: rgb(184, 184, 184);
+                            font-family: Roboto, Arial, sans-serif; -webkit-user-select: none; font-size: 11px;
+                            background-color: rgb(255, 255, 255); padding: 3px 8px 3px 5px; direction: ltr;
+                            text-align: left; white-space: nowrap; display: none;">
+                            <span role="checkbox" style="box-sizing: border-box; position: relative; line-height: 0;
+                                font-size: 0px; margin: 0px 5px 0px 0px; display: inline-block; background-color: rgb(255, 255, 255);
+                                border: 1px solid rgb(241, 241, 241); border-top-left-radius: 1px; border-top-right-radius: 1px;
+                                border-bottom-right-radius: 1px; border-bottom-left-radius: 1px; width: 13px;
+                                height: 13px; vertical-align: middle;">
+                                <div style="position: absolute; left: 1px; top: -2px; width: 13px; height: 11px;
+                                    overflow: hidden; display: none;">
+                                    <img src="./Calculate distance and bearing between two Latitude Longitude points using Haversine formula in JavaScript_files/imgs8.png"
+                                        draggable="false" style="position: absolute; left: -52px; top: -44px; -webkit-user-select: none;
+                                        border: 0px; padding: 0px; margin: 0px; width: 68px; height: 67px;">
+                                </div>
+                            </span>
+                            <label style="vertical-align: middle; cursor: pointer;">
+                                45°</label></div>
+                        <div draggable="false" title="Show imagery with street names" style="color: rgb(0, 0, 0);
+                            font-family: Roboto, Arial, sans-serif; -webkit-user-select: none; font-size: 11px;
+                            background-color: rgb(255, 255, 255); padding: 3px 8px 3px 5px; direction: ltr;
+                            text-align: left; white-space: nowrap;">
+                            <span role="checkbox" style="box-sizing: border-box; position: relative; line-height: 0;
+                                font-size: 0px; margin: 0px 5px 0px 0px; display: inline-block; background-color: rgb(255, 255, 255);
+                                border: 1px solid rgb(198, 198, 198); border-top-left-radius: 1px; border-top-right-radius: 1px;
+                                border-bottom-right-radius: 1px; border-bottom-left-radius: 1px; width: 13px;
+                                height: 13px; vertical-align: middle;">
+                                <div style="position: absolute; left: 1px; top: -2px; width: 13px; height: 11px;
+                                    overflow: hidden;">
+                                    <img src="./Calculate distance and bearing between two Latitude Longitude points using Haversine formula in JavaScript_files/imgs8.png"
+                                        draggable="false" style="position: absolute; left: -52px; top: -44px; -webkit-user-select: none;
+                                        border: 0px; padding: 0px; margin: 0px; width: 68px; height: 67px;">
+                                </div>
+                            </span>
+                            <label style="vertical-align: middle; cursor: pointer;">
+                                Labels</label></div>
+                    </div>
+                </div>
+                <div draggable="false" class="gm-style-cc" style="-webkit-user-select: none; position: absolute;
+                    right: 0px; bottom: 0px;">
+                    <div style="opacity: 0.7; width: 100%; height: 100%; position: absolute;">
+                        <div style="width: 1px;">
+                        </div>
+                        <div style="background-color: rgb(245, 245, 245); width: auto; height: 100%; margin-left: 1px;">
+                        </div>
+                    </div>
+                    <div style="position: relative; padding-right: 6px; padding-left: 6px; font-family: Roboto, Arial, sans-serif;
+                        font-size: 10px; color: rgb(68, 68, 68); white-space: nowrap; direction: ltr;
+                        text-align: right;">
+                        <span>5000 km&nbsp;</span><div style="position: relative; display: inline-block;
+                            height: 8px; bottom: -1px; width: 53px;">
+                            <div style="width: 100%; height: 4px; position: absolute; background-color: rgb(255, 255, 255);
+                                bottom: 0px; left: 0px;">
+                            </div>
+                            <div style="position: absolute; left: 0px; top: 0px; width: 4px; height: 8px; background-color: rgb(255, 255, 255);">
+                            </div>
+                            <div style="width: 4px; height: 8px; position: absolute; background-color: rgb(255, 255, 255);
+                                bottom: 0px; right: 0px;">
+                            </div>
+                            <div style="position: absolute; background-color: rgb(102, 102, 102); height: 2px;
+                                bottom: 1px; right: 1px; left: 1px;">
+                            </div>
+                            <div style="position: absolute; left: 1px; top: 1px; width: 2px; height: 6px; background-color: rgb(102, 102, 102);">
+                            </div>
+                            <div style="width: 2px; height: 6px; position: absolute; background-color: rgb(102, 102, 102);
+                                bottom: 1px; right: 1px;">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="gmnoprint" draggable="false" controlwidth="32" controlheight="84" style="margin: 5px;
+                    -webkit-user-select: none; position: absolute; left: 0px; top: 0px;">
+                    <div controlwidth="32" controlheight="40" style="cursor: url(http://maps.gstatic.com/mapfiles/openhand_8_8.cur) 8 8, default;
+                        position: absolute; left: 0px; top: 0px;">
+                        <div style="width: 32px; height: 40px; overflow: hidden; position: absolute; left: 0px;
+                            top: 0px;">
+                            <img src="./Calculate distance and bearing between two Latitude Longitude points using Haversine formula in JavaScript_files/cb_scout2.png"
+                                draggable="false" style="position: absolute; left: -9px; top: -102px; width: 1028px;
+                                height: 214px; -webkit-user-select: none; border: 0px; padding: 0px; margin: 0px;">
+                        </div>
+                        <div style="width: 32px; height: 40px; overflow: hidden; position: absolute; left: 0px;
+                            top: 0px; visibility: hidden;">
+                            <img src="./Calculate distance and bearing between two Latitude Longitude points using Haversine formula in JavaScript_files/cb_scout2.png"
+                                draggable="false" style="position: absolute; left: -107px; top: -102px; width: 1028px;
+                                height: 214px; -webkit-user-select: none; border: 0px; padding: 0px; margin: 0px;">
+                        </div>
+                        <div style="width: 32px; height: 40px; overflow: hidden; position: absolute; left: 0px;
+                            top: 0px; visibility: hidden;">
+                            <img src="./Calculate distance and bearing between two Latitude Longitude points using Haversine formula in JavaScript_files/cb_scout2.png"
+                                draggable="false" style="position: absolute; left: -58px; top: -102px; width: 1028px;
+                                height: 214px; -webkit-user-select: none; border: 0px; padding: 0px; margin: 0px;">
+                        </div>
+                        <div style="width: 32px; height: 40px; overflow: hidden; position: absolute; left: 0px;
+                            top: 0px; visibility: hidden;">
+                            <img src="./Calculate distance and bearing between two Latitude Longitude points using Haversine formula in JavaScript_files/cb_scout2.png"
+                                draggable="false" style="position: absolute; left: -205px; top: -102px; width: 1028px;
+                                height: 214px; -webkit-user-select: none; border: 0px; padding: 0px; margin: 0px;">
+                        </div>
+                    </div>
+                    <div class="gmnoprint" controlwidth="0" controlheight="0" style="opacity: 0.6; display: none;
+                        position: absolute;">
+                        <div title="Rotate map 90 degrees" style="width: 22px; height: 22px; overflow: hidden;
+                            position: absolute; cursor: pointer;">
+                            <img src="./Calculate distance and bearing between two Latitude Longitude points using Haversine formula in JavaScript_files/mapcnt3.png"
+                                draggable="false" style="position: absolute; left: -38px; top: -360px; width: 59px;
+                                height: 492px; -webkit-user-select: none; border: 0px; padding: 0px; margin: 0px;">
+                        </div>
+                    </div>
+                    <div class="gmnoprint" controlwidth="20" controlheight="39" style="position: absolute;
+                        left: 6px; top: 45px;">
+                        <div style="width: 20px; height: 39px; overflow: hidden; position: absolute;">
+                            <img src="./Calculate distance and bearing between two Latitude Longitude points using Haversine formula in JavaScript_files/mapcnt3.png"
+                                draggable="false" style="position: absolute; left: -39px; top: -401px; width: 59px;
+                                height: 492px; -webkit-user-select: none; border: 0px; padding: 0px; margin: 0px;">
+                        </div>
+                        <div title="Zoom in" style="position: absolute; left: 0px; top: 2px; width: 20px;
+                            height: 17px; cursor: pointer;">
+                        </div>
+                        <div title="Zoom out" style="position: absolute; left: 0px; top: 19px; width: 20px;
+                            height: 17px; cursor: pointer;">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="gm-style" style="position: absolute; left: 0px; top: 0px; overflow: hidden;
+                width: 100%; height: 100%; z-index: 1; display: none;">
+                <div style="position: absolute; left: 0px; top: 0px; overflow: hidden; width: 100%;
+                    height: 100%; z-index: 0; background-color: rgb(229, 227, 223);">
+                    <div style="position: absolute; left: 0px; top: 0px; z-index: 1; width: 100%; height: 100%;
+                        cursor: url(http://maps.gstatic.com/mapfiles/openhand_8_8.cur) 8 8, default;">
+                        <div style="-webkit-transform: translateZ(0); position: absolute; left: 0px; top: 0px;
+                            width: 100%; z-index: 200;">
+                            <div style="-webkit-transform: translateZ(0); position: absolute; left: 0px; top: 0px;
+                                z-index: 101; width: 100%;">
+                            </div>
+                        </div>
+                        <div style="-webkit-transform: translateZ(0); position: absolute; left: 0px; top: 0px;
+                            width: 100%; z-index: 201;">
+                            <div style="-webkit-transform: translateZ(0); position: absolute; left: 0px; top: 0px;
+                                z-index: 102; width: 100%;">
+                            </div>
+                            <div style="-webkit-transform: translateZ(0); position: absolute; left: 0px; top: 0px;
+                                z-index: 103; width: 100%;">
+                            </div>
+                        </div>
+                        <div style="-webkit-transform: translateZ(0); position: absolute; left: 0px; top: 0px;
+                            width: 100%; z-index: 202;">
+                            <div style="-webkit-transform: translateZ(0); position: absolute; left: 0px; top: 0px;
+                                z-index: 104; width: 100%;">
+                            </div>
+                            <div style="-webkit-transform: translateZ(0); position: absolute; left: 0px; top: 0px;
+                                z-index: 105; width: 100%;">
+                            </div>
+                            <div style="-webkit-transform: translateZ(0); position: absolute; left: 0px; top: 0px;
+                                z-index: 106; width: 100%;">
+                            </div>
+                        </div>
+                        <div style="-webkit-transform: translateZ(0); position: absolute; left: 0px; top: 0px;
+                            z-index: 100; width: 100%;">
+                        </div>
+                        <canvas width="0" height="0" style=""></canvas>
+                        <div class="gmnoprint" style="position: absolute; left: 0px; top: 0px; z-index: 2;
+                            width: 480px; height: 480px; font-family: Roboto, Arial, sans-serif;">
+                            <svg version="1.1" overflow="hidden" width="0px" height="0px" viewbox="0 0 0 0" style="position: absolute;
+                                left: 0px; top: 0px;"><ellipse fill="white" fill-rule="evenodd" visibility="hidden" fill-opacity="0.5" cx="476" cy="264.5" rx="38" ry="6.5"></ellipse><path fill="white" fill-rule="evenodd" visibility="hidden" fill-opacity="0.5" d="M487 16 L490 -5 L464 17 L462 36 Z"></path><path fill="black" fill-rule="evenodd" fill-opacity="0.5" stroke="none" d="M 0 -100 L 40 -60 L 30 -50 L 0 -82 L -30 -50 L -40 -60" transform="translate(0 0) scale(1 0.3670685512666815) rotate(228.3694508019438) "></path><path fill="white" fill-rule="evenodd" fill-opacity="1" stroke="none" d="M 0 -100 L 40 -60 L 30 -50 L 0 -82 L -30 -50 L -40 -60" transform="translate(0 -3) scale(1 0.3670685512666815) rotate(228.3694508019438) "></path><path fill="white" fill-rule="evenodd" fill-opacity="0" stroke="none" d="M 0 -120 L 60 -60 L 40 -30 L -40 -30 L -60 -60 L 0 -120" pano="AQW-XqNvvidyrtIT6FZZ7A" cursor="pointer" transform="translate(0 -3) scale(1 0.3670685512666815) rotate(228.3694508019438) "></path><path fill="black" fill-rule="evenodd" fill-opacity="0.5" stroke="none" d="M 0 -100 L 40 -60 L 30 -50 L 0 -82 L -30 -50 L -40 -60" transform="translate(0 0) scale(1 0.3670685512666815) rotate(459.3694508019438) "></path><path fill="white" fill-rule="evenodd" fill-opacity="1" stroke="none" d="M 0 -100 L 40 -60 L 30 -50 L 0 -82 L -30 -50 L -40 -60" transform="translate(0 -3) scale(1 0.3670685512666815) rotate(459.3694508019438) "></path><path fill="white" fill-rule="evenodd" fill-opacity="0" stroke="none" d="M 0 -120 L 60 -60 L 40 -30 L -40 -30 L -60 -60 L 0 -120" pano="ocVFZVY9USVQtaVu93qWDg" cursor="pointer" transform="translate(0 -3) scale(1 0.3670685512666815) rotate(459.3694508019438) "></path></svg>
+                        </div>
+                    </div>
+                </div>
+                <div style="margin-left: 5px; margin-right: 5px; z-index: 1000000; position: absolute;
+                    left: 0px; bottom: 0px;">
+                    <a target="_blank" href="http://maps.google.com/maps?z=17&layer=c&cbll=52.581365,-1.717439&panoid=P6yF37G7iGPyiDXs4AtdQA&cbp=12,-152.3694508019438,,-2,10.092480674405593&hl=en-US&gl=US&mapclient=apiv3"
+                        title="Click to see this area on Google Maps" style="position: static; overflow: visible;
+                        float: none; display: inline;">
+                        <div style="width: 62px; height: 26px; cursor: pointer;">
+                            <img src="./Calculate distance and bearing between two Latitude Longitude points using Haversine formula in JavaScript_files/google_white2.png"
+                                draggable="false" style="position: absolute; left: 0px; top: 0px; width: 62px;
+                                height: 26px; -webkit-user-select: none; border: 0px; padding: 0px; margin: 0px;">
+                        </div>
+                    </a>
+                </div>
+                <div class="gmnoprint" style="z-index: 1000001; position: absolute; right: 0px; bottom: 0px;
+                    width: 12px;">
+                    <div draggable="false" class="gm-style-cc" style="-webkit-user-select: none;">
+                        <div style="opacity: 0.7; width: 100%; height: 100%; position: absolute;">
+                            <div style="width: 1px;">
+                            </div>
+                            <div style="background-color: rgb(245, 245, 245); width: auto; height: 100%; margin-left: 1px;">
+                            </div>
+                        </div>
+                        <div style="position: relative; padding-right: 6px; padding-left: 6px; font-family: Roboto, Arial, sans-serif;
+                            font-size: 10px; color: rgb(68, 68, 68); white-space: nowrap; direction: ltr;
+                            text-align: right;">
+                            <a style="color: rgb(68, 68, 68); text-decoration: none; cursor: pointer;">Map Data</a><span
+                                style="display: none;">© 2014 Google</span></div>
+                    </div>
+                </div>
+                <div style="background-color: white; padding: 15px 21px; border: 1px solid rgb(171, 171, 171);
+                    font-family: Roboto, Arial, sans-serif; color: rgb(34, 34, 34); -webkit-box-shadow: rgba(0, 0, 0, 0.2) 0px 4px 16px;
+                    box-shadow: rgba(0, 0, 0, 0.2) 0px 4px 16px; z-index: 10000002; display: none;
+                    width: 0px; height: 0px; position: absolute; left: 5px; top: 5px;">
+                    <div style="padding: 0px 0px 10px; font-size: 16px;">
+                        Map Data</div>
+                    <div style="font-size: 13px;">
+                        © 2014 Google</div>
+                    <div style="width: 13px; height: 13px; overflow: hidden; position: absolute; opacity: 0.7;
+                        right: 12px; top: 12px; z-index: 10000; cursor: pointer;">
+                        <img src="./Calculate distance and bearing between two Latitude Longitude points using Haversine formula in JavaScript_files/mapcnt3.png"
+                            draggable="false" style="position: absolute; left: -2px; top: -336px; width: 59px;
+                            height: 492px; -webkit-user-select: none; border: 0px; padding: 0px; margin: 0px;">
+                    </div>
+                </div>
+                <div class="gmnoscreen" style="position: absolute; right: 0px; bottom: 0px;">
+                    <div style="font-family: Roboto, Arial, sans-serif; font-size: 11px; color: rgb(68, 68, 68);
+                        direction: ltr; text-align: right; background-color: rgb(245, 245, 245);">
+                        © 2014 Google</div>
+                </div>
+                <div class="gmnoprint gm-style-cc" draggable="false" style="z-index: 1000001; position: absolute;
+                    -webkit-user-select: none; right: 0px; bottom: 0px;">
+                    <div style="opacity: 0.7; width: 100%; height: 100%; position: absolute;">
+                        <div style="width: 1px;">
+                        </div>
+                        <div style="background-color: rgb(245, 245, 245); width: auto; height: 100%; margin-left: 1px;">
+                        </div>
+                    </div>
+                    <div style="position: relative; padding-right: 6px; padding-left: 6px; font-family: Roboto, Arial, sans-serif;
+                        font-size: 10px; color: rgb(68, 68, 68); white-space: nowrap; direction: ltr;
+                        text-align: right;">
+                        <a href="http://www.google.com/intl/en-US_US/help/terms_maps.html" target="_blank"
+                            style="text-decoration: none; cursor: pointer; color: rgb(68, 68, 68);">Terms of
+                            Use</a></div>
+                </div>
+                <div style="z-index: 1; margin: 10px; position: absolute; left: 88px; top: 0px;">
+                    <div style="padding: 5px; background-color: rgba(255, 255, 255, 0.74902); font-family: Roboto, Arial, sans-serif;
+                        font-size: 11px; color: rgb(34, 34, 34);">
+                        England<div style="font-size: 10px; color: rgb(102, 102, 102);">
+                            Address is approximate</div>
+                    </div>
+                </div>
+                <div class="gmnoprint" style="z-index: 1; margin: 3px; position: absolute; right: 0px;
+                    top: 0px;">
+                    <div title="Exit Street View" style="position: absolute; left: 0px; top: 0px; z-index: 2;">
+                        <div style="width: 16px; height: 16px; overflow: hidden; position: absolute; left: 0px;
+                            top: 0px;">
+                            <img src="./Calculate distance and bearing between two Latitude Longitude points using Haversine formula in JavaScript_files/cb_scout2.png"
+                                draggable="false" style="position: absolute; left: -490px; top: -102px; width: 1028px;
+                                height: 214px; -webkit-user-select: none; border: 0px; padding: 0px; margin: 0px;">
+                        </div>
+                        <div style="width: 16px; height: 16px; overflow: hidden; position: absolute; left: 0px;
+                            top: 0px; display: none;">
+                            <img src="./Calculate distance and bearing between two Latitude Longitude points using Haversine formula in JavaScript_files/cb_scout2.png"
+                                draggable="false" style="position: absolute; left: -539px; top: -102px; width: 1028px;
+                                height: 214px; -webkit-user-select: none; border: 0px; padding: 0px; margin: 0px;">
+                        </div>
+                    </div>
+                    <div style="z-index: 1; font-size: 1px; background-color: rgb(187, 187, 187); width: 16px;
+                        height: 16px;">
+                    </div>
+                </div>
+                <div draggable="false" style="color: white; font-family: Roboto, Arial, sans-serif;
+                    background-color: black; padding: 4px; border: 2px solid white; -webkit-user-select: none;
+                    display: none; position: absolute; left: 0px; top: 0px;">
+                    This image is no longer available
+                </div>
+                <div draggable="false" class="gm-style-cc" style="-webkit-user-select: none; position: absolute;
+                    right: 0px; bottom: 0px;">
+                    <div style="opacity: 0.7; width: 100%; height: 100%; position: absolute;">
+                        <div style="width: 1px;">
+                        </div>
+                        <div style="background-color: rgb(245, 245, 245); width: auto; height: 100%; margin-left: 1px;">
+                        </div>
+                    </div>
+                    <div style="position: relative; padding-right: 6px; padding-left: 6px; font-family: Roboto, Arial, sans-serif;
+                        font-size: 10px; color: rgb(68, 68, 68); white-space: nowrap; direction: ltr;
+                        text-align: right;">
+                        <a target="_new" title="Report problems with Street View imagery to Google" href="http://cbk0.googleapis.com/cbk?output=report&cb_client=apiv3&v=4&panoid=P6yF37G7iGPyiDXs4AtdQA&cbp=1,-152.3694508019438,,0,10.092480674405593&hl=en-US"
+                            style="text-decoration: none; color: rgb(68, 68, 68);">Report a problem</a></div>
+                </div>
+                <div class="gmnoprint" draggable="false" controlwidth="78" controlheight="124" style="margin: 5px;
+                    -webkit-user-select: none; position: absolute; left: 0px; top: 0px;">
+                    <div class="gmnoprint" controlwidth="78" controlheight="80" style="cursor: url(http://maps.gstatic.com/mapfiles/openhand_8_8.cur) 8 8, default;
+                        width: 78px; height: 78px; position: absolute; left: 0px; top: 0px;">
+                        <div class="gmnoprint" controlwidth="78" controlheight="80" style="width: 78px; height: 78px;
+                            position: absolute; left: 0px; top: 0px;">
+                            <div style="">
+                                <svg version="1.1" overflow="hidden" width="78px" height="78px" viewbox="0 0 78 78"
+                                    style="position: absolute; left: 0px; top: 0px;"><circle cx="39" cy="39" r="35" stroke-width="3" fill-opacity="0.2" fill="#f2f4f6" stroke="#f2f4f6"></circle><g transform="rotate(152.3694508019438 39 39)"><rect x="33" y="0" rx="4" ry="4" width="12" height="11" stroke="#a6a6a6" stroke-width="1" fill="#f2f4f6"></rect><polyline points="36.5,8.5 36.5,2.5 41.5,8.5 41.5,2.5" stroke-linejoin="bevel" stroke-width="1.5" fill="#f2f4f6" stroke="#000"></polyline></g></svg>
+                            </div>
+                        </div>
+                        <div class="gmnoprint" controlwidth="59" controlheight="59" style="position: absolute;
+                            left: 10px; top: 11px;">
+                            <div style="width: 59px; height: 59px; overflow: hidden; position: relative;">
+                                <img src="./Calculate distance and bearing between two Latitude Longitude points using Haversine formula in JavaScript_files/mapcnt3.png"
+                                    draggable="false" style="position: absolute; left: 0px; top: 0px; width: 59px;
+                                    height: 492px; -webkit-user-select: none; border: 0px; padding: 0px; margin: 0px;">
+                                <div title="Pan left" style="position: absolute; left: 0px; top: 20px; width: 19.666666666666668px;
+                                    height: 19.666666666666668px; cursor: pointer;">
+                                </div>
+                                <div title="Pan right" style="position: absolute; left: 39px; top: 20px; width: 19.666666666666668px;
+                                    height: 19.666666666666668px; cursor: pointer;">
+                                </div>
+                                <div title="Pan up" style="position: absolute; left: 20px; top: 0px; width: 19.666666666666668px;
+                                    height: 19.666666666666668px; cursor: pointer;">
+                                </div>
+                                <div title="Pan down" style="position: absolute; left: 20px; top: 39px; width: 19.666666666666668px;
+                                    height: 19.666666666666668px; cursor: pointer;">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="gmnoprint" controlwidth="20" controlheight="39" style="position: absolute;
+                        left: 29px; top: 85px;">
+                        <div style="width: 20px; height: 39px; overflow: hidden; position: absolute;">
+                            <img src="./Calculate distance and bearing between two Latitude Longitude points using Haversine formula in JavaScript_files/mapcnt3.png"
+                                draggable="false" style="position: absolute; left: -39px; top: -401px; width: 59px;
+                                height: 492px; -webkit-user-select: none; border: 0px; padding: 0px; margin: 0px;">
+                        </div>
+                        <div title="Zoom in" style="position: absolute; left: 0px; top: 2px; width: 20px;
+                            height: 17px; cursor: pointer;">
+                        </div>
+                        <div title="Zoom out" style="position: absolute; left: 0px; top: 19px; width: 20px;
+                            height: 17px; cursor: pointer;">
+                        </div>
+                    </div>
+                    <div draggable="false" controlwidth="18px" style="-webkit-user-select: none; font-family: Roboto, Arial, sans-serif;
+                        font-size: 11px; width: 18px; text-align: center; cursor: pointer; display: none;
+                        position: absolute;">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </fieldset>
+    </form>
+    <hr>
+    <h3 id="convertDecDMS">
+        Convert between degrees-minutes-seconds &amp; decimal degrees</h3>
+    <form name="convert" id="convert">
+    <table class="note">
+        <tbody>
+            <tr>
+                <td>
+                    Latitude
+                </td>
+                <td>
+                    Longitude
+                </td>
+                <td colspan="2">
+                    1° ≈ 111 km <span class="grey">(110.57 eq’l — 111.70 polar)</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="text" name="latDMS" id="latDMS" value="52°12′17.0″N" class="note w8">
+                </td>
+                <td>
+                    <input type="text" name="lonDMS" id="lonDMS" value="000°08′26.0″E" class="note w8">
+                </td>
+                <td>
+                    1′ ≈ 1.85 km <span class="grey">(= 1 nm)</span>
+                </td>
+                <td>
+                    0.01° ≈ 1.11 km
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="text" name="latDec" id="latDec" value="52.20472" class="note w8">
+                </td>
+                <td>
+                    <input type="text" name="lonDec" id="lonDec" value="0.14056" class="note w8">
+                </td>
+                <td>
+                    1″ ≈ 30.9 m
+                </td>
+                <td>
+                    0.0001° ≈ 11.1 m
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    </form>
+    <p class="note">
+        No, I’ve not included decimal minutes: a decimal system is easy, a sexagesimal system
+        has merits, but mixing the two is a complete sow’s ear. Switch off the option on
+        your GPS!</p>
+    <form>
+    Display calculation results as:
+    <input type="radio" name="degFormat" id="degFormatdms" value="dms" checked="checked">
+    deg/min/sec
+    <input type="radio" name="degFormat" id="degFormatd" value="d">
+    decimal degrees
+    </form>
+    <hr>
+    <div id="area">
+    </div>
+</body>
+</html>

@@ -1,0 +1,358 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="MAPSModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+  <EntityContainer Name="MAPSModelStoreContainer">
+    <EntitySet Name="Block" EntityType="MAPSModel.Store.Block" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Circle" EntityType="MAPSModel.Store.Circle" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="District" EntityType="MAPSModel.Store.District" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Division" EntityType="MAPSModel.Store.Division" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ForestArea" EntityType="MAPSModel.Store.ForestArea" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ForestCoordinates" EntityType="MAPSModel.Store.ForestCoordinates" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="LoginMaster" EntityType="MAPSModel.Store.LoginMaster" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Range" EntityType="MAPSModel.Store.Range" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Section" EntityType="MAPSModel.Store.Section" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Tehsil" EntityType="MAPSModel.Store.Tehsil" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Village" EntityType="MAPSModel.Store.Village" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Zone" EntityType="MAPSModel.Store.Zone" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="FK_Block_Section" Association="MAPSModel.Store.FK_Block_Section">
+      <End Role="Section" EntitySet="Section" />
+      <End Role="Block" EntitySet="Block" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Circle_Zone" Association="MAPSModel.Store.FK_Circle_Zone">
+      <End Role="Zone" EntitySet="Zone" />
+      <End Role="Circle" EntitySet="Circle" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Division_Circle" Association="MAPSModel.Store.FK_Division_Circle">
+      <End Role="Circle" EntitySet="Circle" />
+      <End Role="Division" EntitySet="Division" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ForestArea_Block" Association="MAPSModel.Store.FK_ForestArea_Block">
+      <End Role="Block" EntitySet="Block" />
+      <End Role="ForestArea" EntitySet="ForestArea" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ForestArea_Village" Association="MAPSModel.Store.FK_ForestArea_Village">
+      <End Role="Village" EntitySet="Village" />
+      <End Role="ForestArea" EntitySet="ForestArea" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ForestCoordinates_ForestArea" Association="MAPSModel.Store.FK_ForestCoordinates_ForestArea">
+      <End Role="ForestArea" EntitySet="ForestArea" />
+      <End Role="ForestCoordinates" EntitySet="ForestCoordinates" />
+    </AssociationSet>
+    <AssociationSet Name="FK_LoginMaster_District" Association="MAPSModel.Store.FK_LoginMaster_District">
+      <End Role="District" EntitySet="District" />
+      <End Role="LoginMaster" EntitySet="LoginMaster" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Range_Division" Association="MAPSModel.Store.FK_Range_Division">
+      <End Role="Division" EntitySet="Division" />
+      <End Role="Range" EntitySet="Range" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Section_Range" Association="MAPSModel.Store.FK_Section_Range">
+      <End Role="Range" EntitySet="Range" />
+      <End Role="Section" EntitySet="Section" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Tehsil_District" Association="MAPSModel.Store.FK_Tehsil_District">
+      <End Role="District" EntitySet="District" />
+      <End Role="Tehsil" EntitySet="Tehsil" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Village_Tehsil" Association="MAPSModel.Store.FK_Village_Tehsil">
+      <End Role="Tehsil" EntitySet="Tehsil" />
+      <End Role="Village" EntitySet="Village" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Block">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="SectionId" Type="int" Nullable="false" />
+    <Property Name="BlockName" Type="nvarchar" Nullable="false" MaxLength="255" />
+    <Property Name="STD" Type="varchar" MaxLength="6" />
+    <Property Name="PhoneNo" Type="varchar" MaxLength="7" />
+    <Property Name="MobileNo" Type="varchar" MaxLength="10" />
+    <Property Name="FaxNo" Type="varchar" MaxLength="13" />
+    <Property Name="OfficerName" Type="nvarchar" MaxLength="250" />
+    <Property Name="CreatedBy" Type="varchar" MaxLength="30" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="UpdatedBy" Type="varchar" MaxLength="30" />
+    <Property Name="UpdatedDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Circle">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="ZoneId" Type="int" Nullable="false" />
+    <Property Name="CircleName" Type="nvarchar" Nullable="false" MaxLength="255" />
+    <Property Name="STD" Type="varchar" MaxLength="6" />
+    <Property Name="PhoneNo" Type="varchar" MaxLength="7" />
+    <Property Name="MobileNo" Type="varchar" MaxLength="10" />
+    <Property Name="FaxNo" Type="varchar" MaxLength="13" />
+    <Property Name="OfficerName" Type="nvarchar" MaxLength="250" />
+    <Property Name="CreatedBy" Type="varchar" MaxLength="30" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="UpdatedBy" Type="varchar" MaxLength="30" />
+    <Property Name="UpdatedDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="District">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="DistrictName" Type="nvarchar" Nullable="false" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="Division">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="CircleId" Type="int" Nullable="false" />
+    <Property Name="DivisionName" Type="nvarchar" Nullable="false" MaxLength="255" />
+    <Property Name="STD" Type="varchar" MaxLength="6" />
+    <Property Name="PhoneNo" Type="varchar" MaxLength="7" />
+    <Property Name="MobileNo" Type="varchar" MaxLength="10" />
+    <Property Name="FaxNo" Type="varchar" MaxLength="13" />
+    <Property Name="OfficerName" Type="nvarchar" MaxLength="250" />
+    <Property Name="CreatedBy" Type="varchar" MaxLength="30" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="UpdatedBy" Type="varchar" MaxLength="30" />
+    <Property Name="UpdatedDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="ForestArea">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="BlockId" Type="int" />
+    <Property Name="VillageId" Type="int" />
+    <Property Name="ForestType" Type="char" MaxLength="1" />
+    <Property Name="ForestName" Type="nvarchar" MaxLength="250" />
+    <Property Name="NumberOfPillars" Type="tinyint" />
+    <Property Name="isReferencePoint" Type="bit" />
+    <Property Name="AreaCalculated" Type="decimal" Precision="12" Scale="4" />
+    <Property Name="AreaInGazette" Type="decimal" Precision="12" Scale="4" />
+    <Property Name="GazetteDate" Type="date" />
+    <Property Name="GazetteNo" Type="varchar" MaxLength="25" />
+  </EntityType>
+  <EntityType Name="ForestCoordinates">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="ForestAreaId" Type="bigint" Nullable="false" />
+    <Property Name="PillarNo" Type="varchar" MaxLength="6" />
+    <Property Name="Latitude" Type="varchar" MaxLength="30" />
+    <Property Name="Longitude" Type="varchar" MaxLength="30" />
+    <Property Name="ForwardBearings" Type="nvarchar" MaxLength="10" />
+    <Property Name="BearingDifference" Type="decimal" Precision="6" Scale="3" />
+    <Property Name="BackBearings" Type="nvarchar" MaxLength="10" />
+    <Property Name="BackDistanceInMeter" Type="decimal" Precision="9" Scale="4" />
+    <Property Name="BackDistanceInChain" Type="decimal" Precision="8" Scale="4" />
+  </EntityType>
+  <EntityType Name="LoginMaster">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="UserId" Type="nvarchar" Nullable="false" MaxLength="30" />
+    <Property Name="Name" Type="nvarchar" MaxLength="255" />
+    <Property Name="Password" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="DistrictId" Type="int" />
+    <Property Name="Type" Type="char" Nullable="false" MaxLength="1" />
+  </EntityType>
+  <EntityType Name="Range">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="DivisionId" Type="int" Nullable="false" />
+    <Property Name="RangeName" Type="nvarchar" Nullable="false" MaxLength="255" />
+    <Property Name="STD" Type="varchar" MaxLength="6" />
+    <Property Name="PhoneNo" Type="varchar" MaxLength="7" />
+    <Property Name="MobileNo" Type="varchar" MaxLength="10" />
+    <Property Name="FaxNo" Type="varchar" MaxLength="13" />
+    <Property Name="OfficerName" Type="nvarchar" MaxLength="250" />
+    <Property Name="CreatedBy" Type="varchar" MaxLength="30" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="UpdatedBy" Type="varchar" MaxLength="30" />
+    <Property Name="UpdatedDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Section">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="RangeId" Type="int" Nullable="false" />
+    <Property Name="SectionName" Type="nvarchar" Nullable="false" MaxLength="255" />
+    <Property Name="STD" Type="varchar" MaxLength="6" />
+    <Property Name="PhoneNo" Type="varchar" MaxLength="7" />
+    <Property Name="MobileNo" Type="varchar" MaxLength="10" />
+    <Property Name="FaxNo" Type="varchar" MaxLength="13" />
+    <Property Name="OfficerName" Type="nvarchar" MaxLength="250" />
+    <Property Name="CreatedBy" Type="varchar" MaxLength="30" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="UpdatedBy" Type="varchar" MaxLength="30" />
+    <Property Name="UpdatedDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Tehsil">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="DistrictId" Type="int" Nullable="false" />
+    <Property Name="TehsilName" Type="nvarchar" Nullable="false" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="Village">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="TehsilId" Type="int" Nullable="false" />
+    <Property Name="VillageName" Type="nvarchar" Nullable="false" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="Zone">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="ZoneName" Type="nvarchar" Nullable="false" MaxLength="255" />
+    <Property Name="STD" Type="varchar" MaxLength="6" />
+    <Property Name="PhoneNo" Type="varchar" MaxLength="7" />
+    <Property Name="MobileNo" Type="varchar" MaxLength="10" />
+    <Property Name="FaxNo" Type="varchar" MaxLength="13" />
+    <Property Name="OfficerName" Type="nvarchar" MaxLength="250" />
+    <Property Name="CreatedBy" Type="varchar" MaxLength="30" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="UpdatedBy" Type="varchar" MaxLength="30" />
+    <Property Name="UpdatedDate" Type="datetime" />
+  </EntityType>
+  <Association Name="FK_Block_Section">
+    <End Role="Section" Type="MAPSModel.Store.Section" Multiplicity="1" />
+    <End Role="Block" Type="MAPSModel.Store.Block" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Section">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Block">
+        <PropertyRef Name="SectionId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Circle_Zone">
+    <End Role="Zone" Type="MAPSModel.Store.Zone" Multiplicity="1" />
+    <End Role="Circle" Type="MAPSModel.Store.Circle" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Zone">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Circle">
+        <PropertyRef Name="ZoneId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Division_Circle">
+    <End Role="Circle" Type="MAPSModel.Store.Circle" Multiplicity="1" />
+    <End Role="Division" Type="MAPSModel.Store.Division" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Circle">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Division">
+        <PropertyRef Name="CircleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ForestArea_Block">
+    <End Role="Block" Type="MAPSModel.Store.Block" Multiplicity="0..1" />
+    <End Role="ForestArea" Type="MAPSModel.Store.ForestArea" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Block">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ForestArea">
+        <PropertyRef Name="BlockId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ForestArea_Village">
+    <End Role="Village" Type="MAPSModel.Store.Village" Multiplicity="0..1" />
+    <End Role="ForestArea" Type="MAPSModel.Store.ForestArea" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Village">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ForestArea">
+        <PropertyRef Name="VillageId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ForestCoordinates_ForestArea">
+    <End Role="ForestArea" Type="MAPSModel.Store.ForestArea" Multiplicity="1" />
+    <End Role="ForestCoordinates" Type="MAPSModel.Store.ForestCoordinates" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ForestArea">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ForestCoordinates">
+        <PropertyRef Name="ForestAreaId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_LoginMaster_District">
+    <End Role="District" Type="MAPSModel.Store.District" Multiplicity="0..1" />
+    <End Role="LoginMaster" Type="MAPSModel.Store.LoginMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="District">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="LoginMaster">
+        <PropertyRef Name="DistrictId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Range_Division">
+    <End Role="Division" Type="MAPSModel.Store.Division" Multiplicity="1" />
+    <End Role="Range" Type="MAPSModel.Store.Range" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Division">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Range">
+        <PropertyRef Name="DivisionId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Section_Range">
+    <End Role="Range" Type="MAPSModel.Store.Range" Multiplicity="1" />
+    <End Role="Section" Type="MAPSModel.Store.Section" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Range">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Section">
+        <PropertyRef Name="RangeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Tehsil_District">
+    <End Role="District" Type="MAPSModel.Store.District" Multiplicity="1" />
+    <End Role="Tehsil" Type="MAPSModel.Store.Tehsil" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="District">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Tehsil">
+        <PropertyRef Name="DistrictId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Village_Tehsil">
+    <End Role="Tehsil" Type="MAPSModel.Store.Tehsil" Multiplicity="1" />
+    <End Role="Village" Type="MAPSModel.Store.Village" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Tehsil">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Village">
+        <PropertyRef Name="TehsilId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

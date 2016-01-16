@@ -1,0 +1,322 @@
+.jqueryslidemenu
+{
+    WIDTH: 100%;
+    FONT: bold 11px Verdana;
+    BACKGROUND:#68193A;
+}
+.jqueryslidemenu UL
+{
+    PADDING-BOTTOM: 0px;
+    LIST-STYLE-TYPE: none;
+    MARGIN: 0px;
+    PADDING-LEFT: 0px;
+    PADDING-RIGHT: 0px;
+    PADDING-TOP: 0px;
+}
+.jqueryslidemenu UL LI
+{
+    POSITION: relative;
+    DISPLAY: inline;
+    FLOAT: left;
+	top: 0px;
+	left: 0px;
+}
+.jqueryslidemenu UL LI A
+{
+    PADDING-BOTTOM: 8px;
+    PADDING-LEFT: 10px;
+    PADDING-RIGHT: 10px;
+    DISPLAY: block;
+    BACKGROUND: #68193A;
+    COLOR: #2d2b2b;
+    BORDER-RIGHT: #778 1px solid;
+    TEXT-DECORATION: none;
+    PADDING-TOP: 8px
+}
+* HTML .jqueryslidemenu UL LI A
+{
+    DISPLAY: inline-block
+}
+.jqueryslidemenu UL LI A:link
+{
+    COLOR: white
+}
+.jqueryslidemenu UL LI A:visited
+{
+    COLOR: white
+}
+.jqueryslidemenu UL LI A:hover
+{
+    BACKGROUND: black;
+    COLOR: white
+}
+.jqueryslidemenu UL LI UL
+{
+    POSITION: absolute;
+    DISPLAY: block;
+    VISIBILITY: hidden;
+    LEFT: 0px
+}
+.jqueryslidemenu UL LI UL LI
+{
+    DISPLAY: list-item;
+    FLOAT: none
+}
+.jqueryslidemenu UL LI UL LI UL
+{
+    TOP: 0px
+}
+.jqueryslidemenu UL LI UL LI A
+{
+    BORDER-BOTTOM: gray 1px solid;
+    PADDING-BOTTOM: 5px;
+    MARGIN: 0px;
+    PADDING-LEFT: 5px;
+    WIDTH: 160px;
+    PADDING-RIGHT: 5px;
+    FONT: 12px Verdana;
+    BORDER-TOP-WIDTH: 0px;
+    PADDING-TOP: 5px
+}
+.jqueryslidemenuz UL LI UL LI A:hover
+{
+    BACKGROUND: #eff9ff;
+    COLOR: black
+}
+.downarrowclass
+{
+    POSITION: absolute;
+    TOP: 12px;
+    RIGHT: 7px
+}
+.rightarrowclass
+{
+    POSITION: absolute;
+    TOP: 6px;
+    RIGHT: 5px
+}
+.poweredby
+{
+	font-size: 11px;
+	padding-left:10px;
+}
+.navpos
+{
+	height: 30px;
+	font-size:11px;
+	padding: 20px;
+	font-size: 15px;
+	font-weight: bold;
+}
+.navpos .L1
+{
+	color: #5e5e5e;
+	float: left;
+}
+.navpos .L2
+{
+	color: #d3670f;
+}
+.navpos hr
+{
+	border: 1px dashed #707070;
+}
+.menu
+{
+	height: 30px;
+}
+.container
+{
+	padding-left: 5px;
+	height: 100%;
+}
+.container .label
+{
+	font-size: 11px;
+	width: 170px;
+	height: 30px;
+}
+.container .label a
+{
+	font-size: 11px;
+	text-decoration: none;
+	color: #0068cc;
+}
+.cnt
+{
+	padding-left: 20px;
+	padding-right: 20px;
+	padding-bottom: 20px;
+}
+.heading
+{
+	margin-top: 12px;
+	background-color: #dcdcdc;
+	padding: 5px;
+	border: 1px Dotted #afafaf;
+	font-family:Arial;
+	font-size :16px;
+	font-weight:bold;
+
+}
+.button
+{
+	
+	
+
+	background-color:#00511B;
+      	color:White;
+      	font-weight:bold;
+      	font-size:11px;
+		width: 52px;
+		font-family :Arial;
+	}
+.list_heading
+{
+	border: 1px solid #add8e6;
+	background-color: #add8e6;
+	height: 23px;
+	padding-left: 3px;
+	font-weight: bold;
+	font-size: 11px;
+}
+.list_data
+{
+	background-color: white;
+	font-size: 11px;
+	height: 23px;
+	padding-left: 3px;
+	border-bottom: 1px dotted #e0e0e0;
+}
+.list_data img
+{
+	margin-right: 5px;
+}
+.err
+{
+	border: 1px solid #8b0000;
+	background-color: #ffb0b0;
+	font-size: 12px;
+	font-weight: bold;
+	padding: 5px;
+}
+.doneold
+{
+	border: 1px solid #8dbc2d;
+	background-color: #d8ecb0;
+	font-size: 15px;
+	font-weight: bold;
+	padding: 5px;	
+	margin-top:10px;
+}
+
+.done1
+{
+	border: 1px solid Blue;
+	background-color: #EAFFFF;
+	font-size: 13px;
+	font-weight: bold;
+	padding: 5px;
+	font-family :Verdana;	
+}
+.done_error
+{
+	border: 1px solid red;
+	background-color: Red;
+	font-size: 13px;
+	font-weight: bold;
+	padding: 5px;	
+}
+
+.PO_heading
+{
+	background-color: #e5f3f7;
+	height: 23px;
+	padding: 3px;
+	font-weight: bold;
+	font-size: 12px;
+
+}
+.notava {font-size:12px;color:red; font-weight:bold;padding-left:3px;}
+.ava{font-size:12px;font-weight:bold;color:#00954A;padding-left:3px;}
+.login
+{
+	width: 320px;
+	height: 320px;
+	border: 1px solid #9f9f9f;
+	background-color: #e2e2e2;
+	margin-top: 30px;
+}
+.login input
+{
+	height:30px;
+	font-size: 16px;
+}
+.login #login_button
+{
+	width: 100px;
+	background-color: #314e9f;
+	color: white;
+	border: 2px solid #1f3165;
+}
+.login img
+{
+	margin: 10px;
+	margin-left: 15px;
+	float: left;
+}
+.login_c
+{
+	font-size: 12px;
+	margin-top:15px;
+}
+.login td
+{
+		font-size: 14px;
+}
+.login_head
+{
+	font-size: 20px;
+	margin-top:40px;
+	font-weight: bolder;
+	padding: 0px;
+	text-align: left;
+}
+.logo td
+{
+	float: left;
+	text-align: right;
+
+}
+.welcome
+{
+	font-size: 12px;
+}
+.reccount
+{
+	font-size: 12px;
+	font-weight: bold;
+}
+
+.adtable{
+border-collapse:collapse;
+border:1px solid #333333;
+padding:3px;
+}
+.adtable td  {
+border:1px solid #333333;
+}
+
+.unused {
+background-color:#f7f7f7;
+border:0px solid #333333;
+}
+.disDIV
+{
+	background-color: #fffafa;
+}
+.d1
+{
+	border:solid 1px gray;
+	height:90px;
+}

@@ -1,0 +1,10 @@
+E:\Work\MAPS\MAPS\bin\MAPS.dll
+E:\Work\MAPS\MAPS\bin\MAPS.pdb
+E:\Work\MAPS\MAPS\obj\Debug\MAPS.dll
+E:\Work\MAPS\MAPS\obj\Debug\MAPS.pdb
+E:\Work\MAPS\MAPS\bin\Antlr3.Runtime.dll
+E:\Work\MAPS\MAPS\bin\Newtonsoft.Json.dll
+E:\Work\MAPS\MAPS\bin\Antlr3.Runtime.pdb
+E:\Work\MAPS\MAPS\bin\Newtonsoft.Json.xml
+E:\Work\MAPS\MAPS\obj\Debug\MAPS.csprojResolveAssemblyReference.cache
+E:\Work\MAPS\MAPS\bin\SharpKml.xml

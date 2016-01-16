@@ -1,0 +1,774 @@
+﻿body
+{
+}
+.textboxStyle
+{
+    font-family: Verdana;
+    font-size: 11px;
+    border: 1px solid #0080c0;
+    width: 150px;
+    padding-left: 5px;
+    height: 18px;
+    vertical-align: middle;
+}
+.containerDiv
+{
+    border: 1px solid #0080c0;
+    width: 990px;
+    -moz-border-radius-topright: 10px;
+    -moz-border-radius-bottomleft: 10px;
+    padding-left: 3px;
+    padding-right: 3px;
+    text-align: left;
+}
+.innerDiv
+{
+    border: 1px solid #0080c0;
+    -moz-border-radius-topright: 10px;
+    -moz-border-radius-bottomleft: 10px;
+    padding-left: 3px;
+    padding-right: 3px;
+    text-align: left;
+}
+.dropdownlistStyle
+{
+    border: 1px solid #0080c0;
+    font-family: Tahoma;
+    font-size: 12px;
+    color: #1E4999;
+    background-color: #F3F3F3;
+    text-align: left;
+    padding-left: 5px;
+    }
+.label
+{
+    font-family: Tahoma;
+    font-size: 13px;
+    color: #102754;
+    border-style: none;
+    padding-left: 5px;
+    padding-right: 5px;
+    height: 15px;
+}
+.td
+{
+    font-family: Tahoma;
+    font-size: 12px;
+    color: navy;
+    border-style: none;
+    text-align: left;
+    padding-left: 5px;
+    padding-right: 5px;
+    height: 15px;
+}
+.style19
+{
+    text-align: left;
+}
+.style1
+{
+    font-family: Arial;
+    font-size: 12pt;
+    color: #990000;
+    font-weight: bold;
+    text-align: center;
+}
+
+.treeview
+{
+    font-family: tahoma;
+    font-size: 11px;
+    color: #009D00;
+    vertical-align: top;
+    text-align: left;
+    text-indent: 10px;
+    padding: 5px;
+}
+
+.IE8Fix
+{
+    z-index: 100;
+}
+.hed
+{
+    font-family: Verdana;
+    font-size: 8pt;
+    font-weight: bold;
+    text-align: center;
+}
+.hind
+{
+    font-family: Kruti Dev 010 font-size: 8pt;
+    font-weight: bold;
+}
+
+.rec
+{
+    font-family: Arial;
+    font-size: 10pt;
+}
+.binaryhead
+{
+    font-family: Verdana;
+    font-size: 12pt;
+    font-weight: bold;
+    text-align: center;
+    color: #ff3333;
+}
+
+.rec1
+{
+    font-family: Arial;
+    font-size: 16pt;
+}
+.rec2
+{
+    font-family: Arial;
+    font-size: 10pt;
+    font-weight: bold;
+}
+.rhead
+{
+    font-family: Verdana;
+    font-size: 8pt;
+    font-weight: bold;
+    text-align: right;
+}
+.menu
+{
+    font-family: Verdana;
+    font-size: 8pt;
+    font-weight: bold;
+    text-align: left;
+    color: #666666;
+}
+.style2
+{
+    font-family: Arial;
+    font-size: 10pt;
+    color: #000066;
+    text-align: justify;
+}
+.style3
+{
+    font-family: Arial;
+    font-size: 10pt;
+    color: #000066;
+    font-weight: bold;
+}
+.style4
+{
+    font-family: Arial;
+    font-size: 9pt;
+    color: #990000;
+    text-align: center;
+}
+.text-box1
+{
+    font-size: 12pt;
+    border: 1px solid #5B5B5B;
+}
+.style5
+{
+    font-family: Verdana;
+    font-size: 8pt;
+    color: #000066;
+    text-align: left;
+}
+.style17
+{
+    color: Red;
+}
+.style15
+{
+    font-family: Tahoma;
+    font-size: 12px;
+    color: #1E4999;
+    background-color: #F3F3F3;
+    border-style: none;
+    text-align: left;
+    height: 20px;
+    padding-left: 5px;
+    font-weight: bold;
+}
+.style6
+{
+    font-family: Verdana;
+    font-size: 10pt;
+    color: #000066;
+    text-align: Left;
+}
+.style7
+{
+    font-family: Palatino Linotype;
+    font-size: 12pt;
+    color: #000066;
+    text-align: center;
+    font-weight: bold;
+}
+.style8
+{
+    font-family: Palatino Linotype;
+    font-size: 18pt;
+    color: #000066;
+    text-align: center;
+    font-weight: bold;
+}
+.style9
+{
+    font-family: Palatino Linotype;
+    font-size: 12pt;
+    color: #000066;
+    text-align: center;
+}
+.style10
+{
+    font-family: Palatino Linotype;
+    font-size: 12pt;
+    color: #000066;
+    text-align: center;
+    font-weight: bold;
+}
+.textBox
+{
+    font-family: Tahoma;
+    font-size: 13px;
+    border: 1px solid #009999;
+    width: 200px;
+}
+.style11
+{
+    font-family: Palatino Linotype;
+    font-size: 12pt;
+    color: #000066;
+    text-align: Left;
+    font-weight: bold;
+}
+.regheadingStyle
+{
+    font-family: 'MS Sans Serif';
+    font-size: 12px;
+    text-align: left;
+    text-indent: 5px;
+    background-color: #FFFFCC;
+    font-weight: bold;
+    height: 30px;
+}
+.style12
+{
+    font-family: Palatino Linotype;
+    font-size: 10pt;
+    color: #000066;
+    text-align: Left;
+    font-weight: bold;
+}
+.matter
+{
+    font-family: Palatino Linotype;
+    font-size: 10pt;
+    color: #000066;
+    font-weight: bold;
+}
+
+.foot
+{
+    font-family: Verdana;
+    font-size: 8pt;
+    color: #000066;
+    text-align: center;
+    font-weight: bold;
+}
+/* New Forms Style */
+.headings
+{
+    font-family: Tahoma;
+    font-size: 12px;
+    color: #1E4999;
+    background-color: #F3F3F3;
+    border-style: none;
+    text-align: left;
+    height: 20px;
+    padding-left: 5px;
+}
+.label
+{
+    font-family: Tahoma;
+    font-size: 12px;
+    color: #102754;
+    border-style: none;
+    padding-left: 5px;
+    padding-right: 5px;
+    height: 15px;
+}
+.label_1
+{
+    font-family: Tahoma;
+    font-size: 14px;
+    color: #102754;
+    border-style: none;
+    padding-left: 5px;
+    padding-right: 5px;
+    height: 15px;
+	font-weight: 700;
+}
+.label_2
+{
+    font-family: Tahoma;
+    font-size: 11px;
+    color: #102754;
+    border-style: none;
+    text-align: center;
+    padding-left: 5px;
+    padding-right: 5px;
+    height: 15px;
+}
+.textboxTdStyle
+{
+    font-family: Tahoma;
+    font-size: 11px;
+    color: #102754;
+    border-style: none;
+    text-align: left;
+    padding-left: 5px;
+    padding-right: 5px;
+    height: 15px;
+}
+.textboxStyle
+{
+    font-family: Verdana;
+    font-size: 11px;
+    border: 1px solid #80A5E7;
+    width: 170px;
+    padding-left: 5px;
+    height: 20px;
+    vertical-align: middle;
+}
+.linkButtonStyle
+{
+    font-family: Tahoma;
+    font-size: 12px;
+    color: #336699;
+    text-indent: 5px;
+    border-style: none;
+    text-align: center;
+    text-decoration: none;
+}
+.linkButtonStyleFocused
+{
+    font-family: Tahoma;
+    font-size: 12px;
+    color: #336699;
+    text-indent: 5px;
+    border-style: none;
+    text-align: left;
+    text-decoration: underline;
+}
+.alertMessage
+{
+    font-family: Tahoma;
+    font-size: 11px;
+    color: #FF0000;
+    border-style: none;
+    text-align: left;
+    padding-left: 7px;
+    padding-right: 5px;
+    height: 15px;
+}
+
+.mGrid
+{
+    background-color: #fff;
+    margin: 5px 0 10px 0;
+    border: solid 1px #525252;
+    border-collapse: collapse;
+    font-family: Tahoma;
+}
+.mGrid td
+{
+    padding: 2px;
+    border: solid 1px #c1c1c1;
+    color: #717171;
+    font-size: 12px;
+}
+.mGrid th
+{
+    padding: 5px 2px;
+    color: White;
+    text-align: center;
+    background: #9B3767 url(../images/grd_headb.png) repeat-x top;
+    border-left: solid 1px #525252;
+    font-size: 12px;
+    height: 10px;
+}
+.mGrid th a
+{
+    color: White;
+}
+.mGrid .alt
+{
+    background: #fcfcfc url(../images/grd_alt.png) repeat-x top;
+}
+.mGrid .pgr
+{
+    background: #424242 url(../images/grd_pgr.png) repeat-x top;
+}
+.mGrid .pgr table
+{
+    margin: 5px 0;
+}
+.mGrid .pgr td
+{
+    border-width: 0;
+    padding: 0 6px;
+    border-left: solid 1px #666;
+    font-weight: bold;
+    color: #fff;
+    line-height: 12px;
+}
+.mGrid .pgr a
+{
+    color: #666;
+    text-decoration: none;
+}
+.mGrid .pgr a:hover
+{
+    color: #000;
+    text-decoration: none;
+}
+
+.mGrid .head
+{
+    text-align: center;
+}
+
+listStyle
+{
+    border-width: 1px;
+    font-family: Tahoma;
+    font-size: 12px;
+    color: #1E4999;
+    background-color: #F3F3F3;
+    border-style: solid;
+    text-align: left;
+    padding-left: 5px;
+    width: 175px;
+}
+.Grid
+{
+    font-family: Tahoma,Verdana;
+    font-size: 8pt;
+    color: #333;
+    text-decoration: none;
+    border: gray 1px solid;
+    margin-right: 0px;
+}
+.Grid
+{
+    font-family: Tahoma,Verdana;
+    font-size: 8pt;
+    color: #333;
+    text-decoration: none;
+    border: gray 1px solid;
+    margin-right: 0px;
+}
+.Grid .Header
+{
+    background-color: navy;
+    padding-right: 2px;
+    padding-left: 2px;
+    color: White;
+    font-size: 10pt;
+    height: 20px;
+    vertical-align: middle;
+    text-align: center;
+}
+.Grid .Item
+{
+    background-color: #f5f5f5;
+    padding-right: 2px;
+    padding-left: 2px;
+    vertical-align: middle;
+    height: 20px;
+    text-align: center;
+}
+.Grid .AltItem
+{
+    background-color: #dcdcdc;
+    padding-right: 2px;
+    padding-left: 2px;
+    vertical-align: middle;
+    height: 20px;
+    text-align: center;
+}
+.Grid .Insert
+{
+    background-color: #666666;
+    padding-right: 2px;
+    padding-left: 2px;
+    vertical-align: middle;
+    height: 20px;
+    text-align: center;
+}
+.Grid .SelectedItem
+{
+    background-color: #66CCFF;
+    padding-right: 2px;
+    padding-left: 2px;
+    vertical-align: middle;
+    height: 20px;
+    text-align: center;
+}
+.Grid .Pager
+{
+    padding-right: 2px;
+    padding-left: 2px;
+    color: #1e90ff;
+}
+.resultStyle
+{
+    font-family: Tahoma;
+    font-size: 11px;
+    color: #102754;
+    border-style: none;
+    text-align: left;
+    padding-left: 5px;
+    padding-right: 5px;
+    height: 20px;
+}
+.pageHeadings
+{
+    font-family: Tahoma;
+    font-size: 14px;
+    color: #102754;
+    border-style: none;
+    text-align: center;
+    height: 15px;
+    font-weight: bold;
+}
+/*AutoComplete flyout */
+#tm_autocomplete
+{
+    width: auto !important;
+    overflow: visible !important;
+    font-family: tahoma;
+    font-size: 10pt;
+}
+#tm_autocomplete div
+{
+}
+
+.AutoCompleteFlyout
+{
+    margin: 0px !important;
+    background-color: inherit;
+    color: windowtext;
+    border: buttonshadow;
+    border-width: 1px;
+    border-style: solid;
+    cursor: 'default';
+    overflow: auto;
+    text-align: left;
+    list-style-type: none;
+}
+
+.AutoCompleteFlyoutItem
+{
+    background-color: window;
+    color: windowtext;
+    padding: 1px;
+    font-family: Tahoma;
+    font-size: 8pt;
+}
+
+.AutoCompleteFlyoutHilightedItem
+{
+    background-color: #F78009;
+    color: black;
+    padding: 1px;
+    font-family: Tahoma;
+    font-size: 8pt;
+}
+.help_text
+{
+    font-family: Tahoma;
+    font-size: 10px;
+    color: #666666;
+}
+.text_style
+{
+    font-family: Tahoma;
+    font-size: 12px;
+    color: #102754;
+    border-style: none;
+    text-align: left;
+    padding-left: 5px;
+}
+.headings_bold
+{
+    font-family: Tahoma;
+    font-size: 12px;
+    color: #1E4999;
+    background-color: #F3F3F3;
+    border-style: none;
+    text-align: left;
+    height: 20px;
+    padding-left: 5px;
+    font-weight: bold;
+}
+.button
+{
+    font-family: Tahoma;
+    font-size: 12px;
+    color: #1E4999;
+    font-weight: bold;
+}
+.buttonStyle
+{
+    font-family: Tahoma;
+    font-size: 12px;
+    color: #1E4999;
+    font-weight: bold;
+}
+.containerDiv
+{
+    border: 1px solid #0066FF;
+    width: 990px;
+    -moz-border-radius-topright: 10px;
+    -moz-border-radius-bottomleft: 10px;
+    padding-left: 3px;
+    padding-right: 3px;
+    text-align: left;
+}
+
+.mpe
+{
+    border: 1px solid #000000;
+    background-color: #999999;
+}
+.innerDiv
+{
+    border: 1px solid #0066FF;
+    -moz-border-radius-topright: 10px;
+    -moz-border-radius-bottomleft: 10px;
+    padding-left: 3px;
+    padding-right: 3px;
+    text-align: left;
+}
+.label1
+{
+    font-family: Tahoma;
+    font-size: 12px;
+    color: navy;
+    border-style: none;
+    text-align: left;
+    padding-left: 5px;
+    padding-right: 5px;
+    height: 15px;
+}
+.treenode
+{
+    border: 1px solid #d5d5d5;
+    font-family: Tahoma;
+    font-size: 11px;
+    color: Black;
+    background-color: #ddedf7;
+    border-style: solid;
+    border-bottom-width: 2px;
+    text-align: left;
+    padding-left: 5px;
+    width: 150px;
+}
+.treeroot
+{
+    font-family: Tahoma;
+    font-size: 12px;
+    color: white;
+    background-color: #067fc6;
+    border-style: solid;
+    border-bottom-width: 2px;
+    text-align: left;
+    padding-left: 5px;
+    width: 150px;
+    height: 24px;
+}
+.treeview1
+{
+    color: Navy;
+    font-size: 12px;
+    font-family: Verdana;
+    font-weight: normal;
+}
+
+/* jQuery lightBox plugin - Gallery style */
+#gallery
+{
+    background-color: transparent;
+    padding: 0;
+}
+#gallery ul
+{
+    list-style: none;
+    margin-left: 0;
+    padding: 0px 25px;
+}
+#gallery ul li
+{
+    display: inline;
+    float: left;
+    margin-right: 15px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+#gallery ul img
+{
+    padding: 4px 4px 19px 4px;
+    background: #fff;
+    border: 1px solid #ccc;
+    color: #000;
+}
+#gallery ul a:hover img
+{
+    padding: 4px 4px 19px 4px;
+    background: url('images/elements/lightbox_thumb_bg.gif') top left no-repeat;
+    border: 1px solid #333;
+    border-top: 1px solid #ccc;
+    border-left: 1px solid #ccc;
+}
+#gallery ul a:hover
+{
+    color: #fff;
+}
+#gallery ul a.editLink:hover
+{
+    color: inherit;
+}
+/*------ Password Strength CSS ---------*/
+.Poor
+{
+    background-color: red;
+    color: #fffccc;
+}
+.Weak
+{
+    background-color: orange;
+    color: #fffccc;
+}
+.Good
+{
+    background-color: #A52A2A;
+    color: #fffccc;
+}
+.Excellent
+{
+    background-color: blue;
+    color: #fffccc;
+}
+.Strong
+{
+    background-color: green;
+    color: #fffccc;
+}
+.highlightRed
+{
+    border-color: Red;
+}

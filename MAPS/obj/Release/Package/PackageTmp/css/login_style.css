@@ -1,0 +1,69 @@
+body
+{
+	margin: 0px;
+	background-image: url(../images/Mercedes-Benz-vodafone_mclaren_mp4-24_side_view_a4_300dpi_1280x731[1].jpg);
+	font-family: "Arial";
+}
+.success
+{
+	font-size: 13px;
+	color: #009900;
+	font-weight: bold;
+	background-color: #CCFF66;
+	border: 1px;
+	border-color: Yellow;
+	padding: 4px;
+	margin-left: 3px;
+	border-color: #009900;
+	border-style: solid;
+	border: "1px";
+	width: 98%;
+}
+.main_table
+{
+	margin-left: 100px;
+}
+.logo_block
+{
+	background-color: #e20001;
+}
+
+.login_block
+{
+	background-color: #e20001;
+}
+.login_heading
+{
+	color:white;
+
+	font-size: 20px;
+}
+.login_label
+{
+	color:white;
+	font-size: 14px;
+}
+.login_button
+{
+	border: 1px solid #e20001;
+	background-color: white;
+	width: 60px;
+	height: 25px;
+}
+.login_line
+{
+	background-color: white;
+	color: white;
+}
+.footer
+{
+	background-color: #e20001;
+	font-size: 15px;
+	padding: 10px;
+	color: white;
+}
+.login_label1
+{
+	color:Black;
+	font-size: 14px;
+}
