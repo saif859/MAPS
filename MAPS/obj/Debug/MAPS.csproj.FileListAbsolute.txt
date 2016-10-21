@@ -8,3 +8,14 @@ E:\Work\MAPS\MAPS\bin\Antlr3.Runtime.pdb
 E:\Work\MAPS\MAPS\bin\Newtonsoft.Json.xml
 E:\Work\MAPS\MAPS\obj\Debug\MAPS.csprojResolveAssemblyReference.cache
 E:\Work\MAPS\MAPS\bin\SharpKml.xml
+D:\Work\MAPS\MAPS\bin\MAPS.dll.config
+D:\Work\MAPS\MAPS\bin\MAPS.dll
+D:\Work\MAPS\MAPS\bin\MAPS.pdb
+D:\Work\MAPS\MAPS\bin\Antlr3.Runtime.dll
+D:\Work\MAPS\MAPS\bin\Newtonsoft.Json.dll
+D:\Work\MAPS\MAPS\bin\Antlr3.Runtime.pdb
+D:\Work\MAPS\MAPS\bin\Newtonsoft.Json.xml
+D:\Work\MAPS\MAPS\bin\SharpKml.xml
+D:\Work\MAPS\MAPS\obj\Debug\MAPS.csprojResolveAssemblyReference.cache
+D:\Work\MAPS\MAPS\obj\Debug\MAPS.dll
+D:\Work\MAPS\MAPS\obj\Debug\MAPS.pdb

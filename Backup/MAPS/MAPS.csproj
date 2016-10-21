@@ -1,0 +1,736 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{277C7552-5987-4D79-B9DD-B669FEC823EB}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>MAPS</RootNamespace>
+    <AssemblyName>MAPS</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <UseIISExpress>false</UseIISExpress>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>true</UseVSHostingProcess>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AjaxControlToolkit, Version=3.0.31106.0, Culture=neutral, PublicKeyToken=28f01b0e84b6d53e, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\AjaxControlToolkit.dll</HintPath>
+    </Reference>
+    <Reference Include="Antlr3.Runtime">
+      <HintPath>..\packages\Antlr.3.4.1.9004\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.Optimization, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Microsoft.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.5.0.8\lib\net40\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpKml, Version=2.0.1.0, Culture=neutral, PublicKeyToken=9bb853c026a5c0ac, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\SharpKml.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Web.Ajax, Version=3.0.31106.0, Culture=neutral, PublicKeyToken=28f01b0e84b6d53e, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\System.Web.Ajax.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Optimization, Version=1.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="WebGrease, Version=1.6.5135.21930, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="AddKhasara.aspx" />
+    <Content Include="AddNewVillage.aspx" />
+    <Content Include="bin\AjaxControlToolkit.dll" />
+    <Content Include="bin\Microsoft.Web.Infrastructure.dll" />
+    <Content Include="bin\System.Web.Ajax.dll" />
+    <Content Include="ChangePassword.aspx" />
+    <Content Include="Content\ami-sheet.css" />
+    <Content Include="Content\button.css" />
+    <Content Include="Content\form.css" />
+    <Content Include="Content\jquery.fancybox-1.3.1.css" />
+    <Content Include="Content\main.css" />
+    <Content Include="Content\sliderNav.css" />
+    <Content Include="Content\themes\base\images\animated-overlay.gif" />
+    <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_75_dadada_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_75_e6e6e6_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+    <Content Include="Content\themes\base\images\ui-icons_222222_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_454545_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_888888_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Content\themes\base\jquery-ui.css" />
+    <Content Include="Content\themes\base\jquery.ui.accordion.css" />
+    <Content Include="Content\themes\base\jquery.ui.all.css" />
+    <Content Include="Content\themes\base\jquery.ui.autocomplete.css" />
+    <Content Include="Content\themes\base\jquery.ui.base.css" />
+    <Content Include="Content\themes\base\jquery.ui.button.css" />
+    <Content Include="Content\themes\base\jquery.ui.core.css" />
+    <Content Include="Content\themes\base\jquery.ui.datepicker.css" />
+    <Content Include="Content\themes\base\jquery.ui.dialog.css" />
+    <Content Include="Content\themes\base\jquery.ui.menu.css" />
+    <Content Include="Content\themes\base\jquery.ui.progressbar.css" />
+    <Content Include="Content\themes\base\jquery.ui.resizable.css" />
+    <Content Include="Content\themes\base\jquery.ui.selectable.css" />
+    <Content Include="Content\themes\base\jquery.ui.slider.css" />
+    <Content Include="Content\themes\base\jquery.ui.spinner.css" />
+    <Content Include="Content\themes\base\jquery.ui.tabs.css" />
+    <Content Include="Content\themes\base\jquery.ui.theme.css" />
+    <Content Include="Content\themes\base\jquery.ui.tooltip.css" />
+    <Content Include="Content\themes\base\minified\images\animated-overlay.gif" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_glass_55_fbf9ee_1x400.png" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_glass_75_dadada_1x400.png" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_glass_75_e6e6e6_1x400.png" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+    <Content Include="Content\themes\base\minified\images\ui-icons_222222_256x240.png" />
+    <Content Include="Content\themes\base\minified\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Content\themes\base\minified\images\ui-icons_454545_256x240.png" />
+    <Content Include="Content\themes\base\minified\images\ui-icons_888888_256x240.png" />
+    <Content Include="Content\themes\base\minified\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Content\themes\base\minified\jquery-ui.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.accordion.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.autocomplete.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.button.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.core.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.datepicker.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.dialog.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.menu.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.progressbar.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.resizable.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.selectable.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.slider.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.spinner.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.tabs.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.tooltip.min.css" />
+    <Content Include="css\base.css" />
+    <Content Include="css\buttoncss.css" />
+    <Content Include="css\css3-windows-7.css" />
+    <Content Include="css\Forest %282%29.css" />
+    <Content Include="css\Forest.css" />
+    <Content Include="css\grd_alt.png" />
+    <Content Include="css\grd_head.png" />
+    <Content Include="css\grd_head11.png" />
+    <Content Include="css\grd_pgr.png" />
+    <Content Include="css\hicon.jpg" />
+    <Content Include="css\layout.css" />
+    <Content Include="css\Login.css" />
+    <Content Include="css\login_style.css" />
+    <Content Include="css\magiczoom.css" />
+    <Content Include="Content\map2.css" />
+    <Content Include="css\menu.css" />
+    <Content Include="css\scroll_multi.css" />
+    <Content Include="css\skeleton.css" />
+    <Content Include="css\style.css" />
+    <Content Include="css\style1.css" />
+    <Content Include="css\styleold.css" />
+    <Content Include="css\StyleSheet.css" />
+    <Content Include="css\template.css" />
+    <Content Include="css\topMenu.css" />
+    <Content Include="css\ui-lightness\images\ui-bg_diagonals-thick_18_b81900_40x40.png" />
+    <Content Include="css\ui-lightness\images\ui-bg_diagonals-thick_20_666666_40x40.png" />
+    <Content Include="css\ui-lightness\images\ui-bg_flat_10_000000_40x100.png" />
+    <Content Include="css\ui-lightness\images\ui-bg_glass_100_f6f6f6_1x400.png" />
+    <Content Include="css\ui-lightness\images\ui-bg_glass_100_fdf5ce_1x400.png" />
+    <Content Include="css\ui-lightness\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="css\ui-lightness\images\ui-bg_gloss-wave_35_f6a828_500x100.png" />
+    <Content Include="css\ui-lightness\images\ui-bg_highlight-soft_100_eeeeee_1x100.png" />
+    <Content Include="css\ui-lightness\images\ui-bg_highlight-soft_75_ffe45c_1x100.png" />
+    <Content Include="css\ui-lightness\images\ui-icons_222222_256x240.png" />
+    <Content Include="css\ui-lightness\images\ui-icons_228ef1_256x240.png" />
+    <Content Include="css\ui-lightness\images\ui-icons_ef8c08_256x240.png" />
+    <Content Include="css\ui-lightness\images\ui-icons_ffd27a_256x240.png" />
+    <Content Include="css\ui-lightness\images\ui-icons_ffffff_256x240.png" />
+    <Content Include="css\ui-lightness\jquery-ui-1.8.19.custom.css" />
+    <Content Include="css\validationEngine.jquery.css" />
+    <Content Include="DocumentDetail.aspx" />
+    <Content Include="ForestArea.aspx" />
+    <Content Include="ForestArea2.aspx" />
+    <Content Include="ForestAreaNew.aspx" />
+    <Content Include="ForestAreaNew2.aspx" />
+    <Content Include="ForestAreaView.aspx" />
+    <Content Include="ForestAreaView2.aspx" />
+    <Content Include="GazetteDetail.aspx" />
+    <Content Include="GazetteDetailEntry.aspx" />
+    <Content Include="images\add.gif" />
+    <Content Include="images\back_1.jpg" />
+    <Content Include="images\btn_iconDelete.gif" />
+    <Content Include="images\btn_iconEdit.gif" />
+    <Content Include="images\btn_iconView.gif" />
+    <Content Include="images\excel.png" />
+    <Content Include="images\fancybox\blank.gif" />
+    <Content Include="images\fancybox\fancybox-x.png" />
+    <Content Include="images\fancybox\fancybox-y.png" />
+    <Content Include="images\fancybox\fancybox.png" />
+    <Content Include="images\fancybox\fancy_close.png" />
+    <Content Include="images\fancybox\fancy_loading.png" />
+    <Content Include="images\fancybox\fancy_nav_left.png" />
+    <Content Include="images\fancybox\fancy_nav_right.png" />
+    <Content Include="images\fancybox\fancy_shadow_e.png" />
+    <Content Include="images\fancybox\fancy_shadow_n.png" />
+    <Content Include="images\fancybox\fancy_shadow_ne.png" />
+    <Content Include="images\fancybox\fancy_shadow_nw.png" />
+    <Content Include="images\fancybox\fancy_shadow_s.png" />
+    <Content Include="images\fancybox\fancy_shadow_se.png" />
+    <Content Include="images\fancybox\fancy_shadow_sw.png" />
+    <Content Include="images\fancybox\fancy_shadow_w.png" />
+    <Content Include="images\fancybox\fancy_title_left.png" />
+    <Content Include="images\fancybox\fancy_title_main.png" />
+    <Content Include="images\fancybox\fancy_title_over.png" />
+    <Content Include="images\fancybox\fancy_title_right.png" />
+    <Content Include="images\form_sheetbg.png" />
+    <Content Include="images\index_01.jpg" />
+    <Content Include="images\loading.GIF" />
+    <Content Include="images\login_input.png" />
+    <Content Include="images\password.png" />
+    <Content Include="images\User.png" />
+    <Content Include="Logout.aspx" />
+    <Content Include="MAP\1_02_Untitled.jpg" />
+    <Content Include="MAP\Amitech.png" />
+    <Content Include="MAP\map.jpg" />
+    <Content Include="Masters\BeatMaster.aspx" />
+    <Content Include="Masters\BeatMasterNew.aspx" />
+    <Content Include="Masters\BlockMasterNew.aspx" />
+    <Content Include="Masters\CircleMasterNew.aspx" />
+    <Content Include="Masters\DivisionMasterNew.aspx" />
+    <Content Include="Masters\RangeMasterNew.aspx" />
+    <Content Include="Masters\SectionMasterNew.aspx" />
+    <Content Include="Masters\SubDivisionMaster.aspx" />
+    <Content Include="Masters\SubDivisionMasterNew.aspx" />
+    <Content Include="Masters\ZoneMasterNew.aspx" />
+    <Content Include="Scripts\jquery-1.8.2.min.js" />
+    <Content Include="Scripts\jquery-ui-1.10.4.js" />
+    <Content Include="Scripts\jquery-ui-1.10.4.min.js" />
+    <Content Include="Scripts\jquery.fancybox-1.3.4.js" />
+    <Content Include="Scripts\jquery.gritter.min.js" />
+    <Content Include="Scripts\jquery.printElement.js" />
+    <Content Include="Scripts\jquery.printElement.min.js" />
+    <Content Include="Scripts\ptpl.js" />
+    <Content Include="Services\AddArea.asmx" />
+    <Content Include="bin\Microsoft.Web.Optimization.dll" />
+    <Content Include="bin\System.Web.Optimization.dll" />
+    <Content Include="bin\WebGrease.dll" />
+    <Content Include="Content\img\gritter-light.png" />
+    <Content Include="Content\img\gritter-long.png" />
+    <Content Include="Content\img\gritter.png" />
+    <Content Include="Content\img\ie-spacer.gif" />
+    <Content Include="Content\jquery.gritter.css" />
+    <Content Include="Content\map.css" />
+    <Content Include="Content\tooltipster.css" />
+    <Content Include="Default.aspx" />
+    <Content Include="Default2.aspx" />
+    <Content Include="Global.asax" />
+    <Content Include="images\loader.gif" />
+    <Content Include="images\menu_bg.gif" />
+    <Content Include="images\upmap.jpg" />
+    <Content Include="Index1.htm" />
+    <Content Include="Masters\BlockMaster.aspx" />
+    <Content Include="Masters\CircleMaster.aspx" />
+    <Content Include="Masters\DistrictMaster.aspx" />
+    <Content Include="Masters\DivisionMaster.aspx" />
+    <Content Include="Masters\RangeMaster.aspx" />
+    <Content Include="Masters\SectionMaster.aspx" />
+    <Content Include="Masters\TehsilMaster.aspx" />
+    <Content Include="Masters\VillageMaster.aspx" />
+    <Content Include="Masters\ZoneMaster.aspx" />
+    <Content Include="Scripts\geo.js" />
+    <Content Include="Scripts\geo.max.js" />
+    <Content Include="Scripts\infobox.js" />
+    <Content Include="Scripts\infobox.max.js" />
+    <Content Include="Scripts\jquery-2.0.3-vsdoc.js" />
+    <Content Include="Scripts\jquery-2.0.3.js" />
+    <Content Include="Scripts\jquery-2.0.3.min.js" />
+    <Content Include="Scripts\jquery.cookie.js" />
+    <Content Include="Scripts\jquery.min.js" />
+    <Content Include="Scripts\jquery.tooltipster.min.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\json2.js" />
+    <Content Include="Scripts\latlon.js" />
+    <Content Include="Scripts\latlon.max.js" />
+    <Content Include="Scripts\main.js" />
+    <Content Include="Scripts\map.js" />
+    <Content Include="Scripts\ptpl.min.js" />
+    <Content Include="Services\FileValidator.asmx" />
+    <Content Include="ViewGazetteDetail.aspx" />
+    <Content Include="ViewGazetteNotificationDetail.aspx" />
+    <Content Include="View\ForestArea.aspx" />
+    <Content Include="View\ForestArea2.aspx" />
+    <Content Include="View\ForestAreaView.aspx" />
+    <Content Include="View\ForestAreaView2.aspx" />
+    <Content Include="View\ViewGazetteDetail.aspx" />
+    <Content Include="View\ViewGazetteNotificationDetail.aspx" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AddKhasara.aspx.cs">
+      <DependentUpon>AddKhasara.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AddKhasara.aspx.designer.cs">
+      <DependentUpon>AddKhasara.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AddNewVillage.aspx.cs">
+      <DependentUpon>AddNewVillage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AddNewVillage.aspx.designer.cs">
+      <DependentUpon>AddNewVillage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Classes\BeatMethods.cs" />
+    <Compile Include="ChangePassword.aspx.cs">
+      <DependentUpon>ChangePassword.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ChangePassword.aspx.designer.cs">
+      <DependentUpon>ChangePassword.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Classes\BlockMethods.cs" />
+    <Compile Include="Classes\CircleMethods.cs" />
+    <Compile Include="Classes\FieldAreaViewMethof.cs" />
+    <Compile Include="Classes\KhasaraMethods.cs" />
+    <Compile Include="Classes\Myjs.cs" />
+    <Compile Include="Classes\SQLDatabaseManager.cs" />
+    <Compile Include="Classes\DistrictMethods.cs" />
+    <Compile Include="Classes\User.cs" />
+    <Compile Include="Classes\DivisionMethods.cs" />
+    <Compile Include="DocumentDetail.aspx.cs">
+      <DependentUpon>DocumentDetail.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DocumentDetail.aspx.designer.cs">
+      <DependentUpon>DocumentDetail.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ForestArea.aspx.cs">
+      <DependentUpon>ForestArea.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ForestArea.aspx.designer.cs">
+      <DependentUpon>ForestArea.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Classes\ForestAreaMethods.cs" />
+    <Compile Include="ForestArea2.aspx.cs">
+      <DependentUpon>ForestArea2.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ForestArea2.aspx.designer.cs">
+      <DependentUpon>ForestArea2.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ForestAreaNew.aspx.cs">
+      <DependentUpon>ForestAreaNew.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ForestAreaNew.aspx.designer.cs">
+      <DependentUpon>ForestAreaNew.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ForestAreaNew2.aspx.cs">
+      <DependentUpon>ForestAreaNew2.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ForestAreaNew2.aspx.designer.cs">
+      <DependentUpon>ForestAreaNew2.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ForestAreaView.aspx.cs">
+      <DependentUpon>ForestAreaView.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ForestAreaView.aspx.designer.cs">
+      <DependentUpon>ForestAreaView.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ForestAreaView2.aspx.cs">
+      <DependentUpon>ForestAreaView2.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ForestAreaView2.aspx.designer.cs">
+      <DependentUpon>ForestAreaView2.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="GazetteDetail.aspx.cs">
+      <DependentUpon>GazetteDetail.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="GazetteDetail.aspx.designer.cs">
+      <DependentUpon>GazetteDetail.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="GazetteDetailEntry.aspx.cs">
+      <DependentUpon>GazetteDetailEntry.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="GazetteDetailEntry.aspx.designer.cs">
+      <DependentUpon>GazetteDetailEntry.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="handler\FileUploader.ashx.cs">
+      <DependentUpon>FileUploader.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="handler\FileValidator.ashx.cs">
+      <DependentUpon>FileValidator.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Logout.aspx.cs">
+      <DependentUpon>Logout.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Logout.aspx.designer.cs">
+      <DependentUpon>Logout.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Masters\BeatMaster.aspx.cs">
+      <DependentUpon>BeatMaster.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Masters\BeatMaster.aspx.designer.cs">
+      <DependentUpon>BeatMaster.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Masters\BeatMasterNew.aspx.cs">
+      <DependentUpon>BeatMasterNew.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Masters\BeatMasterNew.aspx.designer.cs">
+      <DependentUpon>BeatMasterNew.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Masters\BlockMasterNew.aspx.cs">
+      <DependentUpon>BlockMasterNew.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Masters\BlockMasterNew.aspx.designer.cs">
+      <DependentUpon>BlockMasterNew.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Masters\CircleMasterNew.aspx.cs">
+      <DependentUpon>CircleMasterNew.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Masters\CircleMasterNew.aspx.designer.cs">
+      <DependentUpon>CircleMasterNew.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Masters\DivisionMasterNew.aspx.cs">
+      <DependentUpon>DivisionMasterNew.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Masters\DivisionMasterNew.aspx.designer.cs">
+      <DependentUpon>DivisionMasterNew.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Masters\RangeMasterNew.aspx.cs">
+      <DependentUpon>RangeMasterNew.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Masters\RangeMasterNew.aspx.designer.cs">
+      <DependentUpon>RangeMasterNew.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Masters\SectionMasterNew.aspx.cs">
+      <DependentUpon>SectionMasterNew.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Masters\SectionMasterNew.aspx.designer.cs">
+      <DependentUpon>SectionMasterNew.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Masters\Site1.Master.cs">
+      <DependentUpon>Site1.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Masters\Site1.Master.designer.cs">
+      <DependentUpon>Site1.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Masters\SubDivisionMaster.aspx.cs">
+      <DependentUpon>SubDivisionMaster.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Masters\SubDivisionMaster.aspx.designer.cs">
+      <DependentUpon>SubDivisionMaster.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Masters\SubDivisionMasterNew.aspx.cs">
+      <DependentUpon>SubDivisionMasterNew.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Masters\SubDivisionMasterNew.aspx.designer.cs">
+      <DependentUpon>SubDivisionMasterNew.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Masters\ZoneMasterNew.aspx.cs">
+      <DependentUpon>ZoneMasterNew.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Masters\ZoneMasterNew.aspx.designer.cs">
+      <DependentUpon>ZoneMasterNew.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Classes\RangeMethods.cs" />
+    <Compile Include="Classes\SectionMethods.cs" />
+    <Compile Include="Services\AddArea.asmx.cs">
+      <DependentUpon>AddArea.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Default2.aspx.cs">
+      <DependentUpon>Default2.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Default2.aspx.designer.cs">
+      <DependentUpon>Default2.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Masters\BlockMaster.aspx.cs">
+      <DependentUpon>BlockMaster.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Masters\BlockMaster.aspx.designer.cs">
+      <DependentUpon>BlockMaster.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Masters\CircleMaster.aspx.cs">
+      <DependentUpon>CircleMaster.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Masters\CircleMaster.aspx.designer.cs">
+      <DependentUpon>CircleMaster.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Masters\DistrictMaster.aspx.cs">
+      <DependentUpon>DistrictMaster.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Masters\DistrictMaster.aspx.designer.cs">
+      <DependentUpon>DistrictMaster.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Masters\DivisionMaster.aspx.cs">
+      <DependentUpon>DivisionMaster.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Masters\DivisionMaster.aspx.designer.cs">
+      <DependentUpon>DivisionMaster.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Masters\RangeMaster.aspx.cs">
+      <DependentUpon>RangeMaster.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Masters\RangeMaster.aspx.designer.cs">
+      <DependentUpon>RangeMaster.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Masters\SectionMaster.aspx.cs">
+      <DependentUpon>SectionMaster.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Masters\SectionMaster.aspx.designer.cs">
+      <DependentUpon>SectionMaster.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Masters\TehsilMaster.aspx.cs">
+      <DependentUpon>TehsilMaster.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Masters\TehsilMaster.aspx.designer.cs">
+      <DependentUpon>TehsilMaster.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Masters\VillageMaster.aspx.cs">
+      <DependentUpon>VillageMaster.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Masters\VillageMaster.aspx.designer.cs">
+      <DependentUpon>VillageMaster.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Masters\ZoneMaster.aspx.cs">
+      <DependentUpon>ZoneMaster.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Masters\ZoneMaster.aspx.designer.cs">
+      <DependentUpon>ZoneMaster.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Model1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model1.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\FileValidator.asmx.cs">
+      <DependentUpon>FileValidator.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Site1.Master.cs">
+      <DependentUpon>Site1.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Site1.Master.designer.cs">
+      <DependentUpon>Site1.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Classes\TehsilMethods.cs" />
+    <Compile Include="Classes\ZoneMethods.cs" />
+    <Compile Include="Classes\VillageMethods.cs" />
+    <Compile Include="Classes\SubDivisionMethods.cs" />
+    <Compile Include="ViewGazetteDetail.aspx.cs">
+      <DependentUpon>ViewGazetteDetail.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ViewGazetteDetail.aspx.designer.cs">
+      <DependentUpon>ViewGazetteDetail.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ViewGazetteNotificationDetail.aspx.cs">
+      <DependentUpon>ViewGazetteNotificationDetail.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ViewGazetteNotificationDetail.aspx.designer.cs">
+      <DependentUpon>ViewGazetteNotificationDetail.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="View\ForestArea.aspx.cs">
+      <DependentUpon>ForestArea.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="View\ForestArea.aspx.designer.cs">
+      <DependentUpon>ForestArea.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="View\ForestArea2.aspx.cs">
+      <DependentUpon>ForestArea2.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="View\ForestArea2.aspx.designer.cs">
+      <DependentUpon>ForestArea2.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="View\ForestAreaView.aspx.cs">
+      <DependentUpon>ForestAreaView.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="View\ForestAreaView.aspx.designer.cs">
+      <DependentUpon>ForestAreaView.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="View\ForestAreaView2.aspx.cs">
+      <DependentUpon>ForestAreaView2.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="View\ForestAreaView2.aspx.designer.cs">
+      <DependentUpon>ForestAreaView2.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="View\Site1.Master.cs">
+      <DependentUpon>Site1.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="View\Site1.Master.designer.cs">
+      <DependentUpon>Site1.Master</DependentUpon>
+    </Compile>
+    <Compile Include="View\ViewGazetteDetail.aspx.cs">
+      <DependentUpon>ViewGazetteDetail.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="View\ViewGazetteDetail.aspx.designer.cs">
+      <DependentUpon>ViewGazetteDetail.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="View\ViewGazetteNotificationDetail.aspx.cs">
+      <DependentUpon>ViewGazetteNotificationDetail.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="View\ViewGazetteNotificationDetail.aspx.designer.cs">
+      <DependentUpon>ViewGazetteNotificationDetail.aspx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="packages.config" />
+    <EntityDeploy Include="Model1.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Model1.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Masters\Site1.Master" />
+    <Content Include="handler\FileUploader.ashx" />
+    <None Include="Content\MAP-Help.ppsx" />
+    <None Include="Content\MAP-Help.pptx" />
+    <Content Include="handler\FileValidator.ashx" />
+    <None Include="Content\MapsManual.docx" />
+    <None Include="Scripts\jquery-2.0.3.min.map" />
+    <Content Include="Site1.Master" />
+    <Content Include="View\Site1.Master" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>False</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>51204</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>
+          </IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

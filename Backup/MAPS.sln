@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MAPS", "MAPS\MAPS.csproj", "{277C7552-5987-4D79-B9DD-B669FEC823EB}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{B5C6679E-8B5D-469C-93C4-A3D02CE5139A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{277C7552-5987-4D79-B9DD-B669FEC823EB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{277C7552-5987-4D79-B9DD-B669FEC823EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{277C7552-5987-4D79-B9DD-B669FEC823EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{277C7552-5987-4D79-B9DD-B669FEC823EB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

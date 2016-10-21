@@ -1,0 +1,415 @@
+﻿.perp_sheetbg
+{
+	padding: 16px 0;
+}
+@media screen and (min-width:769px)
+{
+	.perp_sheet_width
+	{
+		min-width: 650px;
+		max-width: 960px;
+		margin: 0 auto;
+	}
+}
+@media only screen and (device-width:768px)
+{
+	.perp_sheet_width
+	{
+		width: 100%;
+		margin: 0 auto;
+	}
+}
+@media only screen and (min-device-width:481px) and (max-device-width:1024px) and (orientation:portrait)
+{
+	.perp_sheet_width
+	{
+		width: 100%;
+		margin: 0 auto;
+	}
+}
+.perp_sheet_width hr
+{
+	margin: 5px 0;
+}
+.perp_sheet
+{
+	background: #fff;
+	padding: 16px;
+}
+.perp_sheet .sa_list
+{
+	overflow-x: auto;
+}
+.perp_sheetbg
+{
+	background: url(../images/form_sheetbg.png);
+	border-bottom: 1px solid #ddd;
+}
+.perp_sheet
+{
+	border: 1px solid #c8c8d3;
+	-moz-box-shadow: 0 4px 20px rgba(0,0,0,.15);
+	-webkit-box-shadow: 0 4px 20px rgba(0,0,0,.15);
+	box-shadow: 0 4px 20px rgba(0,0,0,.15);
+}
+.perp_sheet .ui-tabs
+{
+	margin: 0 -16px;
+}
+.perp_sheet .sa_notebook_page
+{
+	padding: 0 16px;
+}
+.perp header
+{
+	position: relative;
+	border-bottom: 1px solid #cacaca;
+	padding-left: 2px;
+	background-color: #ededed;
+	background-image: -webkit-gradient(linear,left top,left bottom,from(#fcfcfc),to(#dedede));
+	background-image: -webkit-linear-gradient(top,#fcfcfc,#dedede);
+	background-image: -moz-linear-gradient(top,#fcfcfc,#dedede);
+	background-image: -ms-linear-gradient(top,#fcfcfc,#dedede);
+	background-image: -o-linear-gradient(top,#fcfcfc,#dedede);
+	background-image: linear-gradient(to bottom,#fcfcfc,#dedede);
+}
+.perp header > span
+{
+	margin-left: 4px;
+}
+.perp header ul
+{
+	display: inline-block;
+	float: right;
+}
+.perp header .sa_button
+{
+	margin: 3px 2px 1px;
+}
+.perp header .sa_button:first-child
+{
+	margin-left: 6px;
+}
+.perp header .sa_tags
+{
+	margin: 5px 0 0 5px;
+	width: 400px;
+	padding-bottom: 0;
+}
+.perp div.sa_chatter
+{
+	box-sizing: border-box;
+	min-width: 682px;
+	max-width: 892px;
+	margin: 0 auto;
+	padding: 16px 16px 48px;
+}
+.perp div.perp_configuration p, .perp div.perp_configuration ul, .perp div.perp_configuration ol
+{
+	color: #aaa;
+	max-width: 650px;
+}
+.perp div.perp_configuration label
+{
+	min-width: 150px;
+}
+.perp div.perp_configuration .perp_group_cell_label
+{
+	padding: 1px 0;
+}
+.perp div.perp_configuration .perp_group_cell div div
+{
+	padding: 1px 0;
+}
+.perp .sa_subtotal_footer
+{
+	width: 1% !important;
+}
+.perp .sa_subtotal_footer td.perp_group_cell
+{
+	text-align: right;
+	padding: 0 !important;
+}
+.perp .sa_subtotal_footer td.perp_group_cell_label
+{
+	border-right: 0;
+}
+.perp .sa_subtotal_footer .sa_subtotal_footer_separator
+{
+	width: 108px;
+	border-top: 1px solid #cacaca;
+	margin-top: 4px;
+	padding-top: 4px;
+	font-weight: 700;
+	font-size: 18px;
+}
+.perp .sa_subtotal_footer label:after
+{
+	content: ":";
+}
+.perp .sa_subtotal_footer label.sa_subtotal_footer_separator
+{
+	font-weight: 700 !important;
+	padding: 2px 11px 2px 0 !important;
+}
+.perp .sa_subtotal_footer label.perp_label_help
+{
+	font-weight: 400;
+}
+.perp .perp_box_info
+{
+	background: #fe9;
+	border-bottom: 1px solid #cb6;
+	padding: 4px;
+}
+.perp .perp_box_info > p
+{
+	margin: auto;
+}
+.perp .perp_box_warning
+{
+	background: #bd362f;
+	border-bottom: 1px solid #900;
+	padding: 4px;
+}
+.perp .perp_box_warning *
+{
+	color: #fff;
+	text-shadow: none;
+}
+.perp .perp_box_warning > p
+{
+	margin: auto;
+}
+.perp .perp_button
+{
+	margin: 2px;
+}
+.perp td.perp_group_cell_label
+{
+	border-right: 1px solid #ddd;
+	padding: 2px 0;
+}
+.perp td.perp_group_cell_label label
+{
+	line-height: 18px;
+	display: block;
+}
+.perp td.perp_group_cell + .perp_group_cell
+{
+	padding: 2px 0 2px 8px;
+}
+.perp .perp_group
+{
+	width: 100%;
+	margin: 9px 0;
+}
+.perp .perp_group .perp_group_cell.sa_group_right
+{
+	padding-left: 20px;
+}
+.perp .perp_label_help[for], .perp .perp_label[for]
+{
+	font-weight: 700;
+	white-space: nowrap;
+	padding-right: 8px;
+}
+.perp .perp_label_help[for] span, .perp .perp_label[for] span
+{
+	font-size: 80%;
+	color: #006400;
+	vertical-align: top;
+	position: relative;
+	top: -4px;
+	padding: 0 2px;
+}
+.perp .perp_field
+{
+	width: 100%;
+	display: inline-block;
+	padding: 2px 2px 2px 0;
+	vertical-align: top;
+}
+.perp .perp_field input
+{
+	margin: 0;
+	border-radius: 3px;
+	border-color: #ccc;
+	border-width: 1px;
+	border-collapse: collapse;
+	font-style: normal;
+	font-variant: normal;
+	font-weight: 400;
+	line-height: 18px;
+	padding-bottom: 2px;
+	padding-left: 2px;
+	padding-right: 2px;
+	white-space: normal;
+	width: 120px;
+}
+.perp input[type=text], .perp input[type=password], .perp input[type=file], .perp select
+{
+	height: 22px;
+	padding-top: 2px;
+}
+.perp input[type=text], .perp input[type=password], .perp input[type=file], .perp select, .perp textarea
+{
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-ms-box-sizing: border-box;
+	box-sizing: border-box;
+	background: #fff;
+	min-width: 60px;
+	color: #1f1f1f;
+	font-family: Cambria,Georgia,serif;
+}
+.perp input[readonly], .perp select[readonly], .perp textarea[readonly], .perp input[disabled], .perp select[disabled]
+{
+	background: #e5e5e5 !important;
+	color: #666;
+}
+.perp textarea[disabled]
+{
+	border: 0;
+	padding-left: 8px;
+	-moz-box-shadow: none;
+	-webkit-box-shadow: none;
+	box-shadow: none;
+	-moz-border-radius: 0;
+	-webkit-border-radius: 0;
+	border-radius: 0;
+	color: #4c4c4c;
+}
+.perp textarea.sa_inline[disabled]
+{
+	border-left: 8px solid #eee;
+}
+.perp .perp_field_url button img
+{
+	vertical-align: top;
+}
+.perp .perp_required input:not([disabled]):not([readonly]), .perp .perp_required select:not([disabled]):not([readonly]), .perp .perp_required textarea:not([disabled]):not([readonly])
+{
+	background-color: #d2d2ff !important;
+}
+.perp .perp_invalid input, .perp .perp_invalid select, .perp .perp_invalid textarea
+{
+	background-color: #f66 !important;
+	border: 1px solid #d00 !important;
+}
+.perp .sa_input_icon
+{
+	cursor: pointer;
+	margin: 3px 0 0 -21px;
+	vertical-align: top;
+}
+.perp .sa_input_icon_disabled
+{
+	position: absolute;
+	cursor: default;
+	opacity: .5;
+	filter: alpha(opacity=50);
+	right: 5px;
+	top: 3px;
+}
+.perp .perp_field_with_button.sa_no_button > .sa_button
+{
+	display: none;
+}
+.perp .perp_field_with_button:not(.sa_no_button) > .sa_button
+{
+	float: right;
+	-moz-border-radius: 0;
+	-webkit-border-radius: 0;
+	border-radius: 0;
+	border-bottom-left-radius: 0;
+	height: 22px;
+}
+.perp .perp_field_with_button input
+{
+	width: 100%;
+}
+.perp .perp_field_with_button > div
+{
+	position: relative;
+	overflow: hidden;
+}
+.perp .perp_embedded_html
+{
+	position: relative;
+	width: 600px;
+	margin-left: 130px;
+	margin-top: 32px;
+	margin-bottom: 32px;
+	text-align: justify;
+}
+.perp .perp_field_html .sa_input_icon
+{
+	float: right;
+	margin: 4px 7px;
+}
+.perp_editable .perp_field_integer input
+{
+	width: 6em;
+}
+.perp_editable .perp_field_float input
+{
+	width: 7em;
+}
+.perp_editable .perp_field_date input
+{
+	width: 100px;
+}
+.perp_editable .perp_field_datetime input
+{
+	width: 150px;
+}
+.sa_hidden_input_file
+{
+	position: relative;
+}
+.sa_hidden_input_file input.perp_binary_file
+{
+	z-index: 0;
+	line-height: 0;
+	font-size: 12px;
+	position: absolute;
+	top: 1px;
+	left: 0;
+	right: 0;
+	opacity: 0;
+	filter: alpha(opacity=0);
+	-ms-filter: "alpha(opacity=0)";
+	margin: 0;
+	padding: 0;
+}
+.perp .perp_field_image
+{
+	padding: 0;
+	position: relative;
+	display: inline-block;
+	width: auto;
+	vertical-align: top;
+}
+.perp .perp_field_image .perp_field_image_controls
+{
+	position: absolute;
+	top: 1px;
+	padding: 4px 0;
+	width: 100%;
+	display: none;
+	text-align: center;
+	color: #eee;
+	background: rgba(37,37,37,.9);
+	-moz-border-radius: 3px 3px 0 0;
+	-webkit-border-radius: 3px 3px 0 0;
+	border-radius: 3px 3px 0 0;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-ms-box-sizing: border-box;
+	box-sizing: border-box;
+}
+.perp .perp_field_image:hover .perp_field_image_controls
+{
+	display: block;
+}

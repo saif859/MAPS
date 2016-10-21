@@ -1,0 +1,29 @@
+﻿body {
+}
+
+.buttonnew {
+	
+	font-size: 14px;
+	font-weight:bold; 
+	text-decoration: none!important; 
+	font-family: Helvetica, Arial, sans serif;
+	 border:solid 2 #CCCCCC;
+}
+
+.green {
+	text-align:center;
+	color: #000;
+	border: 1px solid black;
+	border-radius: 3px; 
+	text-shadow: 1px 1px 1px #dff4bc;
+	background-color: #a5cb5e;
+	margin-bottom: 0px;
+	height: 24px;
+	width:auto;
+	
+}
+.green:hover {
+	border: 1px solid #687e30;
+
+}
+.green:active {border: 1px solid #506320;}
