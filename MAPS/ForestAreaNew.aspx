@@ -7,15 +7,13 @@
     <%: System.Web.Optimization.Styles.Render("~/css/ui") %>
     <%: System.Web.Optimization.Scripts.Render("~/bundles/jqueryui") %>
     <style type="text/css">
-        @media print
-        {
-            .pre
-            {
+        @media print {
+            .pre {
                 display: none;
             }
         }
-        .UpdateProgressPanel
-        {
+
+        .UpdateProgressPanel {
             z-index: 99999999;
             color: Black;
             width: 250px;
@@ -26,9 +24,8 @@
             left: 40%;
             padding: 10px;
         }
-        
-        .UpdateProgressModalBackground
-        {
+
+        .UpdateProgressModalBackground {
             z-index: 99999998;
             background-color: #FFF;
             position: fixed;
@@ -240,34 +237,25 @@
         </div>
         <table width="100%" border="0" cellpadding="0" cellspacing="0" class="table gra">
             <tr style="color: #000;">
-                <th rowspan="2">
-                    Pillar No.
+                <th rowspan="2">Pillar No.
                 </th>
-                <th colspan="2">
-                    GPS
+                <th colspan="2">GPS
                 </th>
-                <th rowspan="2">
-                    Forward Bearings (in Degree)
+                <th rowspan="2">Forward Bearings (in Degree)
                 </th>
-                <th rowspan="2" style="display: none;">
-                    Bearings Diff. (in Degree)
+                <th rowspan="2" style="display: none;">Bearings Diff. (in Degree)
                 </th>
-                <th rowspan="2" style="display: none;">
-                    Back Bearings (in Degree)
+                <th rowspan="2" style="display: none;">Back Bearings (in Degree)
                 </th>
-                <th rowspan="2" style="display: none;">
-                    Distance from Previous Pillar (in Chains)
+                <th rowspan="2" style="display: none;">Distance from Previous Pillar (in Chains)
                 </th>
-                <th rowspan="2" style="display: none;">
-                    Distance from Previous Pillar (in Meters)
+                <th rowspan="2" style="display: none;">Distance from Previous Pillar (in Meters)
                 </th>
             </tr>
             <tr style="color: #000;">
-                <th>
-                    Latitude
+                <th>Latitude
                 </th>
-                <th>
-                    Longitude
+                <th>Longitude
                 </th>
             </tr>
             <tr style="color: #000;">
@@ -322,14 +310,14 @@
                 <tr>
                     <td width="35%" valign="middle" align="left">
                         <div>
-                            Total Number of Pillar (Excluding first one) :</div>
+                            Total Number of Pillar (Excluding first one) :
+                        </div>
                     </td>
                     <td width="20%" align="left">
                         <asp:TextBox ID="txtNoPillar" runat="server" onkeypress="return OnlyNumber(event);"
                             Style="width: 40px;" class="textAlign inputbox req" placeholder="No." title="Number of Pillar"></asp:TextBox>
                     </td>
-                    <td width="36%" align="left">
-                    </td>
+                    <td width="36%" align="left"></td>
                 </tr>
             </table>
         </div>
@@ -372,15 +360,13 @@
         <div style="margin-top: 10px;">
             <table>
                 <tr>
-                    <td>
-                        Area in Gazette : &nbsp;&nbsp;
+                    <td>Area in Gazette : &nbsp;&nbsp;
                     </td>
                     <td>
                         <asp:TextBox ID="txtGazetteArea2" runat="server" Style="width: 100px;" class="textAlign inputbox"
                             ReadOnly="true" placeholder="Area in Gazette"></asp:TextBox>
                     </td>
-                    <td>
-                        Acre
+                    <td>Acre
                     </td>
                 </tr>
             </table>
@@ -388,27 +374,23 @@
         <div style="margin-top: 10px;">
             <table>
                 <tr>
-                    <td>
-                        Area computed based on chainage and bearings : &nbsp;&nbsp;
+                    <td>Area computed based on chainage and bearings : &nbsp;&nbsp;
                     </td>
                     <td style="display: none;">
                         <asp:TextBox ID="areaM" runat="server" Style="width: 100px; display: none;" class="textAlign inputbox req"
                             ReadOnly="true"></asp:TextBox>
                     </td>
-                    <td style="display: none;">
-                        m²,
+                    <td style="display: none;">m²,
                     </td>
                     <td align="left">
                         <asp:TextBox ID="areaH" runat="server" ReadOnly="true" Style="width: 100px;" class="textAlign inputbox req"></asp:TextBox>
                     </td>
-                    <td>
-                        Ha,
+                    <td>Ha,
                     </td>
                     <td align="left">
                         <asp:TextBox ID="areaA" runat="server" ReadOnly="true" Style="width: 100px;" class="textAlign inputbox req"></asp:TextBox>
                     </td>
-                    <td>
-                        Acre
+                    <td>Acre
                     </td>
                     <td>
                         <input id="Button1" type="button" value="Calculate Area" onclick="orthoMap();" class="button button-green pre" />
@@ -419,27 +401,23 @@
         <div style="margin-top: 10px;">
             <table>
                 <tr>
-                    <td>
-                        Area computed based on field entry of GPS coordinates : &nbsp;&nbsp;
+                    <td>Area computed based on field entry of GPS coordinates : &nbsp;&nbsp;
                     </td>
                     <td style="display: none;">
                         <asp:TextBox ID="areaMF" runat="server" Style="width: 100px; display: none;" class="textAlign inputbox"
                             ReadOnly="true"></asp:TextBox>
                     </td>
-                    <td style="display: none;">
-                        m²,
+                    <td style="display: none;">m²,
                     </td>
                     <td align="left">
                         <asp:TextBox ID="areaHF" runat="server" ReadOnly="true" Style="width: 100px;" class="textAlign inputbox"></asp:TextBox>
                     </td>
-                    <td>
-                        Ha,
+                    <td>Ha,
                     </td>
                     <td align="left">
                         <asp:TextBox ID="areaAF" runat="server" ReadOnly="true" Style="width: 100px;" class="textAlign inputbox"></asp:TextBox>
                     </td>
-                    <td>
-                        Acre
+                    <td>Acre
                     </td>
                     <td>
                         <input id="Button2" type="button" value="Calculate Field Area" onclick="orthoMapField();"
@@ -825,15 +803,15 @@
                     var lon0 = Geo.parseDMS($('#txtLongitude0').val());
 
                     var p0 = new LatLon(lat0, lon0);
-                    //-- $('#txtBackBearing0').val(Geo.toBrng(p0.finalBearingTo(p2), degFmt));
+                    $('#txtBackBearing0').val(Geo.toBrng(p0.finalBearingTo(p2), degFmt));
 
-                    //-- $('#txtDistance0').val((p0.distanceTo(p2) * 1000).toFixed(4));
-                    //-- $('#txtDistanceInChain0').val((p0.distanceTo(p2) * 1000 / 20.1168).toFixed(4));
+                    $('#txtDistance0').val((p0.distanceTo(p2) * 1000).toFixed(4));
+                    $('#txtDistanceInChain0').val((p0.distanceTo(p2) * 1000 / 20.1168).toFixed(4));
 
                     //--  $('#txtBearing' + i).val(Geo.toBrng(p2.finalBearingTo(p0), degFmt));
 
-                    //-- $('#txtBearingDifference0').val((parseFloat(Geo.toBrng(p2.bearingTo(p0), degFmt)) - parseFloat(Geo.toBrng(p0.bearingTo(p2), degFmt))).toFixed(3));
-                    $('#txtBearingDifference0').val(Math.abs((parseFloat($('#txtBearing' + i).val()) - parseFloat($('#txtBackBearing0').val()))).toFixed(3));
+                    $('#txtBearingDifference0').val((parseFloat(Geo.toBrng(p2.bearingTo(p0), degFmt)) - parseFloat(Geo.toBrng(p0.bearingTo(p2), degFmt))).toFixed(3));
+                    //  $('#txtBearingDifference0').val(Math.abs((parseFloat($('#txtBearing' + i).val()) - parseFloat($('#txtBackBearing0').val()))).toFixed(3));
 
                 }
 
@@ -956,115 +934,116 @@
         $(document).ready(function () {
             jValid();
             $(".jDate").datepicker({ dateFormat: 'dd/mm/yy' });
-            <%if(Request["Code"]!=null){ %>
+            <%if (Request["Code"] != null)
+        { %>
 
             var DTO = { 'id': <%:Request["Code"]%>};
-                    $.ajax({
-                        type: "POST",
-                        url: "Services/AddArea.asmx/GetCoordinates",
-                        contentType: 'application/json; charset=utf-8',
-                        dataType: 'json',
-                        data: JSON.stringify(DTO),
-                        success: function (response) {
+            $.ajax({
+                type: "POST",
+                url: "Services/AddArea.asmx/GetCoordinates",
+                contentType: 'application/json; charset=utf-8',
+                dataType: 'json',
+                data: JSON.stringify(DTO),
+                success: function (response) {
 
-                        var rows = $('#<%:txtNoPillar.ClientID%>').val();
+                    var rows = $('#<%:txtNoPillar.ClientID%>').val();
 
-                for (var i = document.getElementById("tbl").rows.length; i > 0; i--) {
-                    document.getElementById("tbl").deleteRow(i - 1);
-                }
+                            for (var i = document.getElementById("tbl").rows.length; i > 0; i--) {
+                                document.getElementById("tbl").deleteRow(i - 1);
+                            }
 
-                var tbody = $("#tbl");
-                var number_of_columns = 10;
+                            var tbody = $("#tbl");
+                            var number_of_columns = 10;
 
-                if (tbody == null || tbody.length < 1) return;
+                            if (tbody == null || tbody.length < 1) return;
 
-                var tfirstrow = $("<tr style='color:#000;'>");
-                 $("<th rowspan=\"2\">").text("Pillar No.").appendTo(tfirstrow);
-                $("<th rowspan=\"2\">").text("Distance from Previous Pillar (in Chains)").appendTo(tfirstrow);
-                 $("<th rowspan=\"2\">").text("Distance from Previous Pillar (in Meters)").appendTo(tfirstrow);
-               $("<th rowspan=\"2\">").text("Back Bearings (in Degree)").appendTo(tfirstrow);
-                $("<th rowspan=\"2\">").html("Bearings Diff. (in Degree)<br/>(as calculated from data)").appendTo(tfirstrow);
-                $("<th rowspan=\"2\">").text("Forward Bearings (in Degree)").appendTo(tfirstrow);
-                $("<th colspan=\"2\">").html("GPS<br/>(as calculated from data)").appendTo(tfirstrow);
-                $("<th colspan=\"2\">").text("Field Recorded GPS").appendTo(tfirstrow);
+                            var tfirstrow = $("<tr style='color:#000;'>");
+                            $("<th rowspan=\"2\">").text("Pillar No.").appendTo(tfirstrow);
+                            $("<th rowspan=\"2\">").text("Distance from Previous Pillar (in Chains)").appendTo(tfirstrow);
+                            $("<th rowspan=\"2\">").text("Distance from Previous Pillar (in Meters)").appendTo(tfirstrow);
+                            $("<th rowspan=\"2\">").text("Back Bearings (in Degree)").appendTo(tfirstrow);
+                            $("<th rowspan=\"2\">").html("Bearings Diff. (in Degree)<br/>(as calculated from data)").appendTo(tfirstrow);
+                            $("<th rowspan=\"2\">").text("Forward Bearings (in Degree)").appendTo(tfirstrow);
+                            $("<th colspan=\"2\">").html("GPS<br/>(as calculated from data)").appendTo(tfirstrow);
+                            $("<th colspan=\"2\">").text("Field Recorded GPS").appendTo(tfirstrow);
 
-                tfirstrow.appendTo(tbody);
-                var tSecondRow = $("<tr style='color:#000;'>");
-                $("<th>").text("Latitude").appendTo(tSecondRow);
-                $("<th>").text("Longitude").appendTo(tSecondRow);
-                $("<th>").text("Latitude").appendTo(tSecondRow);
-                $("<th>").text("Longitude").appendTo(tSecondRow);
+                            tfirstrow.appendTo(tbody);
+                            var tSecondRow = $("<tr style='color:#000;'>");
+                            $("<th>").text("Latitude").appendTo(tSecondRow);
+                            $("<th>").text("Longitude").appendTo(tSecondRow);
+                            $("<th>").text("Latitude").appendTo(tSecondRow);
+                            $("<th>").text("Longitude").appendTo(tSecondRow);
 
 
-                tSecondRow.appendTo(tbody);
-                tSecondRow.appendTo(tbody);
+                            tSecondRow.appendTo(tbody);
+                            tSecondRow.appendTo(tbody);
 
-                var tThirdRow = $("<tr style='color:#000;'>");
-                $("<th>").text("1").appendTo(tThirdRow);
-                $("<th>").text("2").appendTo(tThirdRow);
-                $("<th>").text("3").appendTo(tThirdRow);
-                $("<th>").text("4").appendTo(tThirdRow);
-                $("<th>").text("5").appendTo(tThirdRow);
-                $("<th>").text("6").appendTo(tThirdRow);
-                $("<th>").text("7").appendTo(tThirdRow);
-                $("<th>").text("8").appendTo(tThirdRow);
-                $("<th>").text("9").appendTo(tThirdRow);
-                $("<th>").text("10").appendTo(tThirdRow);
+                            var tThirdRow = $("<tr style='color:#000;'>");
+                            $("<th>").text("1").appendTo(tThirdRow);
+                            $("<th>").text("2").appendTo(tThirdRow);
+                            $("<th>").text("3").appendTo(tThirdRow);
+                            $("<th>").text("4").appendTo(tThirdRow);
+                            $("<th>").text("5").appendTo(tThirdRow);
+                            $("<th>").text("6").appendTo(tThirdRow);
+                            $("<th>").text("7").appendTo(tThirdRow);
+                            $("<th>").text("8").appendTo(tThirdRow);
+                            $("<th>").text("9").appendTo(tThirdRow);
+                            $("<th>").text("10").appendTo(tThirdRow);
 
-                tThirdRow.appendTo(tbody);
-                for (var i = 1; i <= rows; i++) {
-                    var trow = $("<tr>");
-                    for (var c = 0; c < number_of_columns; c++) {
-                        var td = $("<td>").addClass("tableCell").data("col", c).appendTo(trow);
-                        switch (c) {
-                            case 0:
-                                $('<input name="hfId' + i + '" id="hfId' + i + '" value="'+response.d[i].Id+'" type="hidden" />').appendTo(td);
-                                $('<input name="txtPillarNo' + i + '" id="txtPillarNo' + i + '" value="'+response.d[i].PillarNo+'" type="text" style="width:40px" class="textAlign inputbox req" onkeypress="return OnlyNumber(event);" />').appendTo(td);
-                                break;
-                            case 1:
-                                 $('<input name="txtDistanceInChain' + i + '" id="txtDistanceInChain' + i + '" value="'+response.d[i].BackDistanceInChain+'" type="text" placeholder="Distance In Chain" class="textAlign req distance inputbox" onchange="orthoDestMap();" onkeypress="return isNumberWithDot(this);" title="Distance from previous pillar" />').appendTo(td);
-                               break;
-                            case 2:
-                                $('<input name="txtDistance' + i + '" id="txtDistance' + i + '" readonly="readonly" value="'+response.d[i].BackDistanceInMeter+'" type="text" placeholder="Distance In Meter" class="textAlign distance inputbox req" onchange="orthoDestMap();" onkeypress="return isNumberWithDot(this);" title="Distance from previous pillar" />').appendTo(td);
-                                break;
-                            case 3:
-                                $('<input name="txtBackBearing' + i + '" id="txtBackBearing' + i + '" value="'+response.d[i].BackBearings+'" type="text" placeholder="Back Bearings" class="textAlign bearings inputbox brng req" onchange="orthoDestMap();" onkeypress="return isNumberWithDot(this);" title="Back Bearings" />').appendTo(td);
-                                break;
-                            case 4:
-                                $('<input name="txtBearingDifference' + i + '" id="txtBearingDifference' + i + '" value="'+response.d[i].BearingDifference+'" type="text" placeholder="Bearings Difference" readonly="readonly" class="textAlign req bearings inputbox diff" onkeypress="return isNumberWithDot(this);" title="Bearings Difference" />').appendTo(td);
-                                break;
-                            case 5:
-                                $('<input name="txtBearing' + i + '" id="txtBearing' + i + '" type="text" placeholder="Forward Bearings" value="'+response.d[i].ForwardBearings+'" class="textAlign bearings req inputbox brng" onchange="orthoDestMap();" onkeypress="return isNumberWithDot(this);" title="Forward Bearings" />').appendTo(td);
-                                break;
-                            case 6:
-                                $('<input name="txtLatitude' + i + '" id="txtLatitude' + i + '" value="'+response.d[i].Latitude+'" type="text"  placeholder="Latitude" onchange="orthoDistMap();" class="textAlign req inputbox" onkeypress="return isNumberWithDot(this);" title="Latitude" />').appendTo(td);
-                                break;
-                            case 7:
-                                $('<input name="txtLongitude' + i + '" id="txtLongitude' + i + '" value="'+response.d[i].Longitude+'" type="text"  placeholder="Longitude" class="textAlign inputbox req" onchange="orthoDistMap();" onkeypress="return isNumberWithDot(this);"  title="Longitude" />').appendTo(td);
-                                break;
-                            case 8:
-                                $('<input name="txtLatitudeField' + i + '" id="txtLatitudeField' + i + '" value="'+response.d[i].LatitudeField+'" type="text"  placeholder="Latitude" class="textAlign inputbox" onkeypress="return isNumberWithDot(this);" title="Latitude" />').appendTo(td);
-                                break;
-                            case 9:
-                                $('<input name="txtLongitudeField' + i + '" id="txtLongitudeField' + i + '" value="'+response.d[i].LongitudeField+'" type="text"  placeholder="Longitude" class="textAlign inputbox" onkeypress="return isNumberWithDot(this);"  title="Longitude" />').appendTo(td);
-                                break;
+                            tThirdRow.appendTo(tbody);
+                            for (var i = 1; i <= rows; i++) {
+                                var trow = $("<tr>");
+                                for (var c = 0; c < number_of_columns; c++) {
+                                    var td = $("<td>").addClass("tableCell").data("col", c).appendTo(trow);
+                                    switch (c) {
+                                        case 0:
+                                            $('<input name="hfId' + i + '" id="hfId' + i + '" value="'+response.d[i].Id+'" type="hidden" />').appendTo(td);
+                                            $('<input name="txtPillarNo' + i + '" id="txtPillarNo' + i + '" value="'+response.d[i].PillarNo+'" type="text" style="width:40px" class="textAlign inputbox req" onkeypress="return OnlyNumber(event);" />').appendTo(td);
+                                            break;
+                                        case 1:
+                                            $('<input name="txtDistanceInChain' + i + '" id="txtDistanceInChain' + i + '" value="'+response.d[i].BackDistanceInChain+'" type="text" placeholder="Distance In Chain" class="textAlign req distance inputbox" onchange="orthoDestMap();" onkeypress="return isNumberWithDot(this);" title="Distance from previous pillar" />').appendTo(td);
+                                            break;
+                                        case 2:
+                                            $('<input name="txtDistance' + i + '" id="txtDistance' + i + '" readonly="readonly" value="'+response.d[i].BackDistanceInMeter+'" type="text" placeholder="Distance In Meter" class="textAlign distance inputbox req" onchange="orthoDestMap();" onkeypress="return isNumberWithDot(this);" title="Distance from previous pillar" />').appendTo(td);
+                                            break;
+                                        case 3:
+                                            $('<input name="txtBackBearing' + i + '" id="txtBackBearing' + i + '" value="'+response.d[i].BackBearings+'" type="text" placeholder="Back Bearings" class="textAlign bearings inputbox brng req" onchange="orthoDestMap();" onkeypress="return isNumberWithDot(this);" title="Back Bearings" />').appendTo(td);
+                                            break;
+                                        case 4:
+                                            $('<input name="txtBearingDifference' + i + '" id="txtBearingDifference' + i + '" value="'+response.d[i].BearingDifference+'" type="text" placeholder="Bearings Difference" readonly="readonly" class="textAlign req bearings inputbox diff" onkeypress="return isNumberWithDot(this);" title="Bearings Difference" />').appendTo(td);
+                                            break;
+                                        case 5:
+                                            $('<input name="txtBearing' + i + '" id="txtBearing' + i + '" type="text" placeholder="Forward Bearings" value="'+response.d[i].ForwardBearings+'" class="textAlign bearings req inputbox brng" onchange="orthoDestMap();" onkeypress="return isNumberWithDot(this);" title="Forward Bearings" />').appendTo(td);
+                                            break;
+                                        case 6:
+                                            $('<input name="txtLatitude' + i + '" id="txtLatitude' + i + '" value="'+response.d[i].Latitude+'" type="text"  placeholder="Latitude" onchange="orthoDistMap();" class="textAlign req inputbox" onkeypress="return isNumberWithDot(this);" title="Latitude" />').appendTo(td);
+                                            break;
+                                        case 7:
+                                            $('<input name="txtLongitude' + i + '" id="txtLongitude' + i + '" value="'+response.d[i].Longitude+'" type="text"  placeholder="Longitude" class="textAlign inputbox req" onchange="orthoDistMap();" onkeypress="return isNumberWithDot(this);"  title="Longitude" />').appendTo(td);
+                                            break;
+                                        case 8:
+                                            $('<input name="txtLatitudeField' + i + '" id="txtLatitudeField' + i + '" value="'+response.d[i].LatitudeField+'" type="text"  placeholder="Latitude" class="textAlign inputbox" onkeypress="return isNumberWithDot(this);" title="Latitude" />').appendTo(td);
+                                            break;
+                                        case 9:
+                                            $('<input name="txtLongitudeField' + i + '" id="txtLongitudeField' + i + '" value="'+response.d[i].LongitudeField+'" type="text"  placeholder="Longitude" class="textAlign inputbox" onkeypress="return isNumberWithDot(this);"  title="Longitude" />').appendTo(td);
+                                            break;
 
-                        }                                                                                
+                                    }                                                                                
                         
-                    }
-                    trow.appendTo(tbody);
-               }
-           },
-           error: function (response) {
-                 console.log(response);
-           }
-        }).done(function () {
+                                }
+                                trow.appendTo(tbody);
+                            }
+                        },
+                        error: function (response) {
+                            console.log(response);
+                        }
+                    }).done(function () {
 
-             orthoMap();
-             orthoMapField();
-        });
+                        orthoMap();
+                        orthoMapField();
+                    });
     <%} %>
-});
+        });
 
         function jValid() {
 
@@ -1101,12 +1080,12 @@
                 });
 
                 // adding rules for inputs
-//                $('input.req').each(function () {
-//                    $(this).rules("add",
-//                    {
-//                        required: true
-//                    })
-//                });
+                //                $('input.req').each(function () {
+                //                    $(this).rules("add",
+                //                    {
+                //                        required: true
+                //                    })
+                //                });
                 $('.ddl').each(function () {
                     $(this).rules("add",
                     {
@@ -1139,7 +1118,8 @@
 
                     var forestArea = {};
 
-                    <%if(Request["Code"]!=null){ %>
+                    <%if (Request["Code"] != null)
+        { %>
                     forestArea.Id =<%:Request["Code"] %>;
                     forestArea.UpdatedBy='<%:((MAPS.LoginMaster)Session["User"]).UserId %>'
                     <%} %>
@@ -1167,7 +1147,8 @@
                     var i = 0;
                     for (i; i <= numOfPillar; i++) {
 
-                        json.forestCoordinates.push({<%if(Request["Code"]!=null){ %>id: $('#hfId' + i).val(),<%} %> pillarNo: $('#txtPillarNo' + i).val(), latitude: $('#txtLatitude' + i).val(), longitude: $('#txtLongitude' + i).val(), forwardBearings: $('#txtBearing' + i).val(), backBearings: $('#txtBackBearing' + i).val(), backDistanceInMeter: $('#txtDistance' + i).val(), backDistanceInChain: $('#txtDistanceInChain' + i).val(),bearingDifference:$('#txtBearingDifference' + i).val(), latitudeField: $('#txtLatitudeField' + i).val(), longitudeField: $('#txtLongitudeField' + i).val() });
+                        json.forestCoordinates.push({<%if (Request["Code"] != null)
+        { %>id: $('#hfId' + i).val(),<%} %> pillarNo: $('#txtPillarNo' + i).val(), latitude: $('#txtLatitude' + i).val(), longitude: $('#txtLongitude' + i).val(), forwardBearings: $('#txtBearing' + i).val(), backBearings: $('#txtBackBearing' + i).val(), backDistanceInMeter: $('#txtDistance' + i).val(), backDistanceInChain: $('#txtDistanceInChain' + i).val(),bearingDifference:$('#txtBearingDifference' + i).val(), latitudeField: $('#txtLatitudeField' + i).val(), longitudeField: $('#txtLongitudeField' + i).val() });
                     }
                     //--------- If block is other insert it first-----------------
                     if($('#<%:ddlBlock.ClientID%>').val()=='OT'){
@@ -1181,51 +1162,54 @@
                         var dtoBlock={'block': block };
 
                         $.ajax({
-                        type: "POST",
-                        url: "Services/AddArea.asmx/InsertBlock",
-                        contentType: 'application/json; charset=utf-8',
-                        dataType: 'json',async: false,
-                        data: JSON.stringify(dtoBlock),
-                        success: function (response) {
-                            forestArea.BlockId = response.d;// Assign added blockId to forest Area.
+                            type: "POST",
+                            url: "Services/AddArea.asmx/InsertBlock",
+                            contentType: 'application/json; charset=utf-8',
+                            dataType: 'json',async: false,
+                            data: JSON.stringify(dtoBlock),
+                            success: function (response) {
+                                forestArea.BlockId = response.d;// Assign added blockId to forest Area.
 
-                            //----------- Insert Village if Other -------------
-                    if($('#<%:ddlVillage.ClientID%>').val()=='OT'){
-                        var village = {};
+                                //----------- Insert Village if Other -------------
+                                if($('#<%:ddlVillage.ClientID%>').val()=='OT'){
+                                var village = {};
                         
-                        village.tehsilId=$('#<%:ddlTehsil.ClientID%>').val();
+                                village.tehsilId=$('#<%:ddlTehsil.ClientID%>').val();
                         village.VillageName=$('#<%:txtVillage.ClientID%>').val();
                         village.BlockId=forestArea.BlockId;
 
                         var dtoVillage={'village': village };
 
                         $.ajax({
-                        type: "POST",
-                        url: "Services/AddArea.asmx/InsertVillage",
-                        contentType: 'application/json; charset=utf-8',
-                        dataType: 'json',async: false,
-                        data: JSON.stringify(dtoVillage),
-                        success: function (response) {
-                            forestArea.VillageId = response.d;// Assign added villageId to forest Area.
+                            type: "POST",
+                            url: "Services/AddArea.asmx/InsertVillage",
+                            contentType: 'application/json; charset=utf-8',
+                            dataType: 'json',async: false,
+                            data: JSON.stringify(dtoVillage),
+                            success: function (response) {
+                                forestArea.VillageId = response.d;// Assign added villageId to forest Area.
                             },
-                        error: function (response) {
-                            console.log(response);
-                        }
+                            error: function (response) {
+                                console.log(response);
+                            }
                         }).done(function () {});
-                        }
-                    //---------------------------------------------------------------//
+                    }
+                            //---------------------------------------------------------------//
 
                             var DTO = { 'forestArea': forestArea, 'forestCoordinates': json.forestCoordinates };
-                    $.ajax({
-                        type: "POST",
-                        <%if(Request["Code"]!=null){ %>url: "Services/AddArea.asmx/UpdateArea",<%} %>
-                        <%else{ %>url: "Services/AddArea.asmx/InsertArea",<%} %>
+                            $.ajax({
+                                type: "POST",
+                                <%if (Request["Code"] != null)
+        { %>url: "Services/AddArea.asmx/UpdateArea",<%} %>
+                        <%else
+        { %>url: "Services/AddArea.asmx/InsertArea",<%} %>
                         contentType: 'application/json; charset=utf-8',
                         dataType: 'json',async: false,
                         data: JSON.stringify(DTO),
                         success: function (response) {
                             var areaId = response.d;
-                            <%if(Request["Code"]==null){ %>
+                            <%if (Request["Code"] == null)
+        { %>
                             uploadFile(areaId);<%} %>
                             console.log(response);
                         },
@@ -1233,57 +1217,62 @@
                             console.log(response);
                         }
                     }).done(function () {
-                     <%if(Request["Code"]!=null){ %>
+                     <%if (Request["Code"] != null)
+        { %>
                         alert("Data saved successfully.");<%} %>
-                        <%else{ %>alert("Data updated successfully.");<%} %>
+                        <%else
+        { %>alert("Data updated successfully.");<%} %>
                     });
                             console.log(response);
                         },
-                        error: function (response) {
-                            console.log(response);
-                        }
+                            error: function (response) {
+                                console.log(response);
+                            }
                         }).done(function () {
 
-                    });
-                    }
-                    //------------------------------------------------------------
-                    else{
-                    //----------- Insert Village if Other -------------
-                    if($('#<%:ddlVillage.ClientID%>').val()=='OT'){
-                        var village = {};
+                        });
+        }
+                        //------------------------------------------------------------
+        else{
+                        //----------- Insert Village if Other -------------
+            if($('#<%:ddlVillage.ClientID%>').val()=='OT'){
+                            var village = {};
                         
-                        village.tehsilId=$('#<%:ddlTehsil.ClientID%>').val();
+                            village.tehsilId=$('#<%:ddlTehsil.ClientID%>').val();
                         village.VillageName=$('#<%:txtVillage.ClientID%>').val();
                         village.BlockId=forestArea.BlockId;
 
                         var dtoVillage={'village': village };
 
                         $.ajax({
-                        type: "POST",
-                        url: "Services/AddArea.asmx/InsertVillage",
-                        contentType: 'application/json; charset=utf-8',
-                        dataType: 'json',async: false,
-                        data: JSON.stringify(dtoVillage),
-                        success: function (response) {
-                            forestArea.VillageId = response.d;// Assign added villageId to forest Area.
+                            type: "POST",
+                            url: "Services/AddArea.asmx/InsertVillage",
+                            contentType: 'application/json; charset=utf-8',
+                            dataType: 'json',async: false,
+                            data: JSON.stringify(dtoVillage),
+                            success: function (response) {
+                                forestArea.VillageId = response.d;// Assign added villageId to forest Area.
                             },
-                        error: function (response) {
-                            console.log(response);
-                        }
+                            error: function (response) {
+                                console.log(response);
+                            }
                         }).done(function () {});
-                        }
-                    //---------------------------------------------------------------//
+                    }
+                        //---------------------------------------------------------------//
                     var DTO = { 'forestArea': forestArea, 'forestCoordinates': json.forestCoordinates};
                     $.ajax({
                         type: "POST",
-                        <%if(Request["Code"]!=null){ %>url: "Services/AddArea.asmx/UpdateArea",<%} %>
-                        <%else{ %>url: "Services/AddArea.asmx/InsertArea",<%} %>
+                        <%if (Request["Code"] != null)
+        { %>url: "Services/AddArea.asmx/UpdateArea",<%} %>
+                        <%else
+        { %>url: "Services/AddArea.asmx/InsertArea",<%} %>
                         contentType: 'application/json; charset=utf-8',
                         dataType: 'json',async: false,
                         data: JSON.stringify(DTO),
                         success: function (response) {
                             var areaId = response.d;
-                            <%if(Request["Code"]==null){ %>
+                            <%if (Request["Code"] == null)
+        { %>
                             uploadFile(areaId);<%} %>
                             console.log(response);
                         },
@@ -1291,16 +1280,18 @@
                             console.log(response);
                         }
                     }).done(function () {
-                     <%if(Request["Code"]==null){ %>
+                     <%if (Request["Code"] == null)
+        { %>
                         alert("Data saved successfully.");<%} %>
-                        <%else{ %>alert("Data updated successfully.");<%} %>
+                        <%else
+        { %>alert("Data updated successfully.");<%} %>
                     });
 
                     console.log("validates");
-                    }
-                } else {
-                    console.log("does not validate");
                 }
+            } else {
+                console.log("does not validate");
+            }
                 // Validate the form and retain the result.
                 var isValid = $("#form1").valid();
 
@@ -1309,7 +1300,7 @@
                 if (!isValid)
                     evt.preventDefault();
             });
-        }
+    }
     </script>
     <script type="text/javascript">
         var currFile = 0;
