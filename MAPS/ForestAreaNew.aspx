@@ -948,100 +948,100 @@
 
                     var rows = $('#<%:txtNoPillar.ClientID%>').val();
 
-                            for (var i = document.getElementById("tbl").rows.length; i > 0; i--) {
-                                document.getElementById("tbl").deleteRow(i - 1);
-                            }
+                    for (var i = document.getElementById("tbl").rows.length; i > 0; i--) {
+                        document.getElementById("tbl").deleteRow(i - 1);
+                    }
 
-                            var tbody = $("#tbl");
-                            var number_of_columns = 10;
+                    var tbody = $("#tbl");
+                    var number_of_columns = 10;
 
-                            if (tbody == null || tbody.length < 1) return;
+                    if (tbody == null || tbody.length < 1) return;
 
-                            var tfirstrow = $("<tr style='color:#000;'>");
-                            $("<th rowspan=\"2\">").text("Pillar No.").appendTo(tfirstrow);
-                            $("<th rowspan=\"2\">").text("Distance from Previous Pillar (in Chains)").appendTo(tfirstrow);
-                            $("<th rowspan=\"2\">").text("Distance from Previous Pillar (in Meters)").appendTo(tfirstrow);
-                            $("<th rowspan=\"2\">").text("Back Bearings (in Degree)").appendTo(tfirstrow);
-                            $("<th rowspan=\"2\">").html("Bearings Diff. (in Degree)<br/>(as calculated from data)").appendTo(tfirstrow);
-                            $("<th rowspan=\"2\">").text("Forward Bearings (in Degree)").appendTo(tfirstrow);
-                            $("<th colspan=\"2\">").html("GPS<br/>(as calculated from data)").appendTo(tfirstrow);
-                            $("<th colspan=\"2\">").text("Field Recorded GPS").appendTo(tfirstrow);
+                    var tfirstrow = $("<tr style='color:#000;'>");
+                    $("<th rowspan=\"2\">").text("Pillar No.").appendTo(tfirstrow);
+                    $("<th rowspan=\"2\">").text("Distance from Previous Pillar (in Chains)").appendTo(tfirstrow);
+                    $("<th rowspan=\"2\">").text("Distance from Previous Pillar (in Meters)").appendTo(tfirstrow);
+                    $("<th rowspan=\"2\">").text("Back Bearings (in Degree)").appendTo(tfirstrow);
+                    $("<th rowspan=\"2\">").html("Bearings Diff. (in Degree)<br/>(as calculated from data)").appendTo(tfirstrow);
+                    $("<th rowspan=\"2\">").text("Forward Bearings (in Degree)").appendTo(tfirstrow);
+                    $("<th colspan=\"2\">").html("GPS<br/>(as calculated from data)").appendTo(tfirstrow);
+                    $("<th colspan=\"2\">").text("Field Recorded GPS").appendTo(tfirstrow);
 
-                            tfirstrow.appendTo(tbody);
-                            var tSecondRow = $("<tr style='color:#000;'>");
-                            $("<th>").text("Latitude").appendTo(tSecondRow);
-                            $("<th>").text("Longitude").appendTo(tSecondRow);
-                            $("<th>").text("Latitude").appendTo(tSecondRow);
-                            $("<th>").text("Longitude").appendTo(tSecondRow);
+                    tfirstrow.appendTo(tbody);
+                    var tSecondRow = $("<tr style='color:#000;'>");
+                    $("<th>").text("Latitude").appendTo(tSecondRow);
+                    $("<th>").text("Longitude").appendTo(tSecondRow);
+                    $("<th>").text("Latitude").appendTo(tSecondRow);
+                    $("<th>").text("Longitude").appendTo(tSecondRow);
 
 
-                            tSecondRow.appendTo(tbody);
-                            tSecondRow.appendTo(tbody);
+                    tSecondRow.appendTo(tbody);
+                    tSecondRow.appendTo(tbody);
 
-                            var tThirdRow = $("<tr style='color:#000;'>");
-                            $("<th>").text("1").appendTo(tThirdRow);
-                            $("<th>").text("2").appendTo(tThirdRow);
-                            $("<th>").text("3").appendTo(tThirdRow);
-                            $("<th>").text("4").appendTo(tThirdRow);
-                            $("<th>").text("5").appendTo(tThirdRow);
-                            $("<th>").text("6").appendTo(tThirdRow);
-                            $("<th>").text("7").appendTo(tThirdRow);
-                            $("<th>").text("8").appendTo(tThirdRow);
-                            $("<th>").text("9").appendTo(tThirdRow);
-                            $("<th>").text("10").appendTo(tThirdRow);
+                    var tThirdRow = $("<tr style='color:#000;'>");
+                    $("<th>").text("1").appendTo(tThirdRow);
+                    $("<th>").text("2").appendTo(tThirdRow);
+                    $("<th>").text("3").appendTo(tThirdRow);
+                    $("<th>").text("4").appendTo(tThirdRow);
+                    $("<th>").text("5").appendTo(tThirdRow);
+                    $("<th>").text("6").appendTo(tThirdRow);
+                    $("<th>").text("7").appendTo(tThirdRow);
+                    $("<th>").text("8").appendTo(tThirdRow);
+                    $("<th>").text("9").appendTo(tThirdRow);
+                    $("<th>").text("10").appendTo(tThirdRow);
 
-                            tThirdRow.appendTo(tbody);
-                            for (var i = 1; i <= rows; i++) {
-                                var trow = $("<tr>");
-                                for (var c = 0; c < number_of_columns; c++) {
-                                    var td = $("<td>").addClass("tableCell").data("col", c).appendTo(trow);
-                                    switch (c) {
-                                        case 0:
-                                            $('<input name="hfId' + i + '" id="hfId' + i + '" value="'+response.d[i].Id+'" type="hidden" />').appendTo(td);
-                                            $('<input name="txtPillarNo' + i + '" id="txtPillarNo' + i + '" value="'+response.d[i].PillarNo+'" type="text" style="width:40px" class="textAlign inputbox req" onkeypress="return OnlyNumber(event);" />').appendTo(td);
-                                            break;
-                                        case 1:
-                                            $('<input name="txtDistanceInChain' + i + '" id="txtDistanceInChain' + i + '" value="'+response.d[i].BackDistanceInChain+'" type="text" placeholder="Distance In Chain" class="textAlign req distance inputbox" onchange="orthoDestMap();" onkeypress="return isNumberWithDot(this);" title="Distance from previous pillar" />').appendTo(td);
-                                            break;
-                                        case 2:
-                                            $('<input name="txtDistance' + i + '" id="txtDistance' + i + '" readonly="readonly" value="'+response.d[i].BackDistanceInMeter+'" type="text" placeholder="Distance In Meter" class="textAlign distance inputbox req" onchange="orthoDestMap();" onkeypress="return isNumberWithDot(this);" title="Distance from previous pillar" />').appendTo(td);
-                                            break;
-                                        case 3:
-                                            $('<input name="txtBackBearing' + i + '" id="txtBackBearing' + i + '" value="'+response.d[i].BackBearings+'" type="text" placeholder="Back Bearings" class="textAlign bearings inputbox brng req" onchange="orthoDestMap();" onkeypress="return isNumberWithDot(this);" title="Back Bearings" />').appendTo(td);
-                                            break;
-                                        case 4:
-                                            $('<input name="txtBearingDifference' + i + '" id="txtBearingDifference' + i + '" value="'+response.d[i].BearingDifference+'" type="text" placeholder="Bearings Difference" readonly="readonly" class="textAlign req bearings inputbox diff" onkeypress="return isNumberWithDot(this);" title="Bearings Difference" />').appendTo(td);
-                                            break;
-                                        case 5:
-                                            $('<input name="txtBearing' + i + '" id="txtBearing' + i + '" type="text" placeholder="Forward Bearings" value="'+response.d[i].ForwardBearings+'" class="textAlign bearings req inputbox brng" onchange="orthoDestMap();" onkeypress="return isNumberWithDot(this);" title="Forward Bearings" />').appendTo(td);
-                                            break;
-                                        case 6:
-                                            $('<input name="txtLatitude' + i + '" id="txtLatitude' + i + '" value="'+response.d[i].Latitude+'" type="text"  placeholder="Latitude" onchange="orthoDistMap();" class="textAlign req inputbox" onkeypress="return isNumberWithDot(this);" title="Latitude" />').appendTo(td);
-                                            break;
-                                        case 7:
-                                            $('<input name="txtLongitude' + i + '" id="txtLongitude' + i + '" value="'+response.d[i].Longitude+'" type="text"  placeholder="Longitude" class="textAlign inputbox req" onchange="orthoDistMap();" onkeypress="return isNumberWithDot(this);"  title="Longitude" />').appendTo(td);
-                                            break;
-                                        case 8:
-                                            $('<input name="txtLatitudeField' + i + '" id="txtLatitudeField' + i + '" value="'+response.d[i].LatitudeField+'" type="text"  placeholder="Latitude" class="textAlign inputbox" onkeypress="return isNumberWithDot(this);" title="Latitude" />').appendTo(td);
-                                            break;
-                                        case 9:
-                                            $('<input name="txtLongitudeField' + i + '" id="txtLongitudeField' + i + '" value="'+response.d[i].LongitudeField+'" type="text"  placeholder="Longitude" class="textAlign inputbox" onkeypress="return isNumberWithDot(this);"  title="Longitude" />').appendTo(td);
-                                            break;
+                    tThirdRow.appendTo(tbody);
+                    for (var i = 1; i <= rows; i++) {
+                        var trow = $("<tr>");
+                        for (var c = 0; c < number_of_columns; c++) {
+                            var td = $("<td>").addClass("tableCell").data("col", c).appendTo(trow);
+                            switch (c) {
+                                case 0:
+                                    $('<input name="hfId' + i + '" id="hfId' + i + '" value="'+response.d[i].Id+'" type="hidden" />').appendTo(td);
+                                    $('<input name="txtPillarNo' + i + '" id="txtPillarNo' + i + '" value="'+response.d[i].PillarNo+'" type="text" style="width:40px" class="textAlign inputbox req" onkeypress="return OnlyNumber(event);" />').appendTo(td);
+                                    break;
+                                case 1:
+                                    $('<input name="txtDistanceInChain' + i + '" id="txtDistanceInChain' + i + '" value="'+response.d[i].BackDistanceInChain+'" type="text" placeholder="Distance In Chain" class="textAlign req distance inputbox" onchange="orthoDestMap();" onkeypress="return isNumberWithDot(this);" title="Distance from previous pillar" />').appendTo(td);
+                                    break;
+                                case 2:
+                                    $('<input name="txtDistance' + i + '" id="txtDistance' + i + '" readonly="readonly" value="'+response.d[i].BackDistanceInMeter+'" type="text" placeholder="Distance In Meter" class="textAlign distance inputbox req" onchange="orthoDestMap();" onkeypress="return isNumberWithDot(this);" title="Distance from previous pillar" />').appendTo(td);
+                                    break;
+                                case 3:
+                                    $('<input name="txtBackBearing' + i + '" id="txtBackBearing' + i + '" value="'+response.d[i].BackBearings+'" type="text" placeholder="Back Bearings" class="textAlign bearings inputbox brng req" onchange="orthoDestMap();" onkeypress="return isNumberWithDot(this);" title="Back Bearings" />').appendTo(td);
+                                    break;
+                                case 4:
+                                    $('<input name="txtBearingDifference' + i + '" id="txtBearingDifference' + i + '" value="'+response.d[i].BearingDifference+'" type="text" placeholder="Bearings Difference" readonly="readonly" class="textAlign req bearings inputbox diff" onkeypress="return isNumberWithDot(this);" title="Bearings Difference" />').appendTo(td);
+                                    break;
+                                case 5:
+                                    $('<input name="txtBearing' + i + '" id="txtBearing' + i + '" type="text" placeholder="Forward Bearings" value="'+response.d[i].ForwardBearings+'" class="textAlign bearings req inputbox brng" onchange="orthoDestMap();" onkeypress="return isNumberWithDot(this);" title="Forward Bearings" />').appendTo(td);
+                                    break;
+                                case 6:
+                                    $('<input name="txtLatitude' + i + '" id="txtLatitude' + i + '" value="'+response.d[i].Latitude+'" type="text"  placeholder="Latitude" onchange="orthoDistMap();" class="textAlign req inputbox" onkeypress="return isNumberWithDot(this);" title="Latitude" />').appendTo(td);
+                                    break;
+                                case 7:
+                                    $('<input name="txtLongitude' + i + '" id="txtLongitude' + i + '" value="'+response.d[i].Longitude+'" type="text"  placeholder="Longitude" class="textAlign inputbox req" onchange="orthoDistMap();" onkeypress="return isNumberWithDot(this);"  title="Longitude" />').appendTo(td);
+                                    break;
+                                case 8:
+                                    $('<input name="txtLatitudeField' + i + '" id="txtLatitudeField' + i + '" value="'+response.d[i].LatitudeField+'" type="text"  placeholder="Latitude" class="textAlign inputbox" onkeypress="return isNumberWithDot(this);" title="Latitude" />').appendTo(td);
+                                    break;
+                                case 9:
+                                    $('<input name="txtLongitudeField' + i + '" id="txtLongitudeField' + i + '" value="'+response.d[i].LongitudeField+'" type="text"  placeholder="Longitude" class="textAlign inputbox" onkeypress="return isNumberWithDot(this);"  title="Longitude" />').appendTo(td);
+                                    break;
 
-                                    }                                                                                
+                            }                                                                                
                         
-                                }
-                                trow.appendTo(tbody);
-                            }
-                        },
-                        error: function (response) {
-                            console.log(response);
                         }
-                    }).done(function () {
+                        trow.appendTo(tbody);
+                    }
+                },
+                error: function (response) {
+                    console.log(response);
+                }
+            }).done(function () {
 
-                        orthoMap();
-                        orthoMapField();
-                    });
+                orthoMap();
+                orthoMapField();
+            });
     <%} %>
         });
 
@@ -1172,96 +1172,96 @@
 
                                 //----------- Insert Village if Other -------------
                                 if($('#<%:ddlVillage.ClientID%>').val()=='OT'){
-                                var village = {};
+                                    var village = {};
                         
-                                village.tehsilId=$('#<%:ddlTehsil.ClientID%>').val();
-                        village.VillageName=$('#<%:txtVillage.ClientID%>').val();
-                        village.BlockId=forestArea.BlockId;
+                                    village.tehsilId=$('#<%:ddlTehsil.ClientID%>').val();
+                                village.VillageName=$('#<%:txtVillage.ClientID%>').val();
+                                    village.BlockId=forestArea.BlockId;
 
-                        var dtoVillage={'village': village };
+                                    var dtoVillage={'village': village };
 
-                        $.ajax({
-                            type: "POST",
-                            url: "Services/AddArea.asmx/InsertVillage",
-                            contentType: 'application/json; charset=utf-8',
-                            dataType: 'json',async: false,
-                            data: JSON.stringify(dtoVillage),
-                            success: function (response) {
-                                forestArea.VillageId = response.d;// Assign added villageId to forest Area.
-                            },
-                            error: function (response) {
-                                console.log(response);
-                            }
-                        }).done(function () {});
-                    }
-                            //---------------------------------------------------------------//
+                                    $.ajax({
+                                        type: "POST",
+                                        url: "Services/AddArea.asmx/InsertVillage",
+                                        contentType: 'application/json; charset=utf-8',
+                                        dataType: 'json',async: false,
+                                        data: JSON.stringify(dtoVillage),
+                                        success: function (response) {
+                                            forestArea.VillageId = response.d;// Assign added villageId to forest Area.
+                                        },
+                                        error: function (response) {
+                                            console.log(response);
+                                        }
+                                    }).done(function () {});
+                                }
+                                //---------------------------------------------------------------//
 
-                            var DTO = { 'forestArea': forestArea, 'forestCoordinates': json.forestCoordinates };
-                            $.ajax({
-                                type: "POST",
+                                var DTO = { 'forestArea': forestArea, 'forestCoordinates': json.forestCoordinates };
+                                $.ajax({
+                                    type: "POST",
                                 <%if (Request["Code"] != null)
         { %>url: "Services/AddArea.asmx/UpdateArea",<%} %>
                         <%else
         { %>url: "Services/AddArea.asmx/InsertArea",<%} %>
-                        contentType: 'application/json; charset=utf-8',
-                        dataType: 'json',async: false,
-                        data: JSON.stringify(DTO),
-                        success: function (response) {
-                            var areaId = response.d;
+                                contentType: 'application/json; charset=utf-8',
+                                dataType: 'json',async: false,
+                                data: JSON.stringify(DTO),
+                                success: function (response) {
+                                    var areaId = response.d;
                             <%if (Request["Code"] == null)
         { %>
                             uploadFile(areaId);<%} %>
                             console.log(response);
                         },
-                        error: function (response) {
-                            console.log(response);
-                        }
-                    }).done(function () {
+                                error: function (response) {
+                                    console.log(response);
+                                }
+                            }).done(function () {
                      <%if (Request["Code"] != null)
         { %>
-                        alert("Data saved successfully.");<%} %>
+                        alert("Data updated successfully.");<%} %>
                         <%else
-        { %>alert("Data updated successfully.");<%} %>
+        { %>alert("Data saved successfully.");<%} %>
                     });
-                            console.log(response);
-                        },
+                                console.log(response);
+                            },
                             error: function (response) {
                                 console.log(response);
                             }
                         }).done(function () {
 
                         });
-        }
+                }
                         //------------------------------------------------------------
-        else{
+                else{
                         //----------- Insert Village if Other -------------
-            if($('#<%:ddlVillage.ClientID%>').val()=='OT'){
+                    if($('#<%:ddlVillage.ClientID%>').val()=='OT'){
                             var village = {};
                         
                             village.tehsilId=$('#<%:ddlTehsil.ClientID%>').val();
-                        village.VillageName=$('#<%:txtVillage.ClientID%>').val();
-                        village.BlockId=forestArea.BlockId;
+                            village.VillageName=$('#<%:txtVillage.ClientID%>').val();
+                village.BlockId=forestArea.BlockId;
 
-                        var dtoVillage={'village': village };
+                var dtoVillage={'village': village };
 
-                        $.ajax({
-                            type: "POST",
-                            url: "Services/AddArea.asmx/InsertVillage",
-                            contentType: 'application/json; charset=utf-8',
-                            dataType: 'json',async: false,
-                            data: JSON.stringify(dtoVillage),
-                            success: function (response) {
-                                forestArea.VillageId = response.d;// Assign added villageId to forest Area.
-                            },
-                            error: function (response) {
-                                console.log(response);
-                            }
-                        }).done(function () {});
+                $.ajax({
+                    type: "POST",
+                    url: "Services/AddArea.asmx/InsertVillage",
+                    contentType: 'application/json; charset=utf-8',
+                    dataType: 'json',async: false,
+                    data: JSON.stringify(dtoVillage),
+                    success: function (response) {
+                        forestArea.VillageId = response.d;// Assign added villageId to forest Area.
+                    },
+                    error: function (response) {
+                        console.log(response);
                     }
+                }).done(function () {});
+            }
                         //---------------------------------------------------------------//
-                    var DTO = { 'forestArea': forestArea, 'forestCoordinates': json.forestCoordinates};
-                    $.ajax({
-                        type: "POST",
+            var DTO = { 'forestArea': forestArea, 'forestCoordinates': json.forestCoordinates};
+            $.ajax({
+                type: "POST",
                         <%if (Request["Code"] != null)
         { %>url: "Services/AddArea.asmx/UpdateArea",<%} %>
                         <%else
@@ -1279,7 +1279,7 @@
                         error: function (response) {
                             console.log(response);
                         }
-                    }).done(function () {
+                    }).done(function (response) {console.log(response);
                      <%if (Request["Code"] == null)
         { %>
                         alert("Data saved successfully.");<%} %>
