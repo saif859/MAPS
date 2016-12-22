@@ -1,4 +1,4 @@
-﻿<%@ Page Title="सेक्शन" Language="C#" MasterPageFile="~/Masters/Site1.Master" AutoEventWireup="true"
+﻿<%@ Page Title="Section" Language="C#" MasterPageFile="~/Masters/Site1.Master" AutoEventWireup="true"
     CodeBehind="SectionMaster.aspx.cs" Inherits="MAPS.Masters.SectionMaster" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
@@ -7,7 +7,7 @@
     <!--main Section-->
     <div class="mainSection">
         <h1>
-            <span class="heading">सेक्शन</span></h1>
+            <span class="heading">Section</span></h1>
         <div class="butLink01">
             <a href="SectionMasterNew.aspx" class="button">Create </a>
         </div>
@@ -35,15 +35,15 @@
                             </asp:TemplateField>
                             <asp:TemplateField Visible="false">
                                 <ItemTemplate>
-                                    <asp:Label ID="lblId" runat="server" Text='<%# Eval("Id") %>'></asp:Label>
+                                    <asp:Label ID="lblId" runat="server" Text='<%# Eval("RASST_ID") %>'></asp:Label>
                                 </ItemTemplate>
                             </asp:TemplateField>
-                            <asp:BoundField DataField="SectionName" HeaderText="Name"></asp:BoundField>
-                            <asp:BoundField DataField="RangeName" HeaderText="Range Name"></asp:BoundField>
+                            <asp:BoundField DataField="RANGEASST_ENAME" HeaderText="Name"></asp:BoundField>
+                            <asp:BoundField DataField="Range_EName" HeaderText="Range Name"></asp:BoundField>
                             <%--                            <asp:BoundField DataField="ZoneName" HeaderText="Zone"></asp:BoundField>
                             --%>
-                            <asp:BoundField DataField="OfficerName" HeaderText="Officer Name"></asp:BoundField>
-                            <asp:BoundField DataField="MobileNo" HeaderText="MobileNo"></asp:BoundField>
+<%--                            <asp:BoundField DataField="OfficerName" HeaderText="Officer Name"></asp:BoundField>
+--%>                            <asp:BoundField DataField="MobileNo" HeaderText="MobileNo"></asp:BoundField>
                             <asp:BoundField DataField="STD" HeaderText="STD"></asp:BoundField>
                             <asp:BoundField DataField="PhoneNo" HeaderText="PhoneNo"></asp:BoundField>
                             <asp:BoundField DataField="FaxNo" HeaderText="FaxNo"></asp:BoundField>

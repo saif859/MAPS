@@ -169,7 +169,7 @@ input.error, select.error, textarea.error
 .UpdateProgressModalBackground
 {
     z-index: 99999998;
-    background-color: black;
+    background-color: #FFF;
     position: fixed;
     top: 0;
     left: 0;

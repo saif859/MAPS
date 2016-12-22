@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+  <Document id="Document">
+    <name>Document</name>
+    <Placemark>
+      <name>Bhagwanpur Forest Block</name>
+      <Polygon>
+        <extrude>true</extrude>
+        <altitudeMode>clampToGround</altitudeMode>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>78.080356,28.896358,0
+78.079388,28.897728,0
+78.078912,28.899038,0
+78.079123,28.90031,0
+78.081233,28.90056,0
+78.082913,28.900758,0
+78.082637,28.902552,0
+78.082378,28.904228,0
+78.080723,28.904007,0
+78.079158,28.905013,0
+78.077777,28.905902,0
+78.076262,28.906877,0
+78.076815,28.906945,0
+78.076815,28.907162,0
+78.076815,28.910527,0
+78.080925,28.910905,0
+78.083935,28.908532,0
+78.087683,28.905012,0
+78.086858,28.903593,0
+78.086363,28.902403,0
+78.085792,28.90095,0
+78.085355,28.899838,0
+78.085232,28.898603,0
+78.08399,28.897367,0
+78.082695,28.896075,0
+78.08153,28.89418,0</coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+      <Style>
+        <PolyStyle>
+          <color>64969696</color>
+          <colorMode>normal</colorMode>
+        </PolyStyle>
+      </Style>
+    </Placemark>
+  </Document>
+</kml>

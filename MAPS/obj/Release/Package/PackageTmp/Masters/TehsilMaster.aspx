@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Tehsils" Language="C#" MasterPageFile="~/Masters/Site1.Master" AutoEventWireup="true"
+﻿<%@ Page Title="Tehsil" Language="C#" MasterPageFile="~/Masters/Site1.Master" AutoEventWireup="true"
     CodeBehind="TehsilMaster.aspx.cs" Inherits="MAPS.Masters.TehsilMaster" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
@@ -6,7 +6,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="mainSection">
         <h1 style="padding-top: 10px;">
-            <span class="heading">तहसील</span></h1>
+            <span class="heading">Tehsil</span></h1>
         <div class="butLink01">
         </div>
         <div class="butLink02">
@@ -19,18 +19,18 @@
             <asp:UpdatePanel ID="UpdatePanel1" runat="server">
                 <ContentTemplate>
                     <asp:GridView ID="GridView1" runat="server" Width="100%" AutoGenerateColumns="False"
-                        ShowFooter="True" OnRowDeleting="GridView1_RowDeleting" OnRowEditing="GridView1_RowEditing"
-                        OnRowUpdating="GridView1_RowUpdating" OnRowCancelingEdit="GridView1_RowCancelingEdit">
+                        AllowPaging="true" PageSize="100" ShowFooter="True" OnRowDeleting="GridView1_RowDeleting" OnPageIndexChanging="GridView1_PageIndexChanging"
+                        OnRowEditing="GridView1_RowEditing" OnRowUpdating="GridView1_RowUpdating" OnRowCancelingEdit="GridView1_RowCancelingEdit">
                         <AlternatingRowStyle CssClass="alt" />
                         <FooterStyle Font-Bold="true" CssClass="selected" />
                         <Columns>
-                            <asp:TemplateField HeaderText="Sr. No.">
+                            <asp:TemplateField HeaderText="क्र० स०">
                                 <ItemTemplate>
                                     <%#Container.DataItemIndex+1 %>
                                 </ItemTemplate>
                                 <ItemStyle HorizontalAlign="Left" Width="50px" />
                             </asp:TemplateField>
-                            <asp:TemplateField HeaderText="Name" SortExpression="Name">
+                            <asp:TemplateField HeaderText="Tehsil Name" SortExpression="Name">
                                 <ItemTemplate>
                                     <asp:HiddenField ID="lblId" runat="server" Value='<%# Eval("Id") %>'></asp:HiddenField>
                                     <asp:Label ID="lblName" runat="server" Text='<%# Eval("TehsilName") %>'></asp:Label>
@@ -89,7 +89,7 @@
                                 border-color: #DEDFDE; border-width: 0px; width: 100%;">
                                 <tr>
                                     <th scope="col">
-                                        <a href="#">Name</a>
+                                        <a href="#">Tehsil Name</a>
                                     </th>
                                     <th scope="col">
                                         <a href="#">District</a>

@@ -1,4 +1,4 @@
-﻿<%@ Page Title="सेक्शन" Language="C#" MasterPageFile="~/Masters/Site1.Master" AutoEventWireup="true"
+﻿<%@ Page Title="Section" Language="C#" MasterPageFile="~/Masters/Site1.Master" AutoEventWireup="true"
     CodeBehind="SectionMasterNew.aspx.cs" Inherits="MAPS.Masters.SectionMasterNew" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
@@ -95,7 +95,7 @@
                 <ContentTemplate>
                     <div class="perp_sheet perp_sheet_width">
                         <h1>
-                            <span style="color: #06F;">सेक्शन</span><span class="sa_fade">/ </span><span class="sa_breadcrumb_item">
+                            <span style="color: #06F;">Section</span><span class="sa_fade">/ </span><span class="sa_breadcrumb_item">
                                 <%if (Request["Code"] == null)
                                   { %>New<%}
                                   else
@@ -145,14 +145,23 @@
                                     </td>
                                     <td class="perp_group_cell">
                                         <span class="perp_field perp_field_char">
-                                            <asp:DropDownList ID="ddlDivision" runat="server" AutoPostBack="True" 
-                                            onselectedindexchanged="ddlDivision_SelectedIndexChanged">
+                                            <asp:DropDownList ID="ddlDivision" runat="server" AutoPostBack="True" OnSelectedIndexChanged="ddlDivision_SelectedIndexChanged">
                                             </asp:DropDownList>
                                         </span>
                                     </td>
                                 </tr>
                                 <tr class="perp_group_row">
                                     <td class="perp_group_cell perp_group_cell_label">
+                                        <label for="" class=" perp_label sa_text_right">
+                                            Sub Division
+                                        </label>
+                                    </td>
+                                    <td class="perp_group_cell">
+                                        <span class="perp_field perp_field_char">
+                                            <asp:DropDownList ID="ddlSubDivision" runat="server" AutoPostBack="True" OnSelectedIndexChanged="ddlSubDivision_SelectedIndexChanged">
+                                            </asp:DropDownList>
+                                        </span>
+                                    </td><td class="perp_group_cell perp_group_cell_label">
                                         <label class=" perp_label sa_text_right" for="">
                                             Range
                                         </label>
@@ -163,16 +172,7 @@
                                             </asp:DropDownList>
                                         </span>
                                     </td>
-                                    <td class="perp_group_cell perp_group_cell_label">
-                                        <label for="" class=" perp_label sa_text_right">
-                                            Officer Name
-                                        </label>
-                                    </td>
-                                    <td class="perp_group_cell">
-                                        <span class="perp_field perp_field_char">
-                                            <asp:TextBox ID="txtOfficerName" runat="server" MaxLength="250" Width="120px"></asp:TextBox>
-                                        </span>
-                                    </td>
+                                    
                                 </tr>
                                 <tr class="perp_group_row">
                                     <td class="perp_group_cell perp_group_cell_label">
@@ -206,6 +206,16 @@
                                     <td class="perp_group_cell">
                                         <span class="perp_field perp_field_char">
                                             <asp:TextBox ID="txtMobile" runat="server" MaxLength="10" onkeypress="return OnlyNumber(event);"></asp:TextBox>
+                                        </span>
+                                    </td>
+                                    <td class="perp_group_cell perp_group_cell_label">
+                                        <label for="" class=" perp_label sa_text_right">
+                                            Officer Name
+                                        </label>
+                                    </td>
+                                    <td class="perp_group_cell">
+                                        <span class="perp_field perp_field_char">
+                                            <asp:TextBox ID="txtOfficerName" runat="server" MaxLength="250" Width="120px"></asp:TextBox>
                                         </span>
                                     </td>
                                 </tr>

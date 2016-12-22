@@ -1,4 +1,4 @@
-﻿<%@ Page Title="ब्लाक" Language="C#" MasterPageFile="~/Masters/Site1.Master" AutoEventWireup="true"
+﻿<%@ Page Title="Block" Language="C#" MasterPageFile="~/Masters/Site1.Master" AutoEventWireup="true"
     CodeBehind="BlockMasterNew.aspx.cs" Inherits="MAPS.Masters.BlockMasterNew" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
@@ -95,7 +95,7 @@
                 <ContentTemplate>
                     <div class="perp_sheet perp_sheet_width">
                         <h1>
-                            <span style="color: #06F;">ब्लाक</span><span class="sa_fade">/ </span><span class="sa_breadcrumb_item">
+                            <span style="color: #06F;">Block</span><span class="sa_fade">/ </span><span class="sa_breadcrumb_item">
                                 <%if (Request["Code"] == null)
                                   { %>New<%}
                                   else
@@ -152,17 +152,29 @@
                                 </tr>
                                 <tr class="perp_group_row">
                                     <td class="perp_group_cell perp_group_cell_label">
+                                        <label for="" class=" perp_label sa_text_right">
+                                            Sub Division
+                                        </label>
+                                    </td>
+                                    <td class="perp_group_cell">
+                                        <span class="perp_field perp_field_char">
+                                            <asp:DropDownList ID="ddlSubDivision" runat="server" AutoPostBack="True" OnSelectedIndexChanged="ddlSubDivision_SelectedIndexChanged">
+                                            </asp:DropDownList>
+                                        </span>
+                                    </td>
+                                    <td class="perp_group_cell perp_group_cell_label">
                                         <label class=" perp_label sa_text_right" for="">
                                             Range
                                         </label>
                                     </td>
                                     <td class="perp_group_cell">
                                         <span class="perp_field perp_field_char">
-                                            <asp:DropDownList ID="ddlRange" runat="server" AutoPostBack="True" 
-                                            onselectedindexchanged="ddlRange_SelectedIndexChanged">
+                                            <asp:DropDownList ID="ddlRange" runat="server" AutoPostBack="True" OnSelectedIndexChanged="ddlRange_SelectedIndexChanged">
                                             </asp:DropDownList>
                                         </span>
                                     </td>
+                                </tr>
+                                <tr class="perp_group_row">
                                     <td class="perp_group_cell perp_group_cell_label">
                                         <label class=" perp_label sa_text_right" for="">
                                             Section
@@ -170,7 +182,18 @@
                                     </td>
                                     <td class="perp_group_cell">
                                         <span class="perp_field perp_field_char">
-                                            <asp:DropDownList ID="ddlSection" runat="server">
+                                            <asp:DropDownList ID="ddlSection" runat="server" AutoPostBack="True" OnSelectedIndexChanged="ddlSection_SelectedIndexChanged">
+                                            </asp:DropDownList>
+                                        </span>
+                                    </td>
+                                    <td class="perp_group_cell perp_group_cell_label">
+                                        <label class=" perp_label sa_text_right" for="">
+                                            Beat
+                                        </label>
+                                    </td>
+                                    <td class="perp_group_cell">
+                                        <span class="perp_field perp_field_char">
+                                            <asp:DropDownList ID="ddlBeat" runat="server">
                                             </asp:DropDownList>
                                         </span>
                                     </td>

@@ -1,4 +1,4 @@
-﻿<%@ Page Title="रेंज" Language="C#" MasterPageFile="~/Masters/Site1.Master" AutoEventWireup="true"
+﻿<%@ Page Title="Range" Language="C#" MasterPageFile="~/Masters/Site1.Master" AutoEventWireup="true"
     CodeBehind="RangeMasterNew.aspx.cs" Inherits="MAPS.Masters.RangeMasterNew" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
@@ -95,7 +95,7 @@
                 <ContentTemplate>
                     <div class="perp_sheet perp_sheet_width">
                         <h1>
-                            <span style="color: #06F;">रेंज</span><span class="sa_fade">/ </span><span class="sa_breadcrumb_item">
+                            <span style="color: #06F;">Range</span><span class="sa_fade">/ </span><span class="sa_breadcrumb_item">
                                 <%if (Request["Code"] == null)
                                   { %>New<%}
                                   else
@@ -134,8 +134,7 @@
                                     </td>
                                     <td class="perp_group_cell">
                                         <span class="perp_field perp_field_char">
-                                            <asp:DropDownList ID="ddlCircle" runat="server" AutoPostBack="True" 
-                                            onselectedindexchanged="ddlCircle_SelectedIndexChanged">
+                                            <asp:DropDownList ID="ddlCircle" runat="server" AutoPostBack="True" OnSelectedIndexChanged="ddlCircle_SelectedIndexChanged">
                                             </asp:DropDownList>
                                         </span>
                                     </td>
@@ -146,10 +145,27 @@
                                     </td>
                                     <td class="perp_group_cell">
                                         <span class="perp_field perp_field_char">
-                                            <asp:DropDownList ID="ddlDivision" runat="server">
+                                            <asp:DropDownList ID="ddlDivision" runat="server" AutoPostBack="True" OnSelectedIndexChanged="ddlDivision_SelectedIndexChanged">
                                             </asp:DropDownList>
                                         </span>
                                     </td>
+                                </tr>
+                                <tr class="perp_group_row">
+                                    <td class="perp_group_cell perp_group_cell_label">
+                                        <label for="" class=" perp_label sa_text_right">
+                                            Sub Division
+                                        </label>
+                                    </td>
+                                    <td class="perp_group_cell">
+                                        <span class="perp_field perp_field_char">
+                                            <asp:DropDownList ID="ddlSubDivision" runat="server">
+                                            </asp:DropDownList>
+                                        </span>
+                                    </td>
+                                    <td class="perp_group_cell perp_group_cell_label">
+                                        &nbsp;</td>
+                                    <td class="perp_group_cell">
+                                        &nbsp;</td>
                                 </tr>
                                 <tr class="perp_group_row">
                                     <td class="perp_group_cell perp_group_cell_label">

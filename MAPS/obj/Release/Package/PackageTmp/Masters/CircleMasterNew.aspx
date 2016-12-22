@@ -1,4 +1,4 @@
-﻿<%@ Page Title="मंडल" Language="C#" MasterPageFile="~/Masters/Site1.Master" AutoEventWireup="true"
+﻿<%@ Page Title="Circle" Language="C#" MasterPageFile="~/Masters/Site1.Master" AutoEventWireup="true"
     CodeBehind="CircleMasterNew.aspx.cs" Inherits="MAPS.Masters.CircleMasterNew" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
@@ -95,7 +95,7 @@
                 <ContentTemplate>
                     <div class="perp_sheet perp_sheet_width">
                         <h1>
-                            <span style="color: #06F;">मंडल</span><span class="sa_fade">/ </span><span class="sa_breadcrumb_item">
+                            <span style="color: #06F;">Circle</span><span class="sa_fade">/ </span><span class="sa_breadcrumb_item">
                                 <%if (Request["Code"] == null)
                                   { %>New<%}
                                   else

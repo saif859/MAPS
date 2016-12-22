@@ -1,4 +1,4 @@
-﻿<%@ Page Title="ज़ोन" Language="C#" MasterPageFile="~/Masters/Site1.Master" AutoEventWireup="true"
+﻿<%@ Page Title="Zone" Language="C#" MasterPageFile="~/Masters/Site1.Master" AutoEventWireup="true"
     CodeBehind="ZoneMaster.aspx.cs" Inherits="MAPS.Masters.ZoneMaster" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
@@ -7,7 +7,7 @@
     <!--main Section-->
     <div class="mainSection">
         <h1>
-            <span class="heading">ज़ोन</span></h1>
+            <span class="heading">Zone</span></h1>
         <div class="butLink01">
             <a href="ZoneMasterNew.aspx" class="button">Create </a>
         </div>
@@ -35,15 +35,10 @@
                             </asp:TemplateField>
                             <asp:TemplateField Visible="false">
                                 <ItemTemplate>
-                                    <asp:Label ID="lblId" runat="server" Text='<%# Eval("Id") %>'></asp:Label>
+                                    <asp:Label ID="lblId" runat="server" Text='<%# Eval("Wing_Id") %>'></asp:Label>
                                 </ItemTemplate>
                             </asp:TemplateField>
-                            <asp:BoundField DataField="ZoneName" HeaderText="Name"></asp:BoundField>
-                            <asp:BoundField DataField="OfficerName" HeaderText="Officer Name"></asp:BoundField>
-                            <asp:BoundField DataField="MobileNo" HeaderText="MobileNo"></asp:BoundField>
-                            <asp:BoundField DataField="STD" HeaderText="STD"></asp:BoundField>
-                            <asp:BoundField DataField="PhoneNo" HeaderText="PhoneNo"></asp:BoundField>
-                            <asp:BoundField DataField="FaxNo" HeaderText="FaxNo"></asp:BoundField>
+                            <asp:BoundField DataField="Description" HeaderText="Name"></asp:BoundField>
                             <asp:CommandField EditText="&lt;img src='../images/btn_iconEdit.gif' alt='Edit' border='0' /&gt;"
                                 HeaderText="Edit" ShowEditButton="True">
                                 <ItemStyle Width="10px" HorizontalAlign="Center" />

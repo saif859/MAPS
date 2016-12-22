@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Districts" Language="C#" MasterPageFile="~/Masters/Site1.Master"
+﻿<%@ Page Title="District" Language="C#" MasterPageFile="~/Masters/Site1.Master"
     AutoEventWireup="true" CodeBehind="DistrictMaster.aspx.cs" Inherits="MAPS.Masters.DistrictMaster" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
@@ -6,7 +6,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="mainSection">
         <h1 style="padding-top: 10px;">
-            <span class="heading">ज़िला</span></h1>
+            <span class="heading">District</span></h1>
         <div class="butLink01">
         </div>
         <div class="butLink02">
@@ -30,7 +30,7 @@
                                 </ItemTemplate>
                                 <ItemStyle HorizontalAlign="Left" Width="50px" />
                             </asp:TemplateField>
-                            <asp:TemplateField HeaderText="Name" SortExpression="Name">
+                            <asp:TemplateField HeaderText="District Name" SortExpression="Name">
                                 <ItemTemplate>
                                     <asp:HiddenField ID="lblId" runat="server" Value='<%# Eval("Id") %>'></asp:HiddenField>
                                     <asp:Label ID="lblName" runat="server" Text='<%# Eval("DistrictName") %>'></asp:Label>
@@ -73,10 +73,10 @@
                                 border-color: #DEDFDE; border-width: 0px; width: 100%;">
                                 <tr>
                                     <th scope="col">
-                                        <a href="#">Name</a>
+                                        <a href="#">ज़िला का नाम</a>
                                     </th>
                                     <th scope="col">
-                                        <a href="#">Action</a>
+                                        <a href="#">एक्शन</a>
                                     </th>
                                 </tr>
                                 <tr class="selected">

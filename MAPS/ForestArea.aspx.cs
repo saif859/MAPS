@@ -40,9 +40,9 @@ namespace MAPS
 
                 if (((MAPS.LoginMaster)Session["User"]).DistrictId == null)
                 {
-                    GridView1.Columns[8].Visible = false;
-                    GridView1.Columns[10].Visible = false;
-                    GridView1.Columns[12].Visible = false;
+                    GridView1.Columns[9].Visible = false;
+                    GridView1.Columns[11].Visible = false;
+                    GridView1.Columns[13].Visible = false;
                 }
             }
         }
@@ -90,8 +90,10 @@ namespace MAPS
                                  BeatId = b.Block.SectionId,
                                  SectionId = b.Block.mBEAT.RASST_ID,
                                  RangeId = b.Block.mBEAT.mRA.RANGE_ID,
+                                 RangeName = b.Block.mBEAT.mRA.mRANGE.RANGE_ENAME,
                                  SubDivisionId = b.Block.mBEAT.mRA.mRANGE.SUBDIV_ID,
                                  DivisionId = b.Block.mBEAT.mRA.mRANGE.mSUBDIV.DIV_ID,
+                                 DivisionName = b.Block.mBEAT.mRA.mRANGE.mSUBDIV.mDIVISION.DIV_ENAME,
                                  CircleId = b.Block.mBEAT.mRA.mRANGE.mSUBDIV.mDIVISION.CIRCLE_ID,
                                  ZoneId = b.Block.mBEAT.mRA.mRANGE.mSUBDIV.mDIVISION.mCIRCLE.WING_ID,
                                  b.VillageId,
@@ -111,7 +113,9 @@ namespace MAPS
                                  i.BeatId,
                                  i.SectionId,
                                  i.RangeId,
+                                 i.RangeName,
                                  i.DivisionId,
+                                 i.DivisionName,
                                  i.SubDivisionId,
                                  i.CircleId,
                                  i.ZoneId,
@@ -182,7 +186,7 @@ namespace MAPS
                 total = query.Count();
 
                 //Bind Data to Gridview
-                GridView1.DataSource = query.ToList();
+                GridView1.DataSource = query.OrderBy(i => i.DivisionName).ToList();
                 GridView1.DataBind();
             }
         }
@@ -215,9 +219,9 @@ namespace MAPS
         {
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
-                LinkButton ib = (LinkButton)e.Row.Cells[8].Controls[0];
+                ImageButton ib = (ImageButton)e.Row.FindControl("imgEdit");
                 HiddenField lblid = (HiddenField)e.Row.FindControl("lblId");
-                ib.Attributes.Add("href", "ForestAreaNew.aspx?Code=" + lblid.Value + "");
+                ib.PostBackUrl = "ForestAreaNew.aspx?Code=" + lblid.Value + "";
             }
             if (e.Row.RowType == DataControlRowType.Footer)
             {
@@ -425,6 +429,31 @@ namespace MAPS
             GridViewRow gr = (GridViewRow)img.NamingContainer;
             HiddenField hf = (HiddenField)gr.FindControl("lblId");
             Response.Redirect("ForestAreaView.aspx?Code=" + hf.Value + "");
+        }
+
+        protected void imgDelete_click(object sender, ImageClickEventArgs e)
+        {
+            ImageButton img = (ImageButton)sender;
+            GridViewRow gr = (GridViewRow)img.NamingContainer;
+            HiddenField hf = (HiddenField)gr.FindControl("lblId");
+
+            try
+            {
+                faMethods.Delete(Convert.ToInt32(hf.Value));
+                BindGrid();
+                js.ShowAlert(this, "Record deleted successfully!");
+            }
+            catch (Exception ex)
+            {
+                if (ex.InnerException.Message.Contains("REFERENCE"))
+                {
+                    js.ShowAlert(this, "Record in use!");
+                }
+                else
+                {
+                    js.ShowAlert(this, ex.Message);
+                }
+            }
         }
     }
 }

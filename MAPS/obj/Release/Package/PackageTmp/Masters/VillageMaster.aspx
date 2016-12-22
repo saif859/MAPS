@@ -1,4 +1,4 @@
-﻿<%@ Page Title="ग्राम" Language="C#" MasterPageFile="~/Masters/Site1.Master" AutoEventWireup="true"
+﻿<%@ Page Title="Village" Language="C#" MasterPageFile="~/Masters/Site1.Master" AutoEventWireup="true"
     CodeBehind="VillageMaster.aspx.cs" Inherits="MAPS.Masters.VillageMaster" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
@@ -6,7 +6,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="mainSection">
         <h1 style="padding-top: 10px;">
-            <span class="heading">ग्राम</span></h1>
+            <span class="heading">Village</span></h1>
         <div class="butLink01">
         </div>
         <div class="butLink02">
@@ -21,7 +21,7 @@
                     <asp:GridView ID="GridView1" runat="server" Width="100%" AutoGenerateColumns="False"
                         ShowFooter="True" OnRowDeleting="GridView1_RowDeleting" OnRowEditing="GridView1_RowEditing"
                         OnRowUpdating="GridView1_RowUpdating" OnRowCancelingEdit="GridView1_RowCancelingEdit"
-                        OnRowDataBound="GridView1_RowDataBound">
+                        OnRowDataBound="GridView1_RowDataBound" AllowPaging="true" PageSize="100" OnPageIndexChanging="GridView1_PageIndexChanging">
                         <AlternatingRowStyle CssClass="alt" />
                         <FooterStyle Font-Bold="true" CssClass="selected" />
                         <Columns>
@@ -31,7 +31,7 @@
                                 </ItemTemplate>
                                 <ItemStyle HorizontalAlign="Left" Width="50px" />
                             </asp:TemplateField>
-                            <asp:TemplateField HeaderText="Name" SortExpression="Name">
+                            <asp:TemplateField HeaderText="Village Name" SortExpression="Name">
                                 <ItemTemplate>
                                     <asp:HiddenField ID="lblId" runat="server" Value='<%# Eval("Id") %>'></asp:HiddenField>
                                     <asp:Label ID="lblName" runat="server" Text='<%# Eval("VillageName") %>'></asp:Label>
@@ -108,7 +108,7 @@
                                 border-color: #DEDFDE; border-width: 0px; width: 100%;">
                                 <tr>
                                     <th scope="col">
-                                        <a href="#">Name</a>
+                                        <a href="#">Village Name</a>
                                     </th>
                                     <th scope="col">
                                         <a href="#">District</a>

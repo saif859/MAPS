@@ -241,7 +241,7 @@ a.list-group-item:hover, a.list-group-item:focus
     border-top: 1px solid #DDDDDD;
     line-height: 1.42857;
     padding: 8px;
-    vertical-align: top;
+    vertical-align: middle;
     font-size: 13px;
 }
 
@@ -318,3 +318,4 @@ a.list-group-item:hover, a.list-group-item:focus
 {
     text-align: right;
 }
+.bearings,.distance{width:65px;}

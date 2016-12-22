@@ -47,6 +47,8 @@ namespace MAPS
             lblBlock.Text = ds.Tables[0].Rows[0]["BlockName"].ToString();
             lblVillage.Text = ds.Tables[0].Rows[0]["VillageName"].ToString();
             txtNoPillar.Text = ds.Tables[0].Rows[0]["NumberOfPillars"].ToString();
+            lblCircle.Text = ds.Tables[0].Rows[0]["CIRCLE_ENAME"].ToString();
+            lblDivision.Text = ds.Tables[0].Rows[0]["DIV_ENAME"].ToString();
 
         }
 
@@ -171,7 +173,7 @@ namespace MAPS
 
                 //Set the polygon and style to the Placemark:
                 Placemark placemark = new Placemark();
-                placemark.Name = "Kukrail";
+                placemark.Name = ds.Tables[0].Rows[0]["ForestName"].ToString();
                 placemark.Geometry = polygon;
                 placemark.AddStyle(style);
 
@@ -182,15 +184,15 @@ namespace MAPS
                 kml.Feature = document;
 
                 KmlFile kmlFile = KmlFile.Create(kml, true);
-                if (File.Exists(Server.MapPath("~") + "MAP.kml"))
+                if (File.Exists(Server.MapPath("~/kml/") + "MAP" + id.ToString() + ".kml"))
                 {
-                    File.Delete(Server.MapPath("~") + "MAP.kml");
+                    File.Delete(Server.MapPath("~/kml/") + "MAP" + id.ToString() + ".kml");
                 }
-                using (var stream = System.IO.File.OpenWrite(Server.MapPath("~") + "MAP.kml"))
+                using (var stream = System.IO.File.OpenWrite(Server.MapPath("~/kml/") + "MAP" + id.ToString() + ".kml"))
                 {
                     kmlFile.Save(stream);
                 }
-
+                aKml.HRef = "/kml/MAP" + id.ToString() + ".kml";
             }
             catch (Exception exc)
             {

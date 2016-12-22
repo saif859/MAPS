@@ -1,4 +1,4 @@
-﻿<%@ Page Title="मंडल" Language="C#" MasterPageFile="~/Masters/Site1.Master" AutoEventWireup="true"
+﻿<%@ Page Title="Circle" Language="C#" MasterPageFile="~/Masters/Site1.Master" AutoEventWireup="true"
     CodeBehind="CircleMaster.aspx.cs" Inherits="MAPS.Masters.CircleMaster" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
@@ -7,7 +7,7 @@
     <!--main Section-->
     <div class="mainSection">
         <h1>
-            <span class="heading">मंडल</span></h1>
+            <span class="heading">Circle</span></h1>
         <div class="butLink01">
             <a href="CircleMasterNew.aspx" class="button">Create </a>
         </div>
@@ -35,11 +35,11 @@
                             </asp:TemplateField>
                             <asp:TemplateField Visible="false">
                                 <ItemTemplate>
-                                    <asp:Label ID="lblId" runat="server" Text='<%# Eval("Id") %>'></asp:Label>
+                                    <asp:Label ID="lblId" runat="server" Text='<%# Eval("Circle_Id") %>'></asp:Label>
                                 </ItemTemplate>
                             </asp:TemplateField>
-                            <asp:BoundField DataField="CircleName" HeaderText="Name"></asp:BoundField>
-                            <asp:BoundField DataField="ZoneName" HeaderText="Zone"></asp:BoundField>
+                            <asp:BoundField DataField="Circle_EName" HeaderText="Name"></asp:BoundField>
+                            <asp:BoundField DataField="Description" HeaderText="Zone"></asp:BoundField>
                             <asp:BoundField DataField="OfficerName" HeaderText="Officer Name"></asp:BoundField>
                             <asp:BoundField DataField="MobileNo" HeaderText="MobileNo"></asp:BoundField>
                             <asp:BoundField DataField="STD" HeaderText="STD"></asp:BoundField>

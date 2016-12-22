@@ -185,21 +185,23 @@
                                 <Columns>
                                     <asp:TemplateField HeaderText="क्र० स०">
                                         <ItemTemplate>
-                                            <%#Container.DataItemIndex+1 %><asp:HiddenField ID="lblId" runat="server" Value='<%# Eval("id") %>'>
-                                            </asp:HiddenField>
+                                            <%#Container.DataItemIndex+1 %><asp:HiddenField ID="lblId" runat="server" Value='<%# Eval("id") %>'></asp:HiddenField>
                                         </ItemTemplate>
                                         <FooterTemplate>
-                                            <b>स०</b></FooterTemplate>
+                                            <b>स०</b>
+                                        </FooterTemplate>
                                         <HeaderStyle HorizontalAlign="Center" Width="50px" />
                                     </asp:TemplateField>
-                                    <asp:TemplateField HeaderText="वन प्रकार">
+                                    <asp:TemplateField HeaderText="वन प्रभाग">
                                         <ItemTemplate>
-                                            <%#Eval("ForestType").ToString() == "R" ? "Reserved" : (Eval("ForestType").ToString() == "U" ? "UnReserved" : (Eval("ForestType").ToString() == "C" ? "Cadastral" : "Other"))%>
+                                            <%#Eval("DivisionName")%>
                                         </ItemTemplate>
                                         <FooterTemplate>
                                             <b>
-                                                <asp:Label ID="lblTotal" runat="server"></asp:Label></b></FooterTemplate>
+                                                <asp:Label ID="lblTotal" runat="server"></asp:Label></b>
+                                        </FooterTemplate>
                                     </asp:TemplateField>
+                                    <asp:BoundField DataField="RangeName" HeaderText="रेंज"></asp:BoundField>
                                     <asp:BoundField DataField="BlockName" HeaderText="ब्लॉक"></asp:BoundField>
                                     <asp:BoundField DataField="VillageName" HeaderText="ग्राम"></asp:BoundField>
                                     <asp:BoundField DataField="ForestName" HeaderText="वन नाम"></asp:BoundField>
@@ -212,14 +214,21 @@
                                         </ItemTemplate>
                                         <FooterTemplate>
                                             <b>
-                                                <asp:Label ID="lblTotalArea" runat="server"></asp:Label></b></FooterTemplate>
+                                                <asp:Label ID="lblTotalArea" runat="server"></asp:Label></b>
+                                        </FooterTemplate>
                                     </asp:TemplateField>
-                                    <asp:BoundField DataField="AreaInGazette" HeaderText="गैज़ेट में क्षेत्रफल" ItemStyle-HorizontalAlign="Right">
-                                    </asp:BoundField>
-                                    <asp:CommandField EditText="&lt;img src='images/btn_iconEdit.gif' alt='Edit' border='0' /&gt;"
+                                    <asp:BoundField DataField="AreaInGazette" HeaderText="गैज़ेट में क्षेत्रफल" ItemStyle-HorizontalAlign="Right"></asp:BoundField>
+                                    <%--<asp:CommandField EditText="&lt;img src='images/btn_iconEdit.gif' alt='Edit' border='0' /&gt;"
                                         HeaderText="संपादित करें" ShowEditButton="True">
                                         <ItemStyle Width="10px" HorizontalAlign="Center" />
-                                    </asp:CommandField>
+                                    </asp:CommandField>--%>
+                                    <asp:TemplateField HeaderText="संपादित करें">
+                                        <ItemTemplate>
+                                            <asp:ImageButton ID="imgEdit" ImageUrl="~/images/btn_iconEdit.gif"
+                                                Style="border: 0" runat="server" Visible='<%# Convert.ToBoolean(((MAPS.LoginMaster)Session["User"]).DistrictId.ToString()== Eval("DivisionId").ToString()?"true":"false")%>' />
+                                        </ItemTemplate>
+                                        <ItemStyle Width="10px" HorizontalAlign="Center" />
+                                    </asp:TemplateField>
                                     <asp:TemplateField HeaderText="खम्भे विस्तार से देखें">
                                         <ItemTemplate>
                                             <asp:ImageButton ID="imgview" ImageUrl="~/images/btn_iconView.gif" OnClick="imgview_click"
@@ -229,7 +238,7 @@
                                     </asp:TemplateField>
                                     <asp:TemplateField HeaderText="गैज़ेट विस्तार से लिखें">
                                         <ItemTemplate>
-                                            <a href='GazetteDetail.aspx?Code=<%#Eval("Id") %>'>Enter</a>
+                                            <a href='GazetteDetail.aspx?Code=<%#Eval("Id") %>' style="display: <%# ((MAPS.LoginMaster)Session["User"]).DistrictId.ToString()== Eval("DivisionId").ToString()?"block":"none"%>">Enter</a>
                                         </ItemTemplate>
                                         <ItemStyle Width="10px" HorizontalAlign="Center" />
                                     </asp:TemplateField>
@@ -239,10 +248,17 @@
                                         </ItemTemplate>
                                         <ItemStyle Width="10px" HorizontalAlign="Center" />
                                     </asp:TemplateField>
-                                    <asp:CommandField DeleteText="&lt;img src='images/btn_iconDelete.gif' alt='Delete' border='0' /&gt;"
-                                        SelectText="हटाएं" ShowDeleteButton="True" HeaderText="हटाएं">
+                                    <%--<asp:CommandField DeleteText="&lt;img src='images/btn_iconDelete.gif' alt='Delete' border='0' /&gt;"
+                                        SelectText="हटाएं" ShowDeleteButton="True" HeaderText="हटाएं" Visible='<%# Convert.ToBoolean(((MAPS.LoginMaster)Session["User"]).DistrictId.ToString()== Eval("DivisionId").ToString()?"true":"false")%>'>
                                         <ItemStyle Width="10px" HorizontalAlign="Center" />
-                                    </asp:CommandField>
+                                    </asp:CommandField>--%>
+                                    <asp:TemplateField HeaderText="हटाएं">
+                                        <ItemTemplate>
+                                            <asp:ImageButton ID="imgDelete" ImageUrl="~/images/btn_iconDelete.gif" OnClick="imgDelete_click"
+                                                Style="border: 0" runat="server" Visible='<%# Convert.ToBoolean(((MAPS.LoginMaster)Session["User"]).DistrictId.ToString()== Eval("DivisionId").ToString()?"true":"false")%>' />
+                                        </ItemTemplate>
+                                        <ItemStyle Width="10px" HorizontalAlign="Center" />
+                                    </asp:TemplateField>
                                 </Columns>
                             </asp:GridView>
                         </div>

@@ -15,24 +15,18 @@
           <ScalarProperty Name="STD" ColumnName="STD" />
           <ScalarProperty Name="BlockName" ColumnName="BlockName" />
           <ScalarProperty Name="SectionId" ColumnName="SectionId" />
+          <ScalarProperty Name="RangeId" ColumnName="RangeId" />
           <ScalarProperty Name="Id" ColumnName="Id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Circles">
-      <EntityTypeMapping TypeName="MAPSModel.Circle">
-        <MappingFragment StoreEntitySet="Circle">
-          <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
-          <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
-          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-          <ScalarProperty Name="OfficerName" ColumnName="OfficerName" />
-          <ScalarProperty Name="FaxNo" ColumnName="FaxNo" />
-          <ScalarProperty Name="MobileNo" ColumnName="MobileNo" />
-          <ScalarProperty Name="PhoneNo" ColumnName="PhoneNo" />
-          <ScalarProperty Name="STD" ColumnName="STD" />
-          <ScalarProperty Name="CircleName" ColumnName="CircleName" />
-          <ScalarProperty Name="ZoneId" ColumnName="ZoneId" />
+    <EntitySetMapping Name="CadastralPoints">
+      <EntityTypeMapping TypeName="MAPSModel.CadastralPoint">
+        <MappingFragment StoreEntitySet="CadastralPoints">
+          <ScalarProperty Name="Longitude" ColumnName="Longitude" />
+          <ScalarProperty Name="Latitude" ColumnName="Latitude" />
+          <ScalarProperty Name="PillarNo" ColumnName="PillarNo" />
+          <ScalarProperty Name="ForestAreaId" ColumnName="ForestAreaId" />
           <ScalarProperty Name="Id" ColumnName="Id" />
         </MappingFragment>
       </EntityTypeMapping>
@@ -45,34 +39,28 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Divisions">
-      <EntityTypeMapping TypeName="MAPSModel.Division">
-        <MappingFragment StoreEntitySet="Division">
+    <EntitySetMapping Name="ForestAreas">
+      <EntityTypeMapping TypeName="MAPSModel.ForestArea">
+        <MappingFragment StoreEntitySet="ForestArea">
           <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
           <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
           <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
           <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-          <ScalarProperty Name="OfficerName" ColumnName="OfficerName" />
-          <ScalarProperty Name="FaxNo" ColumnName="FaxNo" />
-          <ScalarProperty Name="MobileNo" ColumnName="MobileNo" />
-          <ScalarProperty Name="PhoneNo" ColumnName="PhoneNo" />
-          <ScalarProperty Name="STD" ColumnName="STD" />
-          <ScalarProperty Name="DivisionName" ColumnName="DivisionName" />
-          <ScalarProperty Name="CircleId" ColumnName="CircleId" />
-          <ScalarProperty Name="Id" ColumnName="Id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="ForestAreas">
-      <EntityTypeMapping TypeName="MAPSModel.ForestArea">
-        <MappingFragment StoreEntitySet="ForestArea">
-          <ScalarProperty Name="ForestName" ColumnName="ForestName" />
+          <ScalarProperty Name="AreaInField" ColumnName="AreaInField" />
+          <ScalarProperty Name="CadastralPoints" ColumnName="CadastralPoints" />
+          <ScalarProperty Name="PagesInHindi" ColumnName="PagesInHindi" />
+          <ScalarProperty Name="PagesInEnglish" ColumnName="PagesInEnglish" />
+          <ScalarProperty Name="GazetteTitle" ColumnName="GazetteTitle" />
+          <ScalarProperty Name="GazetteAuthority" ColumnName="GazetteAuthority" />
           <ScalarProperty Name="GazetteNo" ColumnName="GazetteNo" />
           <ScalarProperty Name="GazetteDate" ColumnName="GazetteDate" />
           <ScalarProperty Name="AreaInGazette" ColumnName="AreaInGazette" />
+          <ScalarProperty Name="NotificationType" ColumnName="NotificationType" />
+          <ScalarProperty Name="NotificationNo" ColumnName="NotificationNo" />
           <ScalarProperty Name="AreaCalculated" ColumnName="AreaCalculated" />
           <ScalarProperty Name="isReferencePoint" ColumnName="isReferencePoint" />
           <ScalarProperty Name="NumberOfPillars" ColumnName="NumberOfPillars" />
+          <ScalarProperty Name="ForestName" ColumnName="ForestName" />
           <ScalarProperty Name="ForestType" ColumnName="ForestType" />
           <ScalarProperty Name="VillageId" ColumnName="VillageId" />
           <ScalarProperty Name="BlockId" ColumnName="BlockId" />
@@ -83,14 +71,27 @@
     <EntitySetMapping Name="ForestCoordinates">
       <EntityTypeMapping TypeName="MAPSModel.ForestCoordinate">
         <MappingFragment StoreEntitySet="ForestCoordinates">
-          <ScalarProperty Name="BearingDifference" ColumnName="BearingDifference" />
+          <ScalarProperty Name="LongitudeField" ColumnName="LongitudeField" />
+          <ScalarProperty Name="LatitudeField" ColumnName="LatitudeField" />
           <ScalarProperty Name="BackDistanceInChain" ColumnName="BackDistanceInChain" />
           <ScalarProperty Name="BackDistanceInMeter" ColumnName="BackDistanceInMeter" />
           <ScalarProperty Name="BackBearings" ColumnName="BackBearings" />
+          <ScalarProperty Name="BearingDifference" ColumnName="BearingDifference" />
           <ScalarProperty Name="ForwardBearings" ColumnName="ForwardBearings" />
           <ScalarProperty Name="Longitude" ColumnName="Longitude" />
           <ScalarProperty Name="Latitude" ColumnName="Latitude" />
           <ScalarProperty Name="PillarNo" ColumnName="PillarNo" />
+          <ScalarProperty Name="ForestAreaId" ColumnName="ForestAreaId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="GazetteDetails">
+      <EntityTypeMapping TypeName="MAPSModel.GazetteDetail">
+        <MappingFragment StoreEntitySet="GazetteDetail">
+          <ScalarProperty Name="Photo" ColumnName="Photo" />
+          <ScalarProperty Name="Language" ColumnName="Language" />
+          <ScalarProperty Name="PageNo" ColumnName="PageNo" />
           <ScalarProperty Name="ForestAreaId" ColumnName="ForestAreaId" />
           <ScalarProperty Name="Id" ColumnName="Id" />
         </MappingFragment>
@@ -107,39 +108,134 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Ranges">
-      <EntityTypeMapping TypeName="MAPSModel.Range">
-        <MappingFragment StoreEntitySet="Range">
-          <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
-          <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
-          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-          <ScalarProperty Name="OfficerName" ColumnName="OfficerName" />
-          <ScalarProperty Name="FaxNo" ColumnName="FaxNo" />
-          <ScalarProperty Name="MobileNo" ColumnName="MobileNo" />
-          <ScalarProperty Name="PhoneNo" ColumnName="PhoneNo" />
-          <ScalarProperty Name="STD" ColumnName="STD" />
-          <ScalarProperty Name="RangeName" ColumnName="RangeName" />
-          <ScalarProperty Name="DivisionId" ColumnName="DivisionId" />
-          <ScalarProperty Name="Id" ColumnName="Id" />
+    <EntitySetMapping Name="mBEATs">
+      <EntityTypeMapping TypeName="MAPSModel.mBEAT">
+        <MappingFragment StoreEntitySet="mBEAT">
+          <ScalarProperty Name="UpdateOn" ColumnName="UpdateOn" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="faxno" ColumnName="faxno" />
+          <ScalarProperty Name="Mobileno" ColumnName="Mobileno" />
+          <ScalarProperty Name="Phoneno" ColumnName="Phoneno" />
+          <ScalarProperty Name="Std" ColumnName="Std" />
+          <ScalarProperty Name="REMARK" ColumnName="REMARK" />
+          <ScalarProperty Name="MOBILE" ColumnName="MOBILE" />
+          <ScalarProperty Name="PHONE" ColumnName="PHONE" />
+          <ScalarProperty Name="HQUARTER" ColumnName="HQUARTER" />
+          <ScalarProperty Name="BEAT_HNAME" ColumnName="BEAT_HNAME" />
+          <ScalarProperty Name="BEAT_ENAME" ColumnName="BEAT_ENAME" />
+          <ScalarProperty Name="RASST_ID" ColumnName="RASST_ID" />
+          <ScalarProperty Name="BEAT_ID" ColumnName="BEAT_ID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Sections">
-      <EntityTypeMapping TypeName="MAPSModel.Section">
-        <MappingFragment StoreEntitySet="Section">
-          <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
-          <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
-          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-          <ScalarProperty Name="OfficerName" ColumnName="OfficerName" />
-          <ScalarProperty Name="FaxNo" ColumnName="FaxNo" />
-          <ScalarProperty Name="MobileNo" ColumnName="MobileNo" />
-          <ScalarProperty Name="PhoneNo" ColumnName="PhoneNo" />
-          <ScalarProperty Name="STD" ColumnName="STD" />
-          <ScalarProperty Name="SectionName" ColumnName="SectionName" />
-          <ScalarProperty Name="RangeId" ColumnName="RangeId" />
-          <ScalarProperty Name="Id" ColumnName="Id" />
+    <EntitySetMapping Name="mCIRCLEs">
+      <EntityTypeMapping TypeName="MAPSModel.mCIRCLE">
+        <MappingFragment StoreEntitySet="mCIRCLE">
+          <ScalarProperty Name="Lastupdatedon" ColumnName="Lastupdatedon" />
+          <ScalarProperty Name="officername" ColumnName="officername" />
+          <ScalarProperty Name="UpdateOn" ColumnName="UpdateOn" />
+          <ScalarProperty Name="REMARK" ColumnName="REMARK" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="faxno" ColumnName="faxno" />
+          <ScalarProperty Name="Mobileno" ColumnName="Mobileno" />
+          <ScalarProperty Name="Phoneno" ColumnName="Phoneno" />
+          <ScalarProperty Name="Std" ColumnName="Std" />
+          <ScalarProperty Name="CIRCLE_HNAME" ColumnName="CIRCLE_HNAME" />
+          <ScalarProperty Name="CIRCLE_ENAME" ColumnName="CIRCLE_ENAME" />
+          <ScalarProperty Name="WING_ID" ColumnName="WING_ID" />
+          <ScalarProperty Name="CIRCLE_ID" ColumnName="CIRCLE_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="mDIVISIONs">
+      <EntityTypeMapping TypeName="MAPSModel.mDIVISION">
+        <MappingFragment StoreEntitySet="mDIVISION">
+          <ScalarProperty Name="InstrumentModel" ColumnName="InstrumentModel" />
+          <ScalarProperty Name="NoOfInstrument" ColumnName="NoOfInstrument" />
+          <ScalarProperty Name="Lastupdatedon" ColumnName="Lastupdatedon" />
+          <ScalarProperty Name="officername" ColumnName="officername" />
+          <ScalarProperty Name="UpdateOn" ColumnName="UpdateOn" />
+          <ScalarProperty Name="REMARK" ColumnName="REMARK" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="faxno" ColumnName="faxno" />
+          <ScalarProperty Name="Mobileno" ColumnName="Mobileno" />
+          <ScalarProperty Name="Phoneno" ColumnName="Phoneno" />
+          <ScalarProperty Name="Std" ColumnName="Std" />
+          <ScalarProperty Name="District_Code" ColumnName="District_Code" />
+          <ScalarProperty Name="DIV_FORM_DATE" ColumnName="DIV_FORM_DATE" />
+          <ScalarProperty Name="DIV_TYPE" ColumnName="DIV_TYPE" />
+          <ScalarProperty Name="DIV_HNAME" ColumnName="DIV_HNAME" />
+          <ScalarProperty Name="DIV_ENAME" ColumnName="DIV_ENAME" />
+          <ScalarProperty Name="CIRCLE_ID" ColumnName="CIRCLE_ID" />
+          <ScalarProperty Name="DIV_ID" ColumnName="DIV_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="mRAs">
+      <EntityTypeMapping TypeName="MAPSModel.mRA">
+        <MappingFragment StoreEntitySet="mRA">
+          <ScalarProperty Name="UpdateOn" ColumnName="UpdateOn" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="faxno" ColumnName="faxno" />
+          <ScalarProperty Name="Mobileno" ColumnName="Mobileno" />
+          <ScalarProperty Name="Phoneno" ColumnName="Phoneno" />
+          <ScalarProperty Name="Std" ColumnName="Std" />
+          <ScalarProperty Name="RA_TYPE" ColumnName="RA_TYPE" />
+          <ScalarProperty Name="REMARK" ColumnName="REMARK" />
+          <ScalarProperty Name="RANGEASST_HNAME" ColumnName="RANGEASST_HNAME" />
+          <ScalarProperty Name="RANGEASST_ENAME" ColumnName="RANGEASST_ENAME" />
+          <ScalarProperty Name="RANGE_ID" ColumnName="RANGE_ID" />
+          <ScalarProperty Name="RASST_ID" ColumnName="RASST_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="mRANGEs">
+      <EntityTypeMapping TypeName="MAPSModel.mRANGE">
+        <MappingFragment StoreEntitySet="mRANGE">
+          <ScalarProperty Name="Lastupdatedon" ColumnName="Lastupdatedon" />
+          <ScalarProperty Name="officername" ColumnName="officername" />
+          <ScalarProperty Name="Div_id" ColumnName="Div_id" />
+          <ScalarProperty Name="UpdateOn" ColumnName="UpdateOn" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="faxno" ColumnName="faxno" />
+          <ScalarProperty Name="Mobileno" ColumnName="Mobileno" />
+          <ScalarProperty Name="Phoneno" ColumnName="Phoneno" />
+          <ScalarProperty Name="Std" ColumnName="Std" />
+          <ScalarProperty Name="REMARK" ColumnName="REMARK" />
+          <ScalarProperty Name="RANGE_TYPE" ColumnName="RANGE_TYPE" />
+          <ScalarProperty Name="RANGE_HNAME" ColumnName="RANGE_HNAME" />
+          <ScalarProperty Name="RANGE_ENAME" ColumnName="RANGE_ENAME" />
+          <ScalarProperty Name="SUBDIV_ID" ColumnName="SUBDIV_ID" />
+          <ScalarProperty Name="RANGE_ID" ColumnName="RANGE_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="mSUBDIVs">
+      <EntityTypeMapping TypeName="MAPSModel.mSUBDIV">
+        <MappingFragment StoreEntitySet="mSUBDIV">
+          <ScalarProperty Name="Lastupdatedon" ColumnName="Lastupdatedon" />
+          <ScalarProperty Name="officername" ColumnName="officername" />
+          <ScalarProperty Name="UpdateOn" ColumnName="UpdateOn" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="faxno" ColumnName="faxno" />
+          <ScalarProperty Name="Mobileno" ColumnName="Mobileno" />
+          <ScalarProperty Name="Phoneno" ColumnName="Phoneno" />
+          <ScalarProperty Name="Std" ColumnName="Std" />
+          <ScalarProperty Name="REMARK" ColumnName="REMARK" />
+          <ScalarProperty Name="SUBDIV_HNAME" ColumnName="SUBDIV_HNAME" />
+          <ScalarProperty Name="SUBDIV_ENAME" ColumnName="SUBDIV_ENAME" />
+          <ScalarProperty Name="DIV_ID" ColumnName="DIV_ID" />
+          <ScalarProperty Name="SUBDIV_ID" ColumnName="SUBDIV_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="mWINGs">
+      <EntityTypeMapping TypeName="MAPSModel.mWING">
+        <MappingFragment StoreEntitySet="mWING">
+          <ScalarProperty Name="REMARK" ColumnName="REMARK" />
+          <ScalarProperty Name="Hname" ColumnName="Hname" />
+          <ScalarProperty Name="DESCRIPTION" ColumnName="DESCRIPTION" />
+          <ScalarProperty Name="WING_ID" ColumnName="WING_ID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -157,23 +253,22 @@
         <MappingFragment StoreEntitySet="Village">
           <ScalarProperty Name="VillageName" ColumnName="VillageName" />
           <ScalarProperty Name="TehsilId" ColumnName="TehsilId" />
+          <ScalarProperty Name="BlockId" ColumnName="BlockId" />
           <ScalarProperty Name="Id" ColumnName="Id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Zones">
-      <EntityTypeMapping TypeName="MAPSModel.Zone">
-        <MappingFragment StoreEntitySet="Zone">
-          <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
-          <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
-          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-          <ScalarProperty Name="OfficerName" ColumnName="OfficerName" />
-          <ScalarProperty Name="FaxNo" ColumnName="FaxNo" />
-          <ScalarProperty Name="MobileNo" ColumnName="MobileNo" />
-          <ScalarProperty Name="PhoneNo" ColumnName="PhoneNo" />
-          <ScalarProperty Name="STD" ColumnName="STD" />
-          <ScalarProperty Name="ZoneName" ColumnName="ZoneName" />
+    <EntitySetMapping Name="KhasaraDetails">
+      <EntityTypeMapping TypeName="MAPSModel.KhasaraDetail">
+        <MappingFragment StoreEntitySet="KhasaraDetail">
+          <ScalarProperty Name="AmalDaramadDate" ColumnName="AmalDaramadDate" />
+          <ScalarProperty Name="AmalDaramadNo" ColumnName="AmalDaramadNo" />
+          <ScalarProperty Name="VillageId" ColumnName="VillageId" />
+          <ScalarProperty Name="BlockId" ColumnName="BlockId" />
+          <ScalarProperty Name="AreainAcres" ColumnName="AreainAcres" />
+          <ScalarProperty Name="OwnerName" ColumnName="OwnerName" />
+          <ScalarProperty Name="KhatauniNo" ColumnName="KhatauniNo" />
+          <ScalarProperty Name="KhasaraNo" ColumnName="KhasaraNo" />
           <ScalarProperty Name="Id" ColumnName="Id" />
         </MappingFragment>
       </EntityTypeMapping>

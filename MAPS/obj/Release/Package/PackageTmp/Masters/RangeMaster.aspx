@@ -1,11 +1,11 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Masters/Site1.Master" AutoEventWireup="true"
+﻿<%@ Page Title="Range" Language="C#" MasterPageFile="~/Masters/Site1.Master" AutoEventWireup="true"
     CodeBehind="RangeMaster.aspx.cs" Inherits="MAPS.Masters.RangeMaster" %>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <!--main Section-->
     <div class="mainSection">
         <h1>
-            <span class="heading">रेंज</span></h1>
+            <span class="heading">Range</span></h1>
         <div class="butLink01">
             <a href="RangeMasterNew.aspx" class="button">Create </a>
         </div>
@@ -33,11 +33,11 @@
                             </asp:TemplateField>
                             <asp:TemplateField Visible="false">
                                 <ItemTemplate>
-                                    <asp:Label ID="lblId" runat="server" Text='<%# Eval("Id") %>'></asp:Label>
+                                    <asp:Label ID="lblId" runat="server" Text='<%# Eval("Range_Id") %>'></asp:Label>
                                 </ItemTemplate>
                             </asp:TemplateField>
-                            <asp:BoundField DataField="RangeName" HeaderText="Name"></asp:BoundField>
-                            <asp:BoundField DataField="DivisionName" HeaderText="Division Name"></asp:BoundField>
+                            <asp:BoundField DataField="Range_EName" HeaderText="Name"></asp:BoundField>
+                            <asp:BoundField DataField="SubDiv_EName" HeaderText="SubDivision"></asp:BoundField>
                             <%--                            <asp:BoundField DataField="ZoneName" HeaderText="Zone"></asp:BoundField>
                             --%>
                             <asp:BoundField DataField="OfficerName" HeaderText="Officer Name"></asp:BoundField>

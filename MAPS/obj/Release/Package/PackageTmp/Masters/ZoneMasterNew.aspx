@@ -114,51 +114,6 @@
                                             <asp:TextBox ID="txtZoneName" runat="server" MaxLength="250" Width="150px"></asp:TextBox>
                                         </span>
                                     </td>
-                                    <td class="perp_group_cell perp_group_cell_label">
-                                        <label for="" class=" perp_label sa_text_right">
-                                            Officer Name
-                                        </label>
-                                    </td>
-                                    <td class="perp_group_cell">
-                                        <span class="perp_field perp_field_char">
-                                            <asp:TextBox ID="txtOfficerName" runat="server" MaxLength="250" Width="120px"></asp:TextBox>
-                                        </span>
-                                    </td>
-                                </tr>
-                                <tr class="perp_group_row">
-                                    <td class="perp_group_cell perp_group_cell_label">
-                                        <label for="" class=" perp_label sa_text_right">
-                                            Phone No.
-                                        </label>
-                                    </td>
-                                    <td class="perp_group_cell">
-                                        <span class="perp_field perp_field_char">
-                                            <asp:TextBox ID="txtSTD" runat="server" MaxLength="6" Width="30px" onkeypress="return OnlyNumber(event);"></asp:TextBox>
-                                            <asp:TextBox ID="txtPhoneNo" runat="server" MaxLength="7" onkeypress="return OnlyNumber(event);"></asp:TextBox>
-                                        </span>
-                                    </td>
-                                    <td class="perp_group_cell perp_group_cell_label">
-                                        <label for="" class=" perp_label sa_text_right">
-                                            Fax
-                                        </label>
-                                    </td>
-                                    <td class="perp_group_cell">
-                                        <span class="perp_field perp_field_char">
-                                            <asp:TextBox ID="txtFaxNo" runat="server" MaxLength="13" onkeypress="return OnlyNumber(event);"></asp:TextBox>
-                                        </span>
-                                    </td>
-                                </tr>
-                                <tr class="perp_group_row">
-                                    <td class="perp_group_cell perp_group_cell_label">
-                                        <label for="" class=" perp_label sa_text_right">
-                                            Mobile
-                                        </label>
-                                    </td>
-                                    <td class="perp_group_cell">
-                                        <span class="perp_field perp_field_char">
-                                            <asp:TextBox ID="txtMobile" runat="server" MaxLength="10" onkeypress="return OnlyNumber(event);"></asp:TextBox>
-                                        </span>
-                                    </td>
                                 </tr>
                                 <%if (Request["Code"] == null)
                                   { %>

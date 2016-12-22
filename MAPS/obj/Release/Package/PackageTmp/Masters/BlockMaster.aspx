@@ -1,4 +1,4 @@
-﻿<%@ Page Title="ब्लाक" Language="C#" MasterPageFile="~/Masters/Site1.Master" AutoEventWireup="true"
+﻿<%@ Page Title="Block" Language="C#" MasterPageFile="~/Masters/Site1.Master" AutoEventWireup="true"
     CodeBehind="BlockMaster.aspx.cs" Inherits="MAPS.Masters.BlockMaster" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
@@ -7,7 +7,7 @@
     <!--main Section-->
     <div class="mainSection">
         <h1>
-            <span class="heading">ब्लाक</span></h1>
+            <span class="heading">Block</span></h1>
         <div class="butLink01">
             <a href="BlockMasterNew.aspx" class="button">Create </a>
         </div>
@@ -39,7 +39,7 @@
                                 </ItemTemplate>
                             </asp:TemplateField>
                             <asp:BoundField DataField="BlockName" HeaderText="Name"></asp:BoundField>
-                            <asp:BoundField DataField="SectionName" HeaderText="Section Name"></asp:BoundField>
+                            <asp:BoundField DataField="BEAT_ENAME" HeaderText="Beat"></asp:BoundField>
                             <%--                            <asp:BoundField DataField="ZoneName" HeaderText="Zone"></asp:BoundField>
                             --%>
                             <asp:BoundField DataField="OfficerName" HeaderText="Officer Name"></asp:BoundField>

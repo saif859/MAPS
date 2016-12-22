@@ -2,44 +2,44 @@
 <Schema Namespace="MAPSModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
   <EntityContainer Name="DefaultCS" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="Blocks" EntityType="MAPSModel.Block" />
-    <EntitySet Name="Circles" EntityType="MAPSModel.Circle" />
+    <EntitySet Name="CadastralPoints" EntityType="MAPSModel.CadastralPoint" />
     <EntitySet Name="Districts" EntityType="MAPSModel.District" />
-    <EntitySet Name="Divisions" EntityType="MAPSModel.Division" />
     <EntitySet Name="ForestAreas" EntityType="MAPSModel.ForestArea" />
     <EntitySet Name="ForestCoordinates" EntityType="MAPSModel.ForestCoordinate" />
+    <EntitySet Name="GazetteDetails" EntityType="MAPSModel.GazetteDetail" />
     <EntitySet Name="LoginMasters" EntityType="MAPSModel.LoginMaster" />
-    <EntitySet Name="Ranges" EntityType="MAPSModel.Range" />
-    <EntitySet Name="Sections" EntityType="MAPSModel.Section" />
+    <EntitySet Name="mBEATs" EntityType="MAPSModel.mBEAT" />
+    <EntitySet Name="mCIRCLEs" EntityType="MAPSModel.mCIRCLE" />
+    <EntitySet Name="mDIVISIONs" EntityType="MAPSModel.mDIVISION" />
+    <EntitySet Name="mRAs" EntityType="MAPSModel.mRA" />
+    <EntitySet Name="mRANGEs" EntityType="MAPSModel.mRANGE" />
+    <EntitySet Name="mSUBDIVs" EntityType="MAPSModel.mSUBDIV" />
+    <EntitySet Name="mWINGs" EntityType="MAPSModel.mWING" />
     <EntitySet Name="Tehsils" EntityType="MAPSModel.Tehsil" />
     <EntitySet Name="Villages" EntityType="MAPSModel.Village" />
-    <EntitySet Name="Zones" EntityType="MAPSModel.Zone" />
-    <AssociationSet Name="FK_Block_Section" Association="MAPSModel.FK_Block_Section">
-      <End Role="Section" EntitySet="Sections" />
+    <AssociationSet Name="FK_Block_mBEAT" Association="MAPSModel.FK_Block_mBEAT">
+      <End Role="mBEAT" EntitySet="mBEATs" />
+      <End Role="Block" EntitySet="Blocks" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Block_mRANGE" Association="MAPSModel.FK_Block_mRANGE">
+      <End Role="mRANGE" EntitySet="mRANGEs" />
       <End Role="Block" EntitySet="Blocks" />
     </AssociationSet>
     <AssociationSet Name="FK_ForestArea_Block" Association="MAPSModel.FK_ForestArea_Block">
       <End Role="Block" EntitySet="Blocks" />
       <End Role="ForestArea" EntitySet="ForestAreas" />
     </AssociationSet>
-    <AssociationSet Name="FK_Circle_Zone" Association="MAPSModel.FK_Circle_Zone">
-      <End Role="Zone" EntitySet="Zones" />
-      <End Role="Circle" EntitySet="Circles" />
+    <AssociationSet Name="FK_Village_Block" Association="MAPSModel.FK_Village_Block">
+      <End Role="Block" EntitySet="Blocks" />
+      <End Role="Village" EntitySet="Villages" />
     </AssociationSet>
-    <AssociationSet Name="FK_Division_Circle" Association="MAPSModel.FK_Division_Circle">
-      <End Role="Circle" EntitySet="Circles" />
-      <End Role="Division" EntitySet="Divisions" />
-    </AssociationSet>
-    <AssociationSet Name="FK_LoginMaster_District" Association="MAPSModel.FK_LoginMaster_District">
-      <End Role="District" EntitySet="Districts" />
-      <End Role="LoginMaster" EntitySet="LoginMasters" />
+    <AssociationSet Name="FK_CadastralPoints_ForestArea" Association="MAPSModel.FK_CadastralPoints_ForestArea">
+      <End Role="ForestArea" EntitySet="ForestAreas" />
+      <End Role="CadastralPoint" EntitySet="CadastralPoints" />
     </AssociationSet>
     <AssociationSet Name="FK_Tehsil_District" Association="MAPSModel.FK_Tehsil_District">
       <End Role="District" EntitySet="Districts" />
       <End Role="Tehsil" EntitySet="Tehsils" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Range_Division" Association="MAPSModel.FK_Range_Division">
-      <End Role="Division" EntitySet="Divisions" />
-      <End Role="Range" EntitySet="Ranges" />
     </AssociationSet>
     <AssociationSet Name="FK_ForestArea_Village" Association="MAPSModel.FK_ForestArea_Village">
       <End Role="Village" EntitySet="Villages" />
@@ -49,13 +49,46 @@
       <End Role="ForestArea" EntitySet="ForestAreas" />
       <End Role="ForestCoordinate" EntitySet="ForestCoordinates" />
     </AssociationSet>
-    <AssociationSet Name="FK_Section_Range" Association="MAPSModel.FK_Section_Range">
-      <End Role="Range" EntitySet="Ranges" />
-      <End Role="Section" EntitySet="Sections" />
+    <AssociationSet Name="FK_GazetteDetail_ForestArea" Association="MAPSModel.FK_GazetteDetail_ForestArea">
+      <End Role="ForestArea" EntitySet="ForestAreas" />
+      <End Role="GazetteDetail" EntitySet="GazetteDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_mBEAT_mRANGEASST" Association="MAPSModel.FK_mBEAT_mRANGEASST">
+      <End Role="mRA" EntitySet="mRAs" />
+      <End Role="mBEAT" EntitySet="mBEATs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_mCIRCLE_mWING" Association="MAPSModel.FK_mCIRCLE_mWING">
+      <End Role="mWING" EntitySet="mWINGs" />
+      <End Role="mCIRCLE" EntitySet="mCIRCLEs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_mDIVISION_mCIRCLE" Association="MAPSModel.FK_mDIVISION_mCIRCLE">
+      <End Role="mCIRCLE" EntitySet="mCIRCLEs" />
+      <End Role="mDIVISION" EntitySet="mDIVISIONs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_mSUBDIV_mDIVISION" Association="MAPSModel.FK_mSUBDIV_mDIVISION">
+      <End Role="mDIVISION" EntitySet="mDIVISIONs" />
+      <End Role="mSUBDIV" EntitySet="mSUBDIVs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_mRANGEASST_mRANGE" Association="MAPSModel.FK_mRANGEASST_mRANGE">
+      <End Role="mRANGE" EntitySet="mRANGEs" />
+      <End Role="mRA" EntitySet="mRAs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_mRANGE_mSUBDIV" Association="MAPSModel.FK_mRANGE_mSUBDIV">
+      <End Role="mSUBDIV" EntitySet="mSUBDIVs" />
+      <End Role="mRANGE" EntitySet="mRANGEs" />
     </AssociationSet>
     <AssociationSet Name="FK_Village_Tehsil" Association="MAPSModel.FK_Village_Tehsil">
       <End Role="Tehsil" EntitySet="Tehsils" />
       <End Role="Village" EntitySet="Villages" />
+    </AssociationSet>
+    <EntitySet Name="KhasaraDetails" EntityType="MAPSModel.KhasaraDetail" />
+    <AssociationSet Name="FK_KhasaraDetail_Block" Association="MAPSModel.FK_KhasaraDetail_Block">
+      <End Role="Block" EntitySet="Blocks" />
+      <End Role="KhasaraDetail" EntitySet="KhasaraDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_KhasaraDetail_Village" Association="MAPSModel.FK_KhasaraDetail_Village">
+      <End Role="Village" EntitySet="Villages" />
+      <End Role="KhasaraDetail" EntitySet="KhasaraDetails" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="Block">
@@ -63,7 +96,8 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Type="Int32" Name="SectionId" Nullable="false" />
+    <Property Type="Int32" Name="RangeId" Nullable="false" />
+    <Property Type="Int64" Name="SectionId" />
     <Property Type="String" Name="BlockName" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
     <Property Type="String" Name="STD" MaxLength="6" FixedLength="false" Unicode="false" />
     <Property Type="String" Name="PhoneNo" MaxLength="7" FixedLength="false" Unicode="false" />
@@ -74,27 +108,22 @@
     <Property Type="DateTime" Name="CreatedDate" />
     <Property Type="String" Name="UpdatedBy" MaxLength="30" FixedLength="false" Unicode="false" />
     <Property Type="DateTime" Name="UpdatedDate" />
-    <NavigationProperty Name="Section" Relationship="MAPSModel.FK_Block_Section" FromRole="Block" ToRole="Section" />
+    <NavigationProperty Name="mBEAT" Relationship="MAPSModel.FK_Block_mBEAT" FromRole="Block" ToRole="mBEAT" />
+    <NavigationProperty Name="mRANGE" Relationship="MAPSModel.FK_Block_mRANGE" FromRole="Block" ToRole="mRANGE" />
     <NavigationProperty Name="ForestAreas" Relationship="MAPSModel.FK_ForestArea_Block" FromRole="Block" ToRole="ForestArea" />
+    <NavigationProperty Name="Villages" Relationship="MAPSModel.FK_Village_Block" FromRole="Block" ToRole="Village" />
+    <NavigationProperty Name="KhasaraDetails" Relationship="MAPSModel.FK_KhasaraDetail_Block" FromRole="Block" ToRole="KhasaraDetail" />
   </EntityType>
-  <EntityType Name="Circle">
+  <EntityType Name="CadastralPoint">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
-    <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Type="Int32" Name="ZoneId" Nullable="false" />
-    <Property Type="String" Name="CircleName" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
-    <Property Type="String" Name="STD" MaxLength="6" FixedLength="false" Unicode="false" />
-    <Property Type="String" Name="PhoneNo" MaxLength="7" FixedLength="false" Unicode="false" />
-    <Property Type="String" Name="MobileNo" MaxLength="10" FixedLength="false" Unicode="false" />
-    <Property Type="String" Name="FaxNo" MaxLength="13" FixedLength="false" Unicode="false" />
-    <Property Type="String" Name="OfficerName" MaxLength="250" FixedLength="false" Unicode="true" />
-    <Property Type="String" Name="CreatedBy" MaxLength="30" FixedLength="false" Unicode="false" />
-    <Property Type="DateTime" Name="CreatedDate" />
-    <Property Type="String" Name="UpdatedBy" MaxLength="30" FixedLength="false" Unicode="false" />
-    <Property Type="DateTime" Name="UpdatedDate" />
-    <NavigationProperty Name="Zone" Relationship="MAPSModel.FK_Circle_Zone" FromRole="Circle" ToRole="Zone" />
-    <NavigationProperty Name="Divisions" Relationship="MAPSModel.FK_Division_Circle" FromRole="Circle" ToRole="Division" />
+    <Property Type="Int64" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="Int64" Name="ForestAreaId" Nullable="false" />
+    <Property Type="String" Name="PillarNo" MaxLength="6" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Latitude" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Longitude" MaxLength="30" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="ForestArea" Relationship="MAPSModel.FK_CadastralPoints_ForestArea" FromRole="CadastralPoint" ToRole="ForestArea" />
   </EntityType>
   <EntityType Name="District">
     <Key>
@@ -102,27 +131,7 @@
     </Key>
     <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Type="String" Name="DistrictName" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
-    <NavigationProperty Name="LoginMasters" Relationship="MAPSModel.FK_LoginMaster_District" FromRole="District" ToRole="LoginMaster" />
     <NavigationProperty Name="Tehsils" Relationship="MAPSModel.FK_Tehsil_District" FromRole="District" ToRole="Tehsil" />
-  </EntityType>
-  <EntityType Name="Division">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Type="Int32" Name="CircleId" Nullable="false" />
-    <Property Type="String" Name="DivisionName" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
-    <Property Type="String" Name="STD" MaxLength="6" FixedLength="false" Unicode="false" />
-    <Property Type="String" Name="PhoneNo" MaxLength="7" FixedLength="false" Unicode="false" />
-    <Property Type="String" Name="MobileNo" MaxLength="10" FixedLength="false" Unicode="false" />
-    <Property Type="String" Name="FaxNo" MaxLength="13" FixedLength="false" Unicode="false" />
-    <Property Type="String" Name="OfficerName" MaxLength="250" FixedLength="false" Unicode="true" />
-    <Property Type="String" Name="CreatedBy" MaxLength="30" FixedLength="false" Unicode="false" />
-    <Property Type="DateTime" Name="CreatedDate" />
-    <Property Type="String" Name="UpdatedBy" MaxLength="30" FixedLength="false" Unicode="false" />
-    <Property Type="DateTime" Name="UpdatedDate" />
-    <NavigationProperty Name="Circle" Relationship="MAPSModel.FK_Division_Circle" FromRole="Division" ToRole="Circle" />
-    <NavigationProperty Name="Ranges" Relationship="MAPSModel.FK_Range_Division" FromRole="Division" ToRole="Range" />
   </EntityType>
   <EntityType Name="ForestArea">
     <Key>
@@ -132,16 +141,30 @@
     <Property Type="Int32" Name="BlockId" />
     <Property Type="Int32" Name="VillageId" />
     <Property Type="String" Name="ForestType" MaxLength="1" FixedLength="true" Unicode="false" />
+    <Property Type="String" Name="ForestName" MaxLength="250" FixedLength="false" Unicode="true" />
     <Property Type="Byte" Name="NumberOfPillars" />
     <Property Type="Boolean" Name="isReferencePoint" />
     <Property Type="Decimal" Name="AreaCalculated" Precision="12" Scale="4" />
+    <Property Type="String" Name="NotificationNo" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="NotificationType" MaxLength="20" FixedLength="false" Unicode="true" />
     <Property Type="Decimal" Name="AreaInGazette" Precision="12" Scale="4" />
     <Property Type="DateTime" Name="GazetteDate" />
     <Property Type="String" Name="GazetteNo" MaxLength="25" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="GazetteAuthority" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="GazetteTitle" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Type="Int32" Name="PagesInEnglish" />
+    <Property Type="Int32" Name="PagesInHindi" />
+    <Property Type="Byte" Name="CadastralPoints" />
+    <Property Type="Decimal" Name="AreaInField" Precision="12" Scale="4" />
+    <Property Type="String" Name="CreatedBy" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Type="DateTime" Name="CreatedDate" />
+    <Property Type="String" Name="UpdatedBy" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Type="DateTime" Name="UpdatedDate" />
     <NavigationProperty Name="Block" Relationship="MAPSModel.FK_ForestArea_Block" FromRole="ForestArea" ToRole="Block" />
+    <NavigationProperty Name="CadastralPoints1" Relationship="MAPSModel.FK_CadastralPoints_ForestArea" FromRole="ForestArea" ToRole="CadastralPoint" />
     <NavigationProperty Name="Village" Relationship="MAPSModel.FK_ForestArea_Village" FromRole="ForestArea" ToRole="Village" />
     <NavigationProperty Name="ForestCoordinates" Relationship="MAPSModel.FK_ForestCoordinates_ForestArea" FromRole="ForestArea" ToRole="ForestCoordinate" />
-    <Property Type="String" Name="ForestName" MaxLength="250" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="GazetteDetails" Relationship="MAPSModel.FK_GazetteDetail_ForestArea" FromRole="ForestArea" ToRole="GazetteDetail" />
   </EntityType>
   <EntityType Name="ForestCoordinate">
     <Key>
@@ -153,11 +176,24 @@
     <Property Type="String" Name="Latitude" MaxLength="30" FixedLength="false" Unicode="false" />
     <Property Type="String" Name="Longitude" MaxLength="30" FixedLength="false" Unicode="false" />
     <Property Type="String" Name="ForwardBearings" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Type="Decimal" Name="BearingDifference" Precision="6" Scale="3" />
     <Property Type="String" Name="BackBearings" MaxLength="10" FixedLength="false" Unicode="true" />
     <Property Type="Decimal" Name="BackDistanceInMeter" Precision="9" Scale="4" />
     <Property Type="Decimal" Name="BackDistanceInChain" Precision="8" Scale="4" />
+    <Property Type="String" Name="LatitudeField" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="LongitudeField" MaxLength="30" FixedLength="false" Unicode="false" />
     <NavigationProperty Name="ForestArea" Relationship="MAPSModel.FK_ForestCoordinates_ForestArea" FromRole="ForestCoordinate" ToRole="ForestArea" />
-    <Property Type="Decimal" Name="BearingDifference" Precision="6" Scale="3" />
+  </EntityType>
+  <EntityType Name="GazetteDetail">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Type="Int64" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="Int64" Name="ForestAreaId" Nullable="false" />
+    <Property Type="Int32" Name="PageNo" />
+    <Property Type="String" Name="Language" MaxLength="1" FixedLength="true" Unicode="false" />
+    <Property Type="String" Name="Photo" MaxLength="500" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="ForestArea" Relationship="MAPSModel.FK_GazetteDetail_ForestArea" FromRole="GazetteDetail" ToRole="ForestArea" />
   </EntityType>
   <EntityType Name="LoginMaster">
     <Key>
@@ -168,45 +204,144 @@
     <Property Type="String" Name="Password" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Type="Int32" Name="DistrictId" />
     <Property Type="String" Name="Type" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
-    <NavigationProperty Name="District" Relationship="MAPSModel.FK_LoginMaster_District" FromRole="LoginMaster" ToRole="District" />
   </EntityType>
-  <EntityType Name="Range">
+  <EntityType Name="mBEAT">
     <Key>
-      <PropertyRef Name="Id" />
+      <PropertyRef Name="BEAT_ID" />
     </Key>
-    <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Type="Int32" Name="DivisionId" Nullable="false" />
-    <Property Type="String" Name="RangeName" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
-    <Property Type="String" Name="STD" MaxLength="6" FixedLength="false" Unicode="false" />
-    <Property Type="String" Name="PhoneNo" MaxLength="7" FixedLength="false" Unicode="false" />
-    <Property Type="String" Name="MobileNo" MaxLength="10" FixedLength="false" Unicode="false" />
-    <Property Type="String" Name="FaxNo" MaxLength="13" FixedLength="false" Unicode="false" />
-    <Property Type="String" Name="OfficerName" MaxLength="250" FixedLength="false" Unicode="true" />
-    <Property Type="String" Name="CreatedBy" MaxLength="30" FixedLength="false" Unicode="false" />
-    <Property Type="DateTime" Name="CreatedDate" />
-    <Property Type="String" Name="UpdatedBy" MaxLength="30" FixedLength="false" Unicode="false" />
-    <Property Type="DateTime" Name="UpdatedDate" />
-    <NavigationProperty Name="Division" Relationship="MAPSModel.FK_Range_Division" FromRole="Range" ToRole="Division" />
-    <NavigationProperty Name="Sections" Relationship="MAPSModel.FK_Section_Range" FromRole="Range" ToRole="Section" />
+    <Property Type="Int64" Name="BEAT_ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="Int64" Name="RASST_ID" Nullable="false" />
+    <Property Type="String" Name="BEAT_ENAME" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="BEAT_HNAME" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="HQUARTER" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Type="Int64" Name="PHONE" />
+    <Property Type="Int64" Name="MOBILE" />
+    <Property Type="String" Name="REMARK" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Std" MaxLength="6" FixedLength="true" Unicode="true" />
+    <Property Type="String" Name="Phoneno" MaxLength="7" FixedLength="true" Unicode="true" />
+    <Property Type="String" Name="Mobileno" MaxLength="11" FixedLength="true" Unicode="true" />
+    <Property Type="String" Name="faxno" MaxLength="12" FixedLength="true" Unicode="true" />
+    <Property Type="String" Name="email" MaxLength="25" FixedLength="false" Unicode="false" />
+    <Property Type="DateTime" Name="UpdateOn" />
+    <NavigationProperty Name="Blocks" Relationship="MAPSModel.FK_Block_mBEAT" FromRole="mBEAT" ToRole="Block" />
+    <NavigationProperty Name="mRA" Relationship="MAPSModel.FK_mBEAT_mRANGEASST" FromRole="mBEAT" ToRole="mRA" />
   </EntityType>
-  <EntityType Name="Section">
+  <EntityType Name="mCIRCLE">
     <Key>
-      <PropertyRef Name="Id" />
+      <PropertyRef Name="CIRCLE_ID" />
     </Key>
-    <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Type="Int32" Name="RangeId" Nullable="false" />
-    <Property Type="String" Name="SectionName" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
-    <Property Type="String" Name="STD" MaxLength="6" FixedLength="false" Unicode="false" />
-    <Property Type="String" Name="PhoneNo" MaxLength="7" FixedLength="false" Unicode="false" />
-    <Property Type="String" Name="MobileNo" MaxLength="10" FixedLength="false" Unicode="false" />
-    <Property Type="String" Name="FaxNo" MaxLength="13" FixedLength="false" Unicode="false" />
-    <Property Type="String" Name="OfficerName" MaxLength="250" FixedLength="false" Unicode="true" />
-    <Property Type="String" Name="CreatedBy" MaxLength="30" FixedLength="false" Unicode="false" />
-    <Property Type="DateTime" Name="CreatedDate" />
-    <Property Type="String" Name="UpdatedBy" MaxLength="30" FixedLength="false" Unicode="false" />
-    <Property Type="DateTime" Name="UpdatedDate" />
-    <NavigationProperty Name="Blocks" Relationship="MAPSModel.FK_Block_Section" FromRole="Section" ToRole="Block" />
-    <NavigationProperty Name="Range" Relationship="MAPSModel.FK_Section_Range" FromRole="Section" ToRole="Range" />
+    <Property Type="Int32" Name="CIRCLE_ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="Byte" Name="WING_ID" Nullable="false" />
+    <Property Type="String" Name="CIRCLE_ENAME" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="CIRCLE_HNAME" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="Std" MaxLength="6" FixedLength="true" Unicode="true" />
+    <Property Type="String" Name="Phoneno" MaxLength="7" FixedLength="true" Unicode="true" />
+    <Property Type="String" Name="Mobileno" MaxLength="11" FixedLength="true" Unicode="true" />
+    <Property Type="String" Name="faxno" MaxLength="12" FixedLength="true" Unicode="true" />
+    <Property Type="String" Name="email" MaxLength="25" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="REMARK" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="DateTime" Name="UpdateOn" />
+    <Property Type="String" Name="officername" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Type="DateTime" Name="Lastupdatedon" />
+    <NavigationProperty Name="mWING" Relationship="MAPSModel.FK_mCIRCLE_mWING" FromRole="mCIRCLE" ToRole="mWING" />
+    <NavigationProperty Name="mDIVISIONs" Relationship="MAPSModel.FK_mDIVISION_mCIRCLE" FromRole="mCIRCLE" ToRole="mDIVISION" />
+  </EntityType>
+  <EntityType Name="mDIVISION">
+    <Key>
+      <PropertyRef Name="DIV_ID" />
+    </Key>
+    <Property Type="Int32" Name="DIV_ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="Int32" Name="CIRCLE_ID" Nullable="false" />
+    <Property Type="String" Name="DIV_ENAME" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="DIV_HNAME" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Type="Boolean" Name="DIV_TYPE" Nullable="false" />
+    <Property Type="DateTime" Name="DIV_FORM_DATE" />
+    <Property Type="String" Name="District_Code" MaxLength="4" FixedLength="true" Unicode="true" />
+    <Property Type="String" Name="Std" MaxLength="6" FixedLength="true" Unicode="true" />
+    <Property Type="String" Name="Phoneno" MaxLength="7" FixedLength="true" Unicode="true" />
+    <Property Type="String" Name="Mobileno" MaxLength="11" FixedLength="true" Unicode="true" />
+    <Property Type="String" Name="faxno" MaxLength="12" FixedLength="true" Unicode="true" />
+    <Property Type="String" Name="email" MaxLength="25" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="REMARK" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="DateTime" Name="UpdateOn" />
+    <Property Type="String" Name="officername" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Type="DateTime" Name="Lastupdatedon" />
+    <Property Type="Int32" Name="NoOfInstrument" />
+    <Property Type="String" Name="InstrumentModel" MaxLength="30" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="mCIRCLE" Relationship="MAPSModel.FK_mDIVISION_mCIRCLE" FromRole="mDIVISION" ToRole="mCIRCLE" />
+    <NavigationProperty Name="mSUBDIVs" Relationship="MAPSModel.FK_mSUBDIV_mDIVISION" FromRole="mDIVISION" ToRole="mSUBDIV" />
+  </EntityType>
+  <EntityType Name="mRA">
+    <Key>
+      <PropertyRef Name="RASST_ID" />
+    </Key>
+    <Property Type="Int64" Name="RASST_ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="Int32" Name="RANGE_ID" Nullable="false" />
+    <Property Type="String" Name="RANGEASST_ENAME" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="RANGEASST_HNAME" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="REMARK" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="RA_TYPE" MaxLength="1" FixedLength="true" Unicode="false" />
+    <Property Type="String" Name="Std" MaxLength="6" FixedLength="true" Unicode="true" />
+    <Property Type="String" Name="Phoneno" MaxLength="7" FixedLength="true" Unicode="true" />
+    <Property Type="String" Name="Mobileno" MaxLength="11" FixedLength="true" Unicode="true" />
+    <Property Type="String" Name="faxno" MaxLength="12" FixedLength="true" Unicode="true" />
+    <Property Type="String" Name="email" MaxLength="25" FixedLength="false" Unicode="false" />
+    <Property Type="DateTime" Name="UpdateOn" />
+    <NavigationProperty Name="mBEATs" Relationship="MAPSModel.FK_mBEAT_mRANGEASST" FromRole="mRA" ToRole="mBEAT" />
+    <NavigationProperty Name="mRANGE" Relationship="MAPSModel.FK_mRANGEASST_mRANGE" FromRole="mRA" ToRole="mRANGE" />
+  </EntityType>
+  <EntityType Name="mRANGE">
+    <Key>
+      <PropertyRef Name="RANGE_ID" />
+    </Key>
+    <Property Type="Int32" Name="RANGE_ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="Int32" Name="SUBDIV_ID" Nullable="false" />
+    <Property Type="String" Name="RANGE_ENAME" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="RANGE_HNAME" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Type="Boolean" Name="RANGE_TYPE" />
+    <Property Type="String" Name="REMARK" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Std" MaxLength="6" FixedLength="true" Unicode="true" />
+    <Property Type="String" Name="Phoneno" MaxLength="7" FixedLength="true" Unicode="true" />
+    <Property Type="String" Name="Mobileno" MaxLength="11" FixedLength="true" Unicode="true" />
+    <Property Type="String" Name="faxno" MaxLength="12" FixedLength="true" Unicode="true" />
+    <Property Type="String" Name="email" MaxLength="25" FixedLength="false" Unicode="false" />
+    <Property Type="DateTime" Name="UpdateOn" />
+    <Property Type="Int32" Name="Div_id" />
+    <Property Type="String" Name="officername" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Type="DateTime" Name="Lastupdatedon" />
+    <NavigationProperty Name="Blocks" Relationship="MAPSModel.FK_Block_mRANGE" FromRole="mRANGE" ToRole="Block" />
+    <NavigationProperty Name="mRAs" Relationship="MAPSModel.FK_mRANGEASST_mRANGE" FromRole="mRANGE" ToRole="mRA" />
+    <NavigationProperty Name="mSUBDIV" Relationship="MAPSModel.FK_mRANGE_mSUBDIV" FromRole="mRANGE" ToRole="mSUBDIV" />
+  </EntityType>
+  <EntityType Name="mSUBDIV">
+    <Key>
+      <PropertyRef Name="SUBDIV_ID" />
+    </Key>
+    <Property Type="Int32" Name="SUBDIV_ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="Int32" Name="DIV_ID" Nullable="false" />
+    <Property Type="String" Name="SUBDIV_ENAME" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="SUBDIV_HNAME" MaxLength="25" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="REMARK" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Std" MaxLength="6" FixedLength="true" Unicode="true" />
+    <Property Type="String" Name="Phoneno" MaxLength="7" FixedLength="true" Unicode="true" />
+    <Property Type="String" Name="Mobileno" MaxLength="11" FixedLength="true" Unicode="true" />
+    <Property Type="String" Name="faxno" MaxLength="12" FixedLength="true" Unicode="true" />
+    <Property Type="String" Name="email" MaxLength="25" FixedLength="false" Unicode="false" />
+    <Property Type="DateTime" Name="UpdateOn" />
+    <Property Type="String" Name="officername" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Type="DateTime" Name="Lastupdatedon" />
+    <NavigationProperty Name="mDIVISION" Relationship="MAPSModel.FK_mSUBDIV_mDIVISION" FromRole="mSUBDIV" ToRole="mDIVISION" />
+    <NavigationProperty Name="mRANGEs" Relationship="MAPSModel.FK_mRANGE_mSUBDIV" FromRole="mSUBDIV" ToRole="mRANGE" />
+  </EntityType>
+  <EntityType Name="mWING">
+    <Key>
+      <PropertyRef Name="WING_ID" />
+    </Key>
+    <Property Type="Byte" Name="WING_ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="DESCRIPTION" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Hname" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="REMARK" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="mCIRCLEs" Relationship="MAPSModel.FK_mCIRCLE_mWING" FromRole="mWING" ToRole="mCIRCLE" />
   </EntityType>
   <EntityType Name="Tehsil">
     <Key>
@@ -223,37 +358,35 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="Int32" Name="BlockId" />
     <Property Type="Int32" Name="TehsilId" Nullable="false" />
     <Property Type="String" Name="VillageName" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Block" Relationship="MAPSModel.FK_Village_Block" FromRole="Village" ToRole="Block" />
     <NavigationProperty Name="ForestAreas" Relationship="MAPSModel.FK_ForestArea_Village" FromRole="Village" ToRole="ForestArea" />
     <NavigationProperty Name="Tehsil" Relationship="MAPSModel.FK_Village_Tehsil" FromRole="Village" ToRole="Tehsil" />
+    <NavigationProperty Name="KhasaraDetails" Relationship="MAPSModel.FK_KhasaraDetail_Village" FromRole="Village" ToRole="KhasaraDetail" />
   </EntityType>
-  <EntityType Name="Zone">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Type="String" Name="ZoneName" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
-    <Property Type="String" Name="STD" MaxLength="6" FixedLength="false" Unicode="false" />
-    <Property Type="String" Name="PhoneNo" MaxLength="7" FixedLength="false" Unicode="false" />
-    <Property Type="String" Name="MobileNo" MaxLength="10" FixedLength="false" Unicode="false" />
-    <Property Type="String" Name="FaxNo" MaxLength="13" FixedLength="false" Unicode="false" />
-    <Property Type="String" Name="OfficerName" MaxLength="250" FixedLength="false" Unicode="true" />
-    <Property Type="String" Name="CreatedBy" MaxLength="30" FixedLength="false" Unicode="false" />
-    <Property Type="DateTime" Name="CreatedDate" />
-    <Property Type="String" Name="UpdatedBy" MaxLength="30" FixedLength="false" Unicode="false" />
-    <Property Type="DateTime" Name="UpdatedDate" />
-    <NavigationProperty Name="Circles" Relationship="MAPSModel.FK_Circle_Zone" FromRole="Zone" ToRole="Circle" />
-  </EntityType>
-  <Association Name="FK_Block_Section">
-    <End Type="MAPSModel.Section" Role="Section" Multiplicity="1" />
+  <Association Name="FK_Block_mBEAT">
+    <End Type="MAPSModel.mBEAT" Role="mBEAT" Multiplicity="0..1" />
     <End Type="MAPSModel.Block" Role="Block" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="Section">
-        <PropertyRef Name="Id" />
+      <Principal Role="mBEAT">
+        <PropertyRef Name="BEAT_ID" />
       </Principal>
       <Dependent Role="Block">
         <PropertyRef Name="SectionId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Block_mRANGE">
+    <End Type="MAPSModel.mRANGE" Role="mRANGE" Multiplicity="1" />
+    <End Type="MAPSModel.Block" Role="Block" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="mRANGE">
+        <PropertyRef Name="RANGE_ID" />
+      </Principal>
+      <Dependent Role="Block">
+        <PropertyRef Name="RangeId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -269,39 +402,27 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_Circle_Zone">
-    <End Type="MAPSModel.Zone" Role="Zone" Multiplicity="1" />
-    <End Type="MAPSModel.Circle" Role="Circle" Multiplicity="*" />
+  <Association Name="FK_Village_Block">
+    <End Type="MAPSModel.Block" Role="Block" Multiplicity="0..1" />
+    <End Type="MAPSModel.Village" Role="Village" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="Zone">
+      <Principal Role="Block">
         <PropertyRef Name="Id" />
       </Principal>
-      <Dependent Role="Circle">
-        <PropertyRef Name="ZoneId" />
+      <Dependent Role="Village">
+        <PropertyRef Name="BlockId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_Division_Circle">
-    <End Type="MAPSModel.Circle" Role="Circle" Multiplicity="1" />
-    <End Type="MAPSModel.Division" Role="Division" Multiplicity="*" />
+  <Association Name="FK_CadastralPoints_ForestArea">
+    <End Type="MAPSModel.ForestArea" Role="ForestArea" Multiplicity="1" />
+    <End Type="MAPSModel.CadastralPoint" Role="CadastralPoint" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="Circle">
+      <Principal Role="ForestArea">
         <PropertyRef Name="Id" />
       </Principal>
-      <Dependent Role="Division">
-        <PropertyRef Name="CircleId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_LoginMaster_District">
-    <End Type="MAPSModel.District" Role="District" Multiplicity="0..1" />
-    <End Type="MAPSModel.LoginMaster" Role="LoginMaster" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="District">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="LoginMaster">
-        <PropertyRef Name="DistrictId" />
+      <Dependent Role="CadastralPoint">
+        <PropertyRef Name="ForestAreaId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -314,18 +435,6 @@
       </Principal>
       <Dependent Role="Tehsil">
         <PropertyRef Name="DistrictId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Range_Division">
-    <End Type="MAPSModel.Division" Role="Division" Multiplicity="1" />
-    <End Type="MAPSModel.Range" Role="Range" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Division">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="Range">
-        <PropertyRef Name="DivisionId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -353,15 +462,87 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_Section_Range">
-    <End Type="MAPSModel.Range" Role="Range" Multiplicity="1" />
-    <End Type="MAPSModel.Section" Role="Section" Multiplicity="*" />
+  <Association Name="FK_GazetteDetail_ForestArea">
+    <End Type="MAPSModel.ForestArea" Role="ForestArea" Multiplicity="1" />
+    <End Type="MAPSModel.GazetteDetail" Role="GazetteDetail" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="Range">
+      <Principal Role="ForestArea">
         <PropertyRef Name="Id" />
       </Principal>
-      <Dependent Role="Section">
-        <PropertyRef Name="RangeId" />
+      <Dependent Role="GazetteDetail">
+        <PropertyRef Name="ForestAreaId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_mBEAT_mRANGEASST">
+    <End Type="MAPSModel.mRA" Role="mRA" Multiplicity="1" />
+    <End Type="MAPSModel.mBEAT" Role="mBEAT" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="mRA">
+        <PropertyRef Name="RASST_ID" />
+      </Principal>
+      <Dependent Role="mBEAT">
+        <PropertyRef Name="RASST_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_mCIRCLE_mWING">
+    <End Type="MAPSModel.mWING" Role="mWING" Multiplicity="1" />
+    <End Type="MAPSModel.mCIRCLE" Role="mCIRCLE" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="mWING">
+        <PropertyRef Name="WING_ID" />
+      </Principal>
+      <Dependent Role="mCIRCLE">
+        <PropertyRef Name="WING_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_mDIVISION_mCIRCLE">
+    <End Type="MAPSModel.mCIRCLE" Role="mCIRCLE" Multiplicity="1" />
+    <End Type="MAPSModel.mDIVISION" Role="mDIVISION" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="mCIRCLE">
+        <PropertyRef Name="CIRCLE_ID" />
+      </Principal>
+      <Dependent Role="mDIVISION">
+        <PropertyRef Name="CIRCLE_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_mSUBDIV_mDIVISION">
+    <End Type="MAPSModel.mDIVISION" Role="mDIVISION" Multiplicity="1" />
+    <End Type="MAPSModel.mSUBDIV" Role="mSUBDIV" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="mDIVISION">
+        <PropertyRef Name="DIV_ID" />
+      </Principal>
+      <Dependent Role="mSUBDIV">
+        <PropertyRef Name="DIV_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_mRANGEASST_mRANGE">
+    <End Type="MAPSModel.mRANGE" Role="mRANGE" Multiplicity="1" />
+    <End Type="MAPSModel.mRA" Role="mRA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="mRANGE">
+        <PropertyRef Name="RANGE_ID" />
+      </Principal>
+      <Dependent Role="mRA">
+        <PropertyRef Name="RANGE_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_mRANGE_mSUBDIV">
+    <End Type="MAPSModel.mSUBDIV" Role="mSUBDIV" Multiplicity="1" />
+    <End Type="MAPSModel.mRANGE" Role="mRANGE" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="mSUBDIV">
+        <PropertyRef Name="SUBDIV_ID" />
+      </Principal>
+      <Dependent Role="mRANGE">
+        <PropertyRef Name="SUBDIV_ID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -374,6 +555,46 @@
       </Principal>
       <Dependent Role="Village">
         <PropertyRef Name="TehsilId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="KhasaraDetail">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="KhasaraNo" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="KhatauniNo" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="OwnerName" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Type="Decimal" Name="AreainAcres" Precision="18" Scale="2" />
+    <Property Type="Int32" Name="BlockId" />
+    <Property Type="Int32" Name="VillageId" />
+    <Property Type="String" Name="AmalDaramadNo" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="DateTime" Name="AmalDaramadDate" />
+    <NavigationProperty Name="Block" Relationship="MAPSModel.FK_KhasaraDetail_Block" FromRole="KhasaraDetail" ToRole="Block" />
+    <NavigationProperty Name="Village" Relationship="MAPSModel.FK_KhasaraDetail_Village" FromRole="KhasaraDetail" ToRole="Village" />
+  </EntityType>
+  <Association Name="FK_KhasaraDetail_Block">
+    <End Type="MAPSModel.Block" Role="Block" Multiplicity="0..1" />
+    <End Type="MAPSModel.KhasaraDetail" Role="KhasaraDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Block">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="KhasaraDetail">
+        <PropertyRef Name="BlockId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_KhasaraDetail_Village">
+    <End Type="MAPSModel.Village" Role="Village" Multiplicity="0..1" />
+    <End Type="MAPSModel.KhasaraDetail" Role="KhasaraDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Village">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="KhasaraDetail">
+        <PropertyRef Name="VillageId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

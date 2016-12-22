@@ -1,4 +1,4 @@
-﻿<%@ Page Title="प्रभाग" Language="C#" MasterPageFile="~/Masters/Site1.Master" AutoEventWireup="true"
+﻿<%@ Page Title="Division" Language="C#" MasterPageFile="~/Masters/Site1.Master" AutoEventWireup="true"
     CodeBehind="DivisionMasterNew.aspx.cs" Inherits="MAPS.Masters.DivisionMasterNew" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
@@ -95,7 +95,7 @@
                 <ContentTemplate>
                     <div class="perp_sheet perp_sheet_width">
                         <h1>
-                            <span style="color: #06F;">प्रभाग</span><span class="sa_fade">/ </span><span class="sa_breadcrumb_item">
+                            <span style="color: #06F;">Division</span><span class="sa_fade">/ </span><span class="sa_breadcrumb_item">
                                 <%if (Request["Code"] == null)
                                   { %>New<%}
                                   else
@@ -121,8 +121,7 @@
                                     </td>
                                     <td class="perp_group_cell">
                                         <span class="perp_field perp_field_char">
-                                            <asp:DropDownList ID="ddlZone" runat="server" AutoPostBack="True" 
-                                            onselectedindexchanged="ddlZone_SelectedIndexChanged">
+                                            <asp:DropDownList ID="ddlZone" runat="server" AutoPostBack="True" OnSelectedIndexChanged="ddlZone_SelectedIndexChanged">
                                             </asp:DropDownList>
                                         </span>
                                     </td>
@@ -189,6 +188,28 @@
                                     </td>
                                     <td class="perp_group_cell">
                                         &nbsp;
+                                    </td>
+                                </tr>
+                                <tr class="perp_group_row">
+                                    <td class="perp_group_cell perp_group_cell_label">
+                                        <label class=" perp_label sa_text_right" for="">
+                                            No. of GPS Instrument
+                                        </label>
+                                    </td>
+                                    <td class="perp_group_cell">
+                                        <span class="perp_field perp_field_char">
+                                            <asp:TextBox ID="txtInstrument" runat="server" MaxLength="5" onkeypress="return OnlyNumber(event);"></asp:TextBox>
+                                        </span>
+                                    </td>
+                                    <td class="perp_group_cell perp_group_cell_label">
+                                        <label class=" perp_label sa_text_right" for="">
+                                            Instrument Model
+                                        </label>
+                                    </td>
+                                    <td class="perp_group_cell">
+                                        <span class="perp_field perp_field_char">
+                                            <asp:TextBox ID="txtModel" runat="server" MaxLength="30"></asp:TextBox>
+                                        </span>
                                     </td>
                                 </tr>
                                 <%if (Request["Code"] == null)

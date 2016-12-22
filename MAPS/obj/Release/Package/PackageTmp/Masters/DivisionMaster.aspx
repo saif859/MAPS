@@ -1,4 +1,4 @@
-﻿<%@ Page Title="प्रभाग" Language="C#" MasterPageFile="~/Masters/Site1.Master" AutoEventWireup="true"
+﻿<%@ Page Title="Division" Language="C#" MasterPageFile="~/Masters/Site1.Master" AutoEventWireup="true"
     CodeBehind="DivisionMaster.aspx.cs" Inherits="MAPS.Masters.DivisionMaster" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
@@ -7,9 +7,12 @@
     <!--main Section-->
     <div class="mainSection">
         <h1>
-            <span class="heading">प्रभाग</span></h1>
+            <span class="heading">Division</span></h1>
         <div class="butLink01">
+            <%if (((MAPS.LoginMaster)Session["User"]).DistrictId == null)
+              { %>
             <a href="DivisionMasterNew.aspx" class="button">Create </a>
+            <%} %>
         </div>
         <div class="butLink02">
         </div>
@@ -35,17 +38,19 @@
                             </asp:TemplateField>
                             <asp:TemplateField Visible="false">
                                 <ItemTemplate>
-                                    <asp:Label ID="lblId" runat="server" Text='<%# Eval("Id") %>'></asp:Label>
+                                    <asp:Label ID="lblId" runat="server" Text='<%# Eval("DIV_Id") %>'></asp:Label>
                                 </ItemTemplate>
                             </asp:TemplateField>
-                            <asp:BoundField DataField="DivisionName" HeaderText="Name"></asp:BoundField>
-                            <asp:BoundField DataField="CircleName" HeaderText="Circle Name"></asp:BoundField>
-<%--                            <asp:BoundField DataField="ZoneName" HeaderText="Zone"></asp:BoundField>
---%>                            <asp:BoundField DataField="OfficerName" HeaderText="Officer Name"></asp:BoundField>
+                            <asp:BoundField DataField="Div_EName" HeaderText="Name"></asp:BoundField>
+                            <asp:BoundField DataField="Circle_EName" HeaderText="Circle Name"></asp:BoundField>
+                            <%--                            <asp:BoundField DataField="ZoneName" HeaderText="Zone"></asp:BoundField>
+                            --%>
+                            <asp:BoundField DataField="OfficerName" HeaderText="Officer Name"></asp:BoundField>
                             <asp:BoundField DataField="MobileNo" HeaderText="MobileNo"></asp:BoundField>
                             <asp:BoundField DataField="STD" HeaderText="STD"></asp:BoundField>
                             <asp:BoundField DataField="PhoneNo" HeaderText="PhoneNo"></asp:BoundField>
                             <asp:BoundField DataField="FaxNo" HeaderText="FaxNo"></asp:BoundField>
+                            <asp:BoundField DataField="NoOfInstrument" HeaderText="No. Of Instrument"></asp:BoundField>
                             <asp:CommandField EditText="&lt;img src='../images/btn_iconEdit.gif' alt='Edit' border='0' /&gt;"
                                 HeaderText="Edit" ShowEditButton="True">
                                 <ItemStyle Width="10px" HorizontalAlign="Center" />

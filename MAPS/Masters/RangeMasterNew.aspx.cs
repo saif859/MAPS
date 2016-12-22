@@ -85,7 +85,7 @@ namespace MAPS.Masters
 
             mRANGE range = new mRANGE();
             range.RANGE_ENAME = txtRangeName.Text.Trim();
-            range.SUBDIV_ID = Convert.ToInt32(ddlDivision.SelectedValue);
+            range.SUBDIV_ID = Convert.ToInt32(ddlSubDivision.SelectedValue);
             range.Mobileno = txtMobile.Text.Trim();
 
             range.officername = txtOfficerName.Text.Trim();
@@ -116,9 +116,11 @@ namespace MAPS.Masters
                     u.Name = txtOfficerName.Text.Trim();
                     u.Type = "R";
 
+
                     using (TransactionScope scope = new TransactionScope())
                     {
                         rMethods.Add(range);
+                        u.DistrictId = range.RANGE_ID;
                         users.Create(u);
                         scope.Complete();
                     }

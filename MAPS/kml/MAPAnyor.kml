@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+  <Document id="Document">
+    <name>Document</name>
+    <Placemark>
+      <name>Anyor</name>
+      <Polygon>
+        <extrude>true</extrude>
+        <altitudeMode>clampToGround</altitudeMode>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>77.434097,27.459942,0
+77.43582,27.461508,0
+77.436218,27.461872,0
+77.43809,27.464063,0
+77.439282,27.466123,0
+77.439982,27.46593,0
+77.441085,27.467138,0
+77.441275,27.46787,0
+77.440732,27.468308,0
+77.441067,27.468685,0
+77.441853,27.468232,0
+77.442705,27.469467,0
+77.44179,27.470132,0
+77.441883,27.471558,0
+77.441393,27.47182,0
+77.436177,27.465035,0</coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+      <Style>
+        <PolyStyle>
+          <color>64969696</color>
+          <colorMode>normal</colorMode>
+        </PolyStyle>
+      </Style>
+    </Placemark>
+  </Document>
+</kml>

@@ -7,8 +7,10 @@
     <link href="css/buttoncss.css" rel="stylesheet" type="text/css" />
     <link href="css/StyleSheet.css" rel="stylesheet" type="text/css" />
     <link href="css/menu.css" rel="stylesheet" type="text/css" />
+    <link href="Content/jquery.gritter.css" rel="stylesheet" type="text/css" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Felling &amp; Transit Permit</title>
+    <title>UP Forest MAP Digitization</title>
+    <script src="<%: ResolveClientUrl("~/Scripts/jquery-2.0.3.min.js") %>" type="text/javascript"></script>
     <style type="text/css">
         .input_text
         {
@@ -97,7 +99,7 @@
         </tr>
         <tr>
             <td>
-                &nbsp;
+                <a href="View/ForestArea.aspx">Home</a>
             </td>
         </tr>
         <tr>
@@ -139,6 +141,26 @@
             </td>
         </tr>
     </table>
+    <%: System.Web.Optimization.Scripts.Render("~/bundles/gritter") %>
+    <script type="text/javascript">
+        function jQueryAlert(message) {
+
+            $.gritter.add({
+                // (string | mandatory) the heading of the notification
+                title: 'Message',
+                // (string | mandatory) the text inside the notification
+                text: message,
+                // (string | optional) the image to display on the left
+                // (bool | optional) if you want it to fade out on its own or just sit there
+                sticky: false,
+                // (int | optional) the time you want it to be alive for before fading out
+                time: '5000'
+            });
+
+            return false;
+
+        };
+    </script>
     </form>
 </body>
 </html>
