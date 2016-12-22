@@ -1175,7 +1175,7 @@
                                     var village = {};
                         
                                     village.tehsilId=$('#<%:ddlTehsil.ClientID%>').val();
-                                village.VillageName=$('#<%:txtVillage.ClientID%>').val();
+                                    village.VillageName=$('#<%:txtVillage.ClientID%>').val();
                                     village.BlockId=forestArea.BlockId;
 
                                     var dtoVillage={'village': village };
@@ -1203,27 +1203,29 @@
         { %>url: "Services/AddArea.asmx/UpdateArea",<%} %>
                         <%else
         { %>url: "Services/AddArea.asmx/InsertArea",<%} %>
-                                contentType: 'application/json; charset=utf-8',
-                                dataType: 'json',async: false,
-                                data: JSON.stringify(DTO),
-                                success: function (response) {
-                                    var areaId = response.d;
+                                    contentType: 'application/json; charset=utf-8',
+                                    dataType: 'json',async: false,
+                                    data: JSON.stringify(DTO),
+                                    success: function (response) {
+                                        var areaId = response.d;
                             <%if (Request["Code"] == null)
         { %>
-                            uploadFile(areaId);<%} %>
-                            console.log(response);
-                        },
-                                error: function (response) {
+                                        uploadFile(areaId);<%} %>
+                                        console.log(response);
+                                    },
+                                    error: function (response) {
+                                        console.log(response);
+                                    }
+                                }).done(function () {
                                     console.log(response);
-                                }
-                            }).done(function () {
                      <%if (Request["Code"] != null)
         { %>
-                        alert("Data updated successfully.");<%} %>
+                                    alert("Data updated successfully.");window.location="ForestArea.aspx";<%} %>
                         <%else
-        { %>alert("Data saved successfully.");<%} %>
-                    });
-                                console.log(response);
+        { %>
+                                    alert("Data saved successfully.");window.location="ForestArea.aspx";<%} %>
+                                });
+                                
                             },
                             error: function (response) {
                                 console.log(response);
@@ -1231,67 +1233,70 @@
                         }).done(function () {
 
                         });
-                }
+                    }
                         //------------------------------------------------------------
-                else{
+                    else{
                         //----------- Insert Village if Other -------------
-                    if($('#<%:ddlVillage.ClientID%>').val()=='OT'){
+                        if($('#<%:ddlVillage.ClientID%>').val()=='OT'){
                             var village = {};
                         
                             village.tehsilId=$('#<%:ddlTehsil.ClientID%>').val();
                             village.VillageName=$('#<%:txtVillage.ClientID%>').val();
-                village.BlockId=forestArea.BlockId;
+                            village.BlockId=forestArea.BlockId;
 
-                var dtoVillage={'village': village };
+                            var dtoVillage={'village': village };
 
-                $.ajax({
-                    type: "POST",
-                    url: "Services/AddArea.asmx/InsertVillage",
-                    contentType: 'application/json; charset=utf-8',
-                    dataType: 'json',async: false,
-                    data: JSON.stringify(dtoVillage),
-                    success: function (response) {
-                        forestArea.VillageId = response.d;// Assign added villageId to forest Area.
-                    },
-                    error: function (response) {
-                        console.log(response);
-                    }
-                }).done(function () {});
-            }
+                            $.ajax({
+                                type: "POST",
+                                url: "Services/AddArea.asmx/InsertVillage",
+                                contentType: 'application/json; charset=utf-8',
+                                dataType: 'json',async: false,
+                                data: JSON.stringify(dtoVillage),
+                                success: function (response) {
+                                    forestArea.VillageId = response.d;// Assign added villageId to forest Area.
+                                },
+                                error: function (response) {
+                                    console.log(response);
+                                }
+                            }).done(function () {});
+                        }
                         //---------------------------------------------------------------//
-            var DTO = { 'forestArea': forestArea, 'forestCoordinates': json.forestCoordinates};
-            $.ajax({
-                type: "POST",
+                        var DTO = { 'forestArea': forestArea, 'forestCoordinates': json.forestCoordinates};
+                        $.ajax({
+                            type: "POST",
                         <%if (Request["Code"] != null)
         { %>url: "Services/AddArea.asmx/UpdateArea",<%} %>
                         <%else
         { %>url: "Services/AddArea.asmx/InsertArea",<%} %>
-                        contentType: 'application/json; charset=utf-8',
-                        dataType: 'json',async: false,
-                        data: JSON.stringify(DTO),
-                        success: function (response) {
-                            var areaId = response.d;
+                            contentType: 'application/json; charset=utf-8',
+                            dataType: 'json',async: false,
+                            data: JSON.stringify(DTO),
+                            success: function (response) {
+                                var areaId = response.d;
                             <%if (Request["Code"] == null)
         { %>
                             uploadFile(areaId);<%} %>
                             console.log(response);
                         },
-                        error: function (response) {
+                            error: function (response) {
+                                console.log(response);
+                            }
+                        }).done(function (response) {
                             console.log(response);
-                        }
-                    }).done(function (response) {console.log(response);
+                            console.log("validates");
                      <%if (Request["Code"] == null)
         { %>
-                        alert("Data saved successfully.");<%} %>
+                        alert("Data saved successfully.");window.location="ForestArea.aspx";<%} %>
                         <%else
-        { %>alert("Data updated successfully.");<%} %>
+        { %>
+                        alert("Data updated successfully.");window.location="ForestArea.aspx";<%} %>
                     });
 
-                    console.log("validates");
+            
+                    }
+                } else {
+                    console.log("does not validate");
                 }
-            } else {
-                console.log("does not validate");
-            }
                 // Validate the form and retain the result.
                 var isValid = $("#form1").valid();
 
@@ -1300,7 +1305,7 @@
                 if (!isValid)
                     evt.preventDefault();
             });
-    }
+        }
     </script>
     <script type="text/javascript">
         var currFile = 0;
